@@ -25,6 +25,7 @@ export default function App() {
   });
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <StatusBar backgroundColor="transparent" translucent />
       {fontsLoaded ? (
         <Text>Open up App.tsx to start working on your app!</Text>
       ) : (
