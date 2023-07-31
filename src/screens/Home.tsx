@@ -3,8 +3,6 @@ import { createBox, createText } from "@shopify/restyle";
 import { ThemeProps } from "./../themes";
 import { ButtonLinear } from "@components/ButtonLinear";
 import { Button } from "@components/Button";
-import { LogoIcon } from "@assets/icons/LogoIcon";
-import { HomeIcon } from "@assets/icons/HomeIcon";
 import { Icon } from "@components/Icon";
 
 const Box = createBox<ThemeProps>();
