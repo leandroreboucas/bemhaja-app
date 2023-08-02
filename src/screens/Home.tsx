@@ -1,28 +1,46 @@
-import { ScrollView, View } from "react-native";
-import { createBox, createText } from "@shopify/restyle";
-import { ThemeProps } from "./../themes";
+import { ScrollView } from "react-native";
 import { ButtonLinear } from "@components/ButtonLinear";
 import { Button } from "@components/Button";
 import { Icon } from "@components/Icon";
-
-const Box = createBox<ThemeProps>();
-
-const Text = createText<ThemeProps>();
+import { TextInput } from "@components/TextInput";
+import { Box } from "@components/Box";
+import { Text } from "@components/Text";
+import { EyeOnIcon } from "@assets/icons/EyeOnIcon";
 
 export function Home() {
   return (
-    <ScrollView>
+    <ScrollView style={{ flex: 1 }}>
       <Box
         flex={1}
+        gap="s8"
         alignItems="center"
         justifyContent="center"
         bg="mainBackground"
-        marginTop="s40"
+        marginVertical="s40"
+        paddingHorizontal="s24"
       >
+        <Text variant="title" color="black">
+          Input
+        </Text>
+        <Box gap="s8" width={"100%"}>
+          <TextInput label="E-mail" placeholder="Digite seu e-mail" />
+          <TextInput
+            label="E-mail"
+            placeholder="Digite seu e-mail"
+            errorMessage="Informe um e-mail"
+            required
+          />
+          <TextInput
+            label="Senha"
+            placeholder="Digite sua senha"
+            required
+            rightComponent={<Icon name="eyeOn" color="gray_700" />}
+          />
+        </Box>
         <Text variant="title" color="black">
           Button Linear
         </Text>
-        <Box gap="s8">
+        <Box gap="s8" width={"100%"}>
           <ButtonLinear title="Entrar" />
           <ButtonLinear title="Entrar" loading />
           <ButtonLinear title="Disabled" disabled />
@@ -30,7 +48,7 @@ export function Home() {
         <Text variant="title" color="black">
           Button
         </Text>
-        <Box gap="s8">
+        <Box gap="s8" width={"100%"}>
           <Button title="Primary" />
           <Button title="Primary Disabled" disabled />
           <Button title="Outline" preset="outline" />
@@ -42,7 +60,13 @@ export function Home() {
         <Text variant="title" color="black">
           Icons
         </Text>
-        <Box gap="s8" flexDirection="row">
+        <Box
+          gap="s8"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="center"
+          width={"100%"}
+        >
           <Icon name="home" color="buttonPrimary" />
           <Icon name="events" color="buttonPrimary" />
           <Icon name="friends" color="buttonPrimary" />

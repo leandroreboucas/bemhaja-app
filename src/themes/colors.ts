@@ -14,6 +14,7 @@ const pallete = {
   white: '#fff',
   black: '#000',
   gray: '#999',
+  error: '#FF9494',
 
   gray_800: '#323232',
   gray_700: '#7E7E7E',

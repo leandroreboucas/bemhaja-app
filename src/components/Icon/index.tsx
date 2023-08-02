@@ -1,4 +1,6 @@
 import { EventsIcon } from "@assets/icons/EventsIcon";
+import { EyeOffIcon } from "@assets/icons/EyeOffIcon";
+import { EyeOnIcon } from "@assets/icons/EyeOnIcon";
 import { FriendsIcon } from "@assets/icons/FriendsIcon";
 import { GroupsIcon } from "@assets/icons/GroupsIcon";
 import { HomeIcon } from "@assets/icons/HomeIcon";
@@ -24,6 +26,8 @@ const iconRegistry = {
   events: EventsIcon,
   friends: FriendsIcon,
   groups: GroupsIcon,
+  eyeOn: EyeOnIcon,
+  eyeOff: EyeOffIcon,
 };
 
 type IconType = typeof iconRegistry;
