@@ -1,4 +1,4 @@
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient, LinearGradientProps } from "expo-linear-gradient";
 
 import { useTheme } from "@shopify/restyle";
 import { ThemeColors, ThemeProps } from "@themes/index";
@@ -9,17 +9,20 @@ import {
   TouchableOpacityBox,
   TouchableOpacityBoxProps,
 } from "./TouchableOpacityBox";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface ButtonLinearProps extends TouchableOpacityBoxProps {
   title: string;
   loading?: boolean;
   disabled?: boolean;
+  buttonWidth?: number;
 }
 
 export function ButtonLinear({
   title,
   loading,
   disabled = false,
+  buttonWidth,
   ...touchableOpacityBoxProps
 }: ButtonLinearProps) {
   const { colors } = useTheme<ThemeProps>();
@@ -33,10 +36,11 @@ export function ButtonLinear({
           ? [colors.gray_disabled_Background, colors.gray_disabled_Background]
           : [colors.primary_500, colors.secondary_300]
       }
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
+      start={{ x: 0, y: 1 }}
+      end={{ x: 1, y: 0 }}
       style={{
-        borderRadius: 10,
+        borderRadius: RFValue(10),
+        width: buttonWidth,
       }}
     >
       <TouchableOpacityBox
@@ -44,7 +48,7 @@ export function ButtonLinear({
         paddingHorizontal="s24"
         alignItems="center"
         justifyContent="center"
-        height={50}
+        height={RFValue(48)}
         {...touchableOpacityBoxProps}
       >
         {loading ? (

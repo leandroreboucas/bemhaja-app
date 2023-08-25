@@ -13,10 +13,12 @@ import {
   Poppins_500Medium,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import { Home } from "@screens/Home";
+
 import { ThemeProvider } from "@shopify/restyle";
 import { theme } from "@themes/index";
-import { SafeAreaView } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import { Router } from "@routes/index";
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -38,11 +40,11 @@ export default function App() {
   SplashScreen.hideAsync();
 
   return (
-    <>
+    <SafeAreaProvider>
       <StatusBar style="auto" backgroundColor="transparent" translucent />
       <ThemeProvider theme={theme}>
-        <Home />
+        <Router />
       </ThemeProvider>
-    </>
+    </SafeAreaProvider>
   );
 }

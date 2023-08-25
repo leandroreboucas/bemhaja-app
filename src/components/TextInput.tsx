@@ -7,13 +7,15 @@ import { Box, BoxProps } from "./Box";
 import { Text } from "./Text";
 import { useAppTheme } from "@hooks/useAppTheme";
 import { ReactElement, useRef } from "react";
+import { RFValue } from "react-native-responsive-fontsize";
 
-interface TextInputProps extends RNTextInputProps {
+export interface TextInputProps extends RNTextInputProps {
   label: string;
   errorMessage?: string;
   required?: boolean;
   rightComponent?: ReactElement;
   boxProps?: BoxProps;
+  removeLabel?: boolean;
 }
 
 export function TextInput({
@@ -22,6 +24,7 @@ export function TextInput({
   required = false,
   rightComponent,
   boxProps,
+  removeLabel = false,
   ...rnTextInputProps
 }: TextInputProps) {
   const { colors } = useAppTheme();
@@ -29,9 +32,9 @@ export function TextInput({
 
   const $textInputContainer: BoxProps = {
     flexDirection: "row",
-    borderWidth: errorMessage ? 2 : 1,
+    borderWidth: RFValue(errorMessage ? 2 : 1),
     borderColor: errorMessage ? "error" : "gray_500",
-    padding: "s16",
+    padding: "s8",
     borderRadius: "br10",
     backgroundColor: "gray_100",
   };
@@ -41,12 +44,14 @@ export function TextInput({
   }
 
   return (
-    <Box gap="s4" flex={1} {...boxProps}>
-      <Pressable onPress={focusInput} style={{ flex: 1 }}>
-        <Text variant="title">
-          {required && <Text variant="error">* </Text>}
-          {label}
-        </Text>
+    <Box {...boxProps}>
+      <Pressable onPress={focusInput}>
+        {!removeLabel && (
+          <Text variant="inputLabel">
+            {required && <Text variant="error">* </Text>}
+            {label}
+          </Text>
+        )}
 
         <Box {...$textInputContainer}>
           <RNTextInput
@@ -55,7 +60,7 @@ export function TextInput({
             style={{
               padding: 0,
               fontFamily: "Roboto_400Regular",
-              fontSize: 16,
+              fontSize: RFValue(16),
               flexGrow: 1,
               flexShrink: 1,
             }}

@@ -1,5 +1,6 @@
 import { TouchableOpacityBoxProps } from '@components/TouchableOpacityBox'
 import { ThemeColors } from '@themes/index'
+import { RFValue } from 'react-native-responsive-fontsize'
 
 export type ButtonPreset = 'primary' | 'outline'
 
@@ -32,14 +33,14 @@ export const buttonPresets: Record<
   outline: {
     default: {
       container: {
-        borderWidth: 1,
+        borderWidth: RFValue(1),
         borderColor: 'buttonPrimary'
       },
       content: 'buttonPrimary'
     },
     disabled: {
       container: {
-        borderWidth: 1,
+        borderWidth: RFValue(1),
         borderColor: 'gray_disabled_Background'
       },
       content: 'gray_disabled_Content'

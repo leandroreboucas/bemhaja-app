@@ -6,18 +6,16 @@ import { TextInput } from "@components/TextInput";
 import { Box } from "@components/Box";
 import { Text } from "@components/Text";
 import { EyeOnIcon } from "@assets/icons/EyeOnIcon";
+import { Screen } from "@components/Screen";
 
 export function Home() {
   return (
-    <ScrollView style={{ flex: 1 }}>
+    <Screen scrollable>
       <Box
-        flex={1}
         gap="s8"
         alignItems="center"
         justifyContent="center"
         bg="mainBackground"
-        marginVertical="s40"
-        paddingHorizontal="s24"
       >
         <Text variant="title" color="black">
           Input
@@ -73,6 +71,6 @@ export function Home() {
           <Icon name="groups" color="buttonPrimary" />
         </Box>
       </Box>
-    </ScrollView>
+    </Screen>
   );
 }

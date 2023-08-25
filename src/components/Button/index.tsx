@@ -8,6 +8,7 @@ import {
   TouchableOpacityBoxProps,
 } from "../TouchableOpacityBox";
 import { ButtonPreset, buttonPresets } from "./ButtonPresets";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface ButtonProps extends TouchableOpacityBoxProps {
   title: string;
@@ -34,7 +35,7 @@ export function Button({
       alignItems="center"
       justifyContent="center"
       borderRadius="br10"
-      height={50}
+      height={RFValue(50)}
       {...buttonPreset.container}
       {...touchableOpacityBoxProps}
     >
