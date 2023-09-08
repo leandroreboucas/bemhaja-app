@@ -12,15 +12,24 @@ import { Icon } from "@components/Icon";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@routes/index";
 import { Loading } from "@components/Loading";
+import { Controller, useForm } from "react-hook-form";
 
 interface UserProp {
   email: string;
-  senha: string;
+  password: string;
 }
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, "LoginScreen">;
 
 export function LoginScreen({ navigation }: ScreenProps) {
+  const { control, formState, handleSubmit } = useForm<UserProp>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    mode: "onChange",
+  });
+
   function navigateToSignUpScreen() {
     navigation.navigate("SignUpScreen");
   }
@@ -28,6 +37,8 @@ export function LoginScreen({ navigation }: ScreenProps) {
   function navigateToForgoutPasswordScreen() {
     navigation.navigate("ForgoutPasswordScreen");
   }
+
+  function submitForm({ email, password }: UserProp) {}
 
   if (!ImageBg) {
     return <Loading />;
@@ -47,28 +58,59 @@ export function LoginScreen({ navigation }: ScreenProps) {
       <Screen scrollable removeBackgroundColor>
         <Box
           paddingTop="s34"
-          paddingBottom="s16"
+          paddingBottom="s24"
           alignItems="center"
           justifyContent="center"
         >
           <LogoIcon />
         </Box>
 
-        <TextInput
-          required
-          label="E-mail"
-          placeholder="Digite seu e-mail"
-          boxProps={{ mb: "s16" }}
-          keyboardType="email-address"
+        <Controller
+          control={control}
+          name="email"
+          rules={{
+            required: "E-mail obrigatório",
+            pattern: {
+              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+              message: "E-mail inválido",
+            },
+          }}
+          render={({ field, fieldState }) => (
+            <TextInput
+              removeLabel
+              value={field.value}
+              onChangeText={field.onChange}
+              errorMessage={fieldState.error?.message}
+              required
+              label="E-mail"
+              placeholder="Digite seu e-mail"
+              boxProps={{ mb: fieldState.error?.message ? "s8" : "s24" }}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="password"
+          rules={{
+            required: "Senha Obrigatória",
+          }}
+          render={({ field, fieldState }) => (
+            <PasswordInput
+              removeLabel
+              value={field.value}
+              onChangeText={field.onChange}
+              errorMessage={fieldState.error?.message}
+              required
+              label="Senha"
+              placeholder="Digite sua senha"
+              boxProps={{ mb: fieldState.error?.message ? "s8" : "s24" }}
+            />
+          )}
         />
 
-        <PasswordInput
-          required
-          label="Senha"
-          placeholder="Digite sua senha"
-          boxProps={{ mb: "s16" }}
-        />
-        <Box alignItems="center" mb="s16">
+        <Box alignItems="center" mb="s24">
           <Pressable
             hitSlop={RFValue(10)}
             onPress={navigateToForgoutPasswordScreen}
@@ -76,8 +118,13 @@ export function LoginScreen({ navigation }: ScreenProps) {
             <Text variant="padrao">Recuperar senha</Text>
           </Pressable>
         </Box>
-        <Box alignItems="center" mb="s72">
-          <ButtonLinear title="Entrar" buttonWidth={RFValue(190)} />
+        <Box alignItems="center" mb={"s72"}>
+          <ButtonLinear
+            disabled={!formState.isValid}
+            onPress={handleSubmit(submitForm)}
+            title="Entrar"
+            buttonWidth={RFValue(190)}
+          />
         </Box>
         <Box alignItems="center" mb="s24">
           <Text variant="title_300" color="white">

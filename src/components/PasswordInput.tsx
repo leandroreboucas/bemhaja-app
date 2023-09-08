@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Icon } from "./Icon";
 import { TextInput, TextInputProps } from "./TextInput";
-import { Pressable } from "react-native";
 
-type PasswordInputProps = Omit<TextInputProps, "rightComponent">;
+export type PasswordInputProps = Omit<TextInputProps, "rightComponent">;
 
 export function PasswordInput(props: PasswordInputProps) {
   const [isSecureText, setIsSecureText] = useState(true);
