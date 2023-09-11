@@ -3,17 +3,34 @@ import { Screen } from "@components/Screen";
 import { Text } from "@components/Text";
 import { ImageBackground, Pressable } from "react-native";
 import ImageBg from "@assets/bg-cad.png";
-import { Icon } from "@components/Icon";
-import { TextInput } from "@components/TextInput";
+
 import { RFValue } from "react-native-responsive-fontsize";
-import { PasswordInput } from "@components/PasswordInput";
+
 import { ButtonLinear } from "@components/ButtonLinear";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "@components/Button";
+
 import { Loading } from "@components/Loading";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ForgoutPasswordType,
+  forgoutPasswordSchema,
+} from "./ForgoutPasswordSchema";
+import { FormTextInput } from "@components/Form/FormTextInput";
 
 export function ForgoutPasswordScreen() {
   const navigation = useNavigation();
+  const { control, formState, handleSubmit } = useForm<ForgoutPasswordType>({
+    resolver: zodResolver(forgoutPasswordSchema),
+    defaultValues: {
+      email: "",
+    },
+    mode: "onChange",
+  });
+  function submitForm(form: ForgoutPasswordType) {
+    console.log(form);
+  }
   if (!ImageBg) {
     return <Loading />;
   }
@@ -45,7 +62,9 @@ export function ForgoutPasswordScreen() {
           </Text>
         </Box>
 
-        <TextInput
+        <FormTextInput
+          control={control}
+          name="email"
           removeLabel
           required
           label="E-mail"
@@ -55,7 +74,12 @@ export function ForgoutPasswordScreen() {
         />
 
         <Box alignItems="center" mb="s28">
-          <ButtonLinear title="Recuperar senha" buttonWidth={RFValue(190)} />
+          <ButtonLinear
+            disabled={!formState.isValid}
+            onPress={handleSubmit(submitForm)}
+            title="Recuperar senha"
+            buttonWidth={RFValue(190)}
+          />
         </Box>
         <Box alignItems="center" mb="s160">
           <Pressable onPress={navigation.goBack}>

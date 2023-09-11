@@ -1,10 +1,10 @@
 import { LogoIcon } from "@assets/icons/LogoIcon";
 import { Box } from "@components/Box";
 import { ButtonLinear } from "@components/ButtonLinear";
-import { PasswordInput } from "@components/PasswordInput";
+
 import { Screen } from "@components/Screen";
 import { Text } from "@components/Text";
-import { TextInput } from "@components/TextInput";
+
 import { ImageBackground, Platform, Pressable } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import ImageBg from "@assets/bg.png";
@@ -12,20 +12,20 @@ import { Icon } from "@components/Icon";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@routes/index";
 import { Loading } from "@components/Loading";
-import { Controller, useForm } from "react-hook-form";
-
-interface UserProp {
-  email: string;
-  password: string;
-}
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginType, loginSchema } from "./LoginSchema";
+import { FormTextInput } from "@components/Form/FormTextInput";
+import { FormPasswordInput } from "@components/Form/FormPasswordInput";
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, "LoginScreen">;
 
 export function LoginScreen({ navigation }: ScreenProps) {
-  const { control, formState, handleSubmit } = useForm<UserProp>({
+  const { control, formState, handleSubmit } = useForm<LoginType>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
-      password: "",
+      senha: "",
     },
     mode: "onChange",
   });
@@ -38,7 +38,9 @@ export function LoginScreen({ navigation }: ScreenProps) {
     navigation.navigate("ForgoutPasswordScreen");
   }
 
-  function submitForm({ email, password }: UserProp) {}
+  function submitForm(form: LoginType) {
+    console.log(form);
+  }
 
   if (!ImageBg) {
     return <Loading />;
@@ -65,49 +67,26 @@ export function LoginScreen({ navigation }: ScreenProps) {
           <LogoIcon />
         </Box>
 
-        <Controller
+        <FormTextInput
           control={control}
           name="email"
-          rules={{
-            required: "E-mail obrigatório",
-            pattern: {
-              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-              message: "E-mail inválido",
-            },
-          }}
-          render={({ field, fieldState }) => (
-            <TextInput
-              removeLabel
-              value={field.value}
-              onChangeText={field.onChange}
-              errorMessage={fieldState.error?.message}
-              required
-              label="E-mail"
-              placeholder="Digite seu e-mail"
-              boxProps={{ mb: fieldState.error?.message ? "s8" : "s24" }}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-          )}
+          removeLabel
+          required
+          label="E-mail"
+          placeholder="Digite seu e-mail"
+          boxProps={{ mb: formState.errors.email?.message ? "s8" : "s24" }}
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
-        <Controller
+
+        <FormPasswordInput
           control={control}
-          name="password"
-          rules={{
-            required: "Senha Obrigatória",
-          }}
-          render={({ field, fieldState }) => (
-            <PasswordInput
-              removeLabel
-              value={field.value}
-              onChangeText={field.onChange}
-              errorMessage={fieldState.error?.message}
-              required
-              label="Senha"
-              placeholder="Digite sua senha"
-              boxProps={{ mb: fieldState.error?.message ? "s8" : "s24" }}
-            />
-          )}
+          name="senha"
+          removeLabel
+          required
+          label="Senha"
+          placeholder="Digite sua senha"
+          boxProps={{ mb: formState.errors.senha?.message ? "s8" : "s24" }}
         />
 
         <Box alignItems="center" mb="s24">

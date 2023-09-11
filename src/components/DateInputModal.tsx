@@ -10,6 +10,7 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { formatISO } from "date-fns";
 
 export interface TextInputProps extends RNTextInputProps {
   label: string;
@@ -60,7 +61,6 @@ export function DateInputModal({
   }
 
   function handleConfirm(date: Date) {
-    console.log("A date has been picked: ", date);
     setDate(date!);
     setDateField(date);
     hideDatePicker();
