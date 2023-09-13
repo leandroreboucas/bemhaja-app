@@ -1,10 +1,10 @@
-import { ImageBackground, Pressable } from "react-native";
+import {ImageBackground, Pressable} from 'react-native';
 
-import ImageBg from "@assets/bg-cad.png";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "@react-navigation/native";
-import { useForm } from "react-hook-form";
-import { RFValue } from "react-native-responsive-fontsize";
+import ImageBg from '@assets/bg-cad.png';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {useNavigation} from '@react-navigation/native';
+import {useForm} from 'react-hook-form';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
   Box,
@@ -16,23 +16,23 @@ import {
   FormTextInput,
   FormDateInputModal,
   FormPasswordInput,
-} from "@components";
+} from '@components';
 
-import { SignUpType, signUpSchema } from "./SignUpSchema";
+import {SignUpType, signUpSchema} from './SignUpSchema';
 
 export function SignUpScreen() {
   const navigation = useNavigation();
 
-  const { control, formState, handleSubmit } = useForm<SignUpType>({
+  const {control, formState, handleSubmit} = useForm<SignUpType>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      nome: "",
-      email: "",
+      nome: '',
+      email: '',
       data_nascimento: undefined,
-      senha: "",
-      confirma_senha: "",
+      senha: '',
+      confirma_senha: '',
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   function submitForm(form: SignUpType) {
@@ -47,19 +47,17 @@ export function SignUpScreen() {
       source={ImageBg}
       resizeMode="stretch"
       style={{
-        justifyContent: "center",
-        width: "100%",
-        height: "100%",
-        flexDirection: "column",
-      }}
-    >
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
+      }}>
       <Screen scrollable removeBackgroundColor>
         <Box
           paddingTop="s60"
           paddingBottom="s28"
           alignItems="center"
-          justifyContent="center"
-        >
+          justifyContent="center">
           <Text variant="banner_cad">
             Seja bem vindo, vamos começar a espalhar boas ações!
           </Text>
@@ -84,7 +82,7 @@ export function SignUpScreen() {
           required
           label="Nome"
           placeholder="Nome Completo"
-          boxProps={{ mb: "s28" }}
+          boxProps={{mb: 's28'}}
           keyboardType="default"
         />
 
@@ -95,7 +93,7 @@ export function SignUpScreen() {
           required
           label="E-mail"
           placeholder="E-mail"
-          boxProps={{ mb: "s28" }}
+          boxProps={{mb: 's28'}}
           keyboardType="email-address"
         />
 
@@ -106,7 +104,7 @@ export function SignUpScreen() {
           required
           label="Data de nascimento"
           placeholder="Data de nascimento"
-          boxProps={{ mb: "s28" }}
+          boxProps={{mb: 's28'}}
         />
 
         <FormPasswordInput
@@ -116,7 +114,7 @@ export function SignUpScreen() {
           required
           label="Senha"
           placeholder="Senha"
-          boxProps={{ mb: "s28" }}
+          boxProps={{mb: 's28'}}
         />
 
         <FormPasswordInput
@@ -126,7 +124,7 @@ export function SignUpScreen() {
           required
           label="Senha"
           placeholder="Confirmar sua senha"
-          boxProps={{ mb: "s28" }}
+          boxProps={{mb: 's28'}}
         />
 
         <Box alignItems="center" mb="s28">
@@ -142,8 +140,7 @@ export function SignUpScreen() {
             <Text
               variant="label_back_button"
               color="gray_700"
-              textDecorationLine="underline"
-            >
+              textDecorationLine="underline">
               Voltar
             </Text>
           </Pressable>

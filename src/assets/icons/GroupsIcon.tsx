@@ -1,7 +1,7 @@
-import { IIcon } from "@components/Icon/IIcon";
-import { Svg, Path } from "react-native-svg";
+import {IIcon} from '@components/Icon/IIcon';
+import {Svg, Path} from 'react-native-svg';
 
-export function GroupsIcon({ size = 24, color }: IIcon) {
+export function GroupsIcon({size = 24, color}: IIcon) {
   return (
     <Svg width={size} height={size} viewBox="0 0 22 23" fill="none">
       <Path

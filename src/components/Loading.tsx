@@ -1,18 +1,17 @@
-import { ActivityIndicator } from "react-native";
+import {ActivityIndicator} from 'react-native';
 
-import { useAppTheme } from "@hooks";
+import {useAppTheme} from '@hooks';
 
-import { Box } from "./Box";
+import {Box} from './Box';
 
 export function Loading() {
-  const { colors } = useAppTheme();
+  const {colors} = useAppTheme();
   return (
     <Box
       flex={1}
       alignItems="center"
       justifyContent="center"
-      backgroundColor="white"
-    >
+      backgroundColor="white">
       <ActivityIndicator size="small" color={colors.primary_500} />
     </Box>
   );

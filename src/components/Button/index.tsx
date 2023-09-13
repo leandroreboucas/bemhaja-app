@@ -1,17 +1,17 @@
-import { ActivityIndicator } from "react-native";
+import {ActivityIndicator} from 'react-native';
 
-import { useTheme } from "@shopify/restyle";
-import { RFValue } from "react-native-responsive-fontsize";
+import {useTheme} from '@shopify/restyle';
+import {RFValue} from 'react-native-responsive-fontsize';
 
-import { ThemeProps } from "@themes";
+import {ThemeProps} from '@themes';
 
 import {
   TouchableOpacityBox,
   TouchableOpacityBoxProps,
-} from "../TouchableOpacityBox";
+} from '../TouchableOpacityBox';
 
-import { Text } from "./../Text";
-import { ButtonPreset, buttonPresets } from "./ButtonPresets";
+import {Text} from './../Text';
+import {ButtonPreset, buttonPresets} from './ButtonPresets';
 
 interface ButtonProps extends TouchableOpacityBoxProps {
   title: string;
@@ -23,13 +23,13 @@ interface ButtonProps extends TouchableOpacityBoxProps {
 export function Button({
   title,
   loading,
-  preset = "primary",
+  preset = 'primary',
   disabled = false,
   ...touchableOpacityBoxProps
 }: ButtonProps) {
-  const { colors } = useTheme<ThemeProps>();
+  const {colors} = useTheme<ThemeProps>();
 
-  const buttonPreset = buttonPresets[preset][disabled ? "disabled" : "default"];
+  const buttonPreset = buttonPresets[preset][disabled ? 'disabled' : 'default'];
 
   return (
     <TouchableOpacityBox
@@ -40,8 +40,7 @@ export function Button({
       borderRadius="br10"
       height={RFValue(50)}
       {...buttonPreset.container}
-      {...touchableOpacityBoxProps}
-    >
+      {...touchableOpacityBoxProps}>
       {loading ? (
         <ActivityIndicator color={colors[buttonPreset.content]} />
       ) : (

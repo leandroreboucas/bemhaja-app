@@ -1,10 +1,10 @@
-import { ImageBackground, Pressable } from "react-native";
+import {ImageBackground, Pressable} from 'react-native';
 
-import ImageBg from "@assets/bg-cad.png";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation } from "@react-navigation/native";
-import { useForm } from "react-hook-form";
-import { RFValue } from "react-native-responsive-fontsize";
+import ImageBg from '@assets/bg-cad.png';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {useNavigation} from '@react-navigation/native';
+import {useForm} from 'react-hook-form';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
   Box,
@@ -13,21 +13,21 @@ import {
   ButtonLinear,
   Loading,
   FormTextInput,
-} from "@components";
+} from '@components';
 
 import {
   ForgoutPasswordType,
   forgoutPasswordSchema,
-} from "./ForgoutPasswordSchema";
+} from './ForgoutPasswordSchema';
 
 export function ForgoutPasswordScreen() {
   const navigation = useNavigation();
-  const { control, formState, handleSubmit } = useForm<ForgoutPasswordType>({
+  const {control, formState, handleSubmit} = useForm<ForgoutPasswordType>({
     resolver: zodResolver(forgoutPasswordSchema),
     defaultValues: {
-      email: "",
+      email: '',
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
   function submitForm(form: ForgoutPasswordType) {
     console.log(form);
@@ -41,19 +41,17 @@ export function ForgoutPasswordScreen() {
       source={ImageBg}
       resizeMode="stretch"
       style={{
-        justifyContent: "center",
-        width: "100%",
-        height: "100%",
-        flexDirection: "column",
-      }}
-    >
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
+      }}>
       <Screen scrollable removeBackgroundColor>
         <Box
           paddingTop="s60"
           paddingBottom="s28"
           alignItems="center"
-          justifyContent="center"
-        >
+          justifyContent="center">
           <Text variant="banner_cad">Esqueci minha senha</Text>
         </Box>
         <Box paddingBottom="s28" alignItems="center" justifyContent="center">
@@ -70,7 +68,7 @@ export function ForgoutPasswordScreen() {
           required
           label="E-mail"
           placeholder="Digite seu e-mail"
-          boxProps={{ mb: "s28" }}
+          boxProps={{mb: 's28'}}
           keyboardType="email-address"
         />
 
@@ -87,8 +85,7 @@ export function ForgoutPasswordScreen() {
             <Text
               variant="label_back_button"
               color="gray_700"
-              textDecorationLine="underline"
-            >
+              textDecorationLine="underline">
               Voltar
             </Text>
           </Pressable>

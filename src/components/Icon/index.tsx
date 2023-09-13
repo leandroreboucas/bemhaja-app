@@ -1,19 +1,19 @@
-import { Pressable } from "react-native";
+import {Pressable} from 'react-native';
 
-import { AppleIcon } from "@assets/icons/AppleIcon";
-import { ArrowLeftIcon } from "@assets/icons/ArrowLeftIcon";
-import { CameraIcon } from "@assets/icons/CameraIcon";
-import { EventsIcon } from "@assets/icons/EventsIcon";
-import { EyeOffIcon } from "@assets/icons/EyeOffIcon";
-import { EyeOnIcon } from "@assets/icons/EyeOnIcon";
-import { FacebookIcon } from "@assets/icons/FacebookIcon";
-import { FriendsIcon } from "@assets/icons/FriendsIcon";
-import { GoogleIcon } from "@assets/icons/GoogleIcon";
-import { GroupsIcon } from "@assets/icons/GroupsIcon";
-import { HomeIcon } from "@assets/icons/HomeIcon";
-import { useAppTheme } from "@hooks/useAppTheme";
-import { ThemeColors } from "@themes/index";
-import { RFValue } from "react-native-responsive-fontsize";
+import {AppleIcon} from '@assets/icons/AppleIcon';
+import {ArrowLeftIcon} from '@assets/icons/ArrowLeftIcon';
+import {CameraIcon} from '@assets/icons/CameraIcon';
+import {EventsIcon} from '@assets/icons/EventsIcon';
+import {EyeOffIcon} from '@assets/icons/EyeOffIcon';
+import {EyeOnIcon} from '@assets/icons/EyeOnIcon';
+import {FacebookIcon} from '@assets/icons/FacebookIcon';
+import {FriendsIcon} from '@assets/icons/FriendsIcon';
+import {GoogleIcon} from '@assets/icons/GoogleIcon';
+import {GroupsIcon} from '@assets/icons/GroupsIcon';
+import {HomeIcon} from '@assets/icons/HomeIcon';
+import {useAppTheme} from '@hooks/useAppTheme';
+import {ThemeColors} from '@themes/index';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 interface IconProps {
   name: IconNames;
@@ -24,11 +24,11 @@ interface IconProps {
 
 export function Icon({
   name,
-  color = "backgroundContrast",
+  color = 'backgroundContrast',
   size = 24,
   onPress,
 }: IconProps) {
-  const { colors } = useAppTheme();
+  const {colors} = useAppTheme();
   const SVGIcon = iconRegistry[name];
 
   if (onPress) {

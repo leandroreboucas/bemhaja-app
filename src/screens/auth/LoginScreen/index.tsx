@@ -1,11 +1,11 @@
-import { ImageBackground, Platform, Pressable } from "react-native";
+import {ImageBackground, Platform, Pressable} from 'react-native';
 
-import ImageBg from "@assets/bg.png";
-import { LogoIcon } from "@assets/icons/LogoIcon";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useForm } from "react-hook-form";
-import { RFValue } from "react-native-responsive-fontsize";
+import ImageBg from '@assets/bg.png';
+import {LogoIcon} from '@assets/icons/LogoIcon';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useForm} from 'react-hook-form';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
   Box,
@@ -16,29 +16,29 @@ import {
   Loading,
   FormTextInput,
   FormPasswordInput,
-} from "@components";
-import { RootStackParamList } from "@routes";
+} from '@components';
+import {RootStackParamList} from '@routes';
 
-import { LoginType, loginSchema } from "./LoginSchema";
+import {LoginType, loginSchema} from './LoginSchema';
 
-type ScreenProps = NativeStackScreenProps<RootStackParamList, "LoginScreen">;
+type ScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
 
-export function LoginScreen({ navigation }: ScreenProps) {
-  const { control, formState, handleSubmit } = useForm<LoginType>({
+export function LoginScreen({navigation}: ScreenProps) {
+  const {control, formState, handleSubmit} = useForm<LoginType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
-      senha: "",
+      email: '',
+      senha: '',
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   function navigateToSignUpScreen() {
-    navigation.navigate("SignUpScreen");
+    navigation.navigate('SignUpScreen');
   }
 
   function navigateToForgoutPasswordScreen() {
-    navigation.navigate("ForgoutPasswordScreen");
+    navigation.navigate('ForgoutPasswordScreen');
   }
 
   function submitForm(form: LoginType) {
@@ -54,19 +54,17 @@ export function LoginScreen({ navigation }: ScreenProps) {
       source={ImageBg}
       resizeMode="stretch"
       style={{
-        justifyContent: "center",
-        width: "100%",
-        height: "100%",
-        flexDirection: "column",
-      }}
-    >
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+        flexDirection: 'column',
+      }}>
       <Screen scrollable removeBackgroundColor>
         <Box
           paddingTop="s34"
           paddingBottom="s24"
           alignItems="center"
-          justifyContent="center"
-        >
+          justifyContent="center">
           <LogoIcon />
         </Box>
 
@@ -77,7 +75,7 @@ export function LoginScreen({ navigation }: ScreenProps) {
           required
           label="E-mail"
           placeholder="Digite seu e-mail"
-          boxProps={{ mb: formState.errors.email?.message ? "s8" : "s24" }}
+          boxProps={{mb: formState.errors.email?.message ? 's8' : 's24'}}
           keyboardType="email-address"
           autoCapitalize="none"
         />
@@ -89,14 +87,13 @@ export function LoginScreen({ navigation }: ScreenProps) {
           required
           label="Senha"
           placeholder="Digite sua senha"
-          boxProps={{ mb: formState.errors.senha?.message ? "s8" : "s24" }}
+          boxProps={{mb: formState.errors.senha?.message ? 's8' : 's24'}}
         />
 
         <Box alignItems="center" mb="s24">
           <Pressable
             hitSlop={RFValue(10)}
-            onPress={navigateToForgoutPasswordScreen}
-          >
+            onPress={navigateToForgoutPasswordScreen}>
             <Text variant="padrao">Recuperar senha</Text>
           </Pressable>
         </Box>
@@ -117,14 +114,12 @@ export function LoginScreen({ navigation }: ScreenProps) {
           flexDirection="row"
           justifyContent="space-around"
           alignItems="center"
-          mb="s24"
-        >
+          mb="s24">
           <Box
             gap="s8"
             flexDirection="column"
             justifyContent="center"
-            alignItems="center"
-          >
+            alignItems="center">
             <Icon name="facebook" size={42} color="white" />
             <Text variant="login_social">Conta Facebook</Text>
           </Box>
@@ -132,18 +127,16 @@ export function LoginScreen({ navigation }: ScreenProps) {
             gap="s8"
             flexDirection="column"
             justifyContent="center"
-            alignItems="center"
-          >
+            alignItems="center">
             <Icon name="google" size={42} color="white" />
             <Text variant="login_social">Conta Google</Text>
           </Box>
-          {Platform.OS === "ios" && (
+          {Platform.OS === 'ios' && (
             <Box
               gap="s8"
               flexDirection="column"
               justifyContent="center"
-              alignItems="center"
-            >
+              alignItems="center">
               <Icon name="apple" size={42} color="white" />
               <Text variant="login_social">Conta Apple</Text>
             </Box>

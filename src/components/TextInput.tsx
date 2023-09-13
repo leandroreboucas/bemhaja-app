@@ -1,16 +1,16 @@
-import { ReactElement, useRef } from "react";
+import {ReactElement, useRef} from 'react';
 import {
   Pressable,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
-} from "react-native";
+} from 'react-native';
 
-import { RFValue } from "react-native-responsive-fontsize";
+import {RFValue} from 'react-native-responsive-fontsize';
 
-import { useAppTheme } from "@hooks";
+import {useAppTheme} from '@hooks';
 
-import { Box, BoxProps } from "./Box";
-import { Text } from "./Text";
+import {Box, BoxProps} from './Box';
+import {Text} from './Text';
 
 export interface TextInputProps extends RNTextInputProps {
   label: string;
@@ -30,16 +30,16 @@ export function TextInput({
   removeLabel = false,
   ...rnTextInputProps
 }: TextInputProps) {
-  const { colors } = useAppTheme();
+  const {colors} = useAppTheme();
   const inputRef = useRef<RNTextInput>(null);
 
   const $textInputContainer: BoxProps = {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderWidth: RFValue(errorMessage ? 2 : 1),
-    borderColor: errorMessage ? "error" : "gray_500",
-    padding: "s8",
-    borderRadius: "br10",
-    backgroundColor: "gray_100",
+    borderColor: errorMessage ? 'error' : 'gray_500',
+    padding: 's8',
+    borderRadius: 'br10',
+    backgroundColor: 'gray_100',
   };
 
   function focusInput() {
@@ -62,7 +62,7 @@ export function TextInput({
             placeholderTextColor={colors.gray_700}
             style={{
               padding: 0,
-              fontFamily: "Roboto_400Regular",
+              fontFamily: 'Roboto_400Regular',
               fontSize: RFValue(16),
               flexGrow: 1,
               flexShrink: 1,

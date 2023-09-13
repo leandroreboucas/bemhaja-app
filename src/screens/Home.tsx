@@ -6,7 +6,7 @@ import {
   Box,
   Text,
   Screen,
-} from "@components";
+} from '@components';
 
 export function Home() {
   return (
@@ -15,8 +15,7 @@ export function Home() {
         gap="s8"
         alignItems="center"
         justifyContent="center"
-        bg="mainBackground"
-      >
+        bg="mainBackground">
         <Text variant="title" color="black">
           Input
         </Text>
@@ -63,8 +62,7 @@ export function Home() {
           flexDirection="row"
           alignItems="center"
           justifyContent="center"
-          width="100%"
-        >
+          width="100%">
           <Icon name="home" color="buttonPrimary" />
           <Icon name="events" color="buttonPrimary" />
           <Icon name="friends" color="buttonPrimary" />

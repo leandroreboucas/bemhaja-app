@@ -1,9 +1,9 @@
-import { createTheme } from "@shopify/restyle";
-import { RFValue } from "react-native-responsive-fontsize";
+import {createTheme} from '@shopify/restyle';
+import {RFValue} from 'react-native-responsive-fontsize';
 
-import { colors } from "./colors";
-import { spacing } from "./spacing";
-import { textVariants } from "./textVariants";
+import {colors} from './colors';
+import {spacing} from './spacing';
+import {textVariants} from './textVariants';
 
 const theme = createTheme({
   colors,
@@ -16,6 +16,6 @@ const theme = createTheme({
 
 type ThemeProps = typeof theme;
 
-type ThemeColors = keyof ThemeProps["colors"];
+type ThemeColors = keyof ThemeProps['colors'];
 
-export { theme, ThemeProps, ThemeColors };
+export {theme, ThemeProps, ThemeColors};

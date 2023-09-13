@@ -1,7 +1,7 @@
-import { IIcon } from "@components/Icon/IIcon";
-import { Svg, Path, Circle, G } from "react-native-svg";
+import {IIcon} from '@components/Icon/IIcon';
+import {Svg, Path, Circle, G} from 'react-native-svg';
 
-export function CameraIcon({ size = 24, color }: IIcon) {
+export function CameraIcon({size = 24, color}: IIcon) {
   return (
     <Svg width={size} height={size} viewBox="0 0 140 140" fill="none">
       <G id="Group 5">
