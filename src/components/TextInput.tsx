@@ -5,7 +5,7 @@ import {
 } from "react-native";
 import { Box, BoxProps } from "./Box";
 import { Text } from "./Text";
-import { useAppTheme } from "@hooks/useAppTheme";
+import { useAppTheme } from "@hooks";
 import { ReactElement, useRef } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 

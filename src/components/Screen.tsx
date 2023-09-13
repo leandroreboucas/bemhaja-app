@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { Box } from "./Box";
 
-import { useAppSafeArea } from "@hooks/useAppSafeArea";
+import { useAppSafeArea, useAppTheme } from "@hooks";
 import { Icon } from "./Icon";
 import { Text } from "./Text";
 import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
-import { useAppTheme } from "@hooks/useAppTheme";
+
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacityBox } from "./TouchableOpacityBox";
 

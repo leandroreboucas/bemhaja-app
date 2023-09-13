@@ -1,12 +1,12 @@
-import { ScrollView } from "react-native";
-import { ButtonLinear } from "@components/ButtonLinear";
-import { Button } from "@components/Button";
-import { Icon } from "@components/Icon";
-import { TextInput } from "@components/TextInput";
-import { Box } from "@components/Box";
-import { Text } from "@components/Text";
-import { EyeOnIcon } from "@assets/icons/EyeOnIcon";
-import { Screen } from "@components/Screen";
+import {
+  ButtonLinear,
+  Button,
+  Icon,
+  TextInput,
+  Box,
+  Text,
+  Screen,
+} from "@components";
 
 export function Home() {
   return (

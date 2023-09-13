@@ -1,9 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ForgoutPasswordScreen } from "@screens/auth/ForgoutPasswordScreen";
-import { LoginScreen } from "@screens/auth/LoginScreen";
-import { SignUpScreen } from "@screens/auth/SignUpScreen";
+import { ForgoutPasswordScreen, LoginScreen, SignUpScreen } from "@screens";
 
 export type RootStackParamList = {
   LoginScreen: undefined;

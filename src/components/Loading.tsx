@@ -1,7 +1,7 @@
 import { ActivityIndicator } from "react-native";
 
 import { Box } from "./Box";
-import { useAppTheme } from "@hooks/useAppTheme";
+import { useAppTheme } from "@hooks";
 
 export function Loading() {
   const { colors } = useAppTheme();

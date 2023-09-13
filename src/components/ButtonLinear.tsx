@@ -1,9 +1,9 @@
-import { LinearGradient, LinearGradientProps } from "expo-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { useTheme } from "@shopify/restyle";
-import { ThemeColors, ThemeProps } from "@themes/index";
+import { ThemeProps } from "@themes";
 
-import { Text } from "@components/Text";
+import { Text } from "./Text";
 import { ActivityIndicator } from "react-native";
 import {
   TouchableOpacityBox,

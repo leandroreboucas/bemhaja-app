@@ -15,10 +15,10 @@ import {
 } from "@expo-google-fonts/poppins";
 
 import { ThemeProvider } from "@shopify/restyle";
-import { theme } from "@themes/index";
+import { theme } from "@themes";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Router } from "@routes/index";
+import { Router } from "@routes";
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();

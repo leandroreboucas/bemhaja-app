@@ -5,14 +5,13 @@ import {
 } from "react-native";
 import { Box, BoxProps } from "./Box";
 import { Text } from "./Text";
-import { useAppTheme } from "@hooks/useAppTheme";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { useAppTheme } from "@hooks";
+import React, { ReactElement, useRef, useState } from "react";
 import { RFValue } from "react-native-responsive-fontsize";
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { formatISO } from "date-fns";
 
-export interface TextInputProps extends RNTextInputProps {
+export interface DateInputProps extends RNTextInputProps {
   label: string;
   errorMessage?: string;
   required?: boolean;
@@ -34,7 +33,7 @@ export function DateInputModal({
   removeLabel = false,
   setDateField,
   ...rnTextInputProps
-}: TextInputProps) {
+}: DateInputProps) {
   const [date, setDate] = useState(maximumDate);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);

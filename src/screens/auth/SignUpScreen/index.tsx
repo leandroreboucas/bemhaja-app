@@ -1,21 +1,25 @@
-import { Box } from "@components/Box";
-import { Screen } from "@components/Screen";
-import { Text } from "@components/Text";
+import {
+  Box,
+  Screen,
+  Text,
+  Icon,
+  ButtonLinear,
+  Loading,
+  FormTextInput,
+  FormDateInputModal,
+  FormPasswordInput,
+} from "@components";
+
 import { ImageBackground, Pressable } from "react-native";
 import ImageBg from "@assets/bg-cad.png";
-import { Icon } from "@components/Icon";
+
 import { RFValue } from "react-native-responsive-fontsize";
 
-import { ButtonLinear } from "@components/ButtonLinear";
 import { useNavigation } from "@react-navigation/native";
-import { Loading } from "@components/Loading";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormTextInput } from "@components/Form/FormTextInput";
 
-import { FormDateInputModal } from "@components/Form/FormDateInputModal";
-import { FormPasswordInput } from "@components/Form/FormPasswordInput";
 import { SignUpType, signUpSchema } from "./SignUpSchema";
 
 export function SignUpScreen() {

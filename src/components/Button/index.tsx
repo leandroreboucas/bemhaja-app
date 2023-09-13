@@ -1,7 +1,7 @@
 import { useTheme } from "@shopify/restyle";
-import { ThemeProps } from "@themes/index";
+import { ThemeProps } from "@themes";
 
-import { Text } from "@components/Text";
+import { Text } from "./../Text";
 import { ActivityIndicator } from "react-native";
 import {
   TouchableOpacityBox,

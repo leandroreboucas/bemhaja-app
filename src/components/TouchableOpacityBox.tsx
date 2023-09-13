@@ -13,7 +13,7 @@ import {
   SpacingShorthandProps,
 } from "@shopify/restyle";
 
-import { ThemeProps } from "@themes/index";
+import { ThemeProps } from "@themes";
 
 export type TouchableOpacityBoxProps = BackgroundColorProps<ThemeProps> &
   TouchableOpacityProps &

@@ -1,5 +1,5 @@
 import { createBox } from "@shopify/restyle";
-import { ThemeProps } from "@themes/index";
+import { ThemeProps } from "@themes";
 import { ComponentProps } from "react";
 
 export const Box = createBox<ThemeProps>();

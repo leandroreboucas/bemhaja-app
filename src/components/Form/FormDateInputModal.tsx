@@ -1,11 +1,11 @@
 import { Controller, UseControllerProps, FieldValues } from "react-hook-form";
-import { DateInputModal, TextInputProps } from "@components/DateInputModal";
+import { DateInputModal, DateInputProps } from "./../DateInputModal";
 export function FormDateInputModal<FormType extends FieldValues>({
   control,
   name,
   rules,
-  ...textInputProps
-}: Omit<TextInputProps, "setDateField"> & UseControllerProps<FormType>) {
+  ...dateInputProps
+}: Omit<DateInputProps, "setDateField"> & UseControllerProps<FormType>) {
   return (
     <Controller
       control={control}
@@ -17,7 +17,7 @@ export function FormDateInputModal<FormType extends FieldValues>({
           errorMessage={fieldState.error?.message}
           setDateField={field.onChange}
           removeLabel
-          {...textInputProps}
+          {...dateInputProps}
         />
       )}
     />

@@ -1,22 +1,23 @@
 import { LogoIcon } from "@assets/icons/LogoIcon";
-import { Box } from "@components/Box";
-import { ButtonLinear } from "@components/ButtonLinear";
-
-import { Screen } from "@components/Screen";
-import { Text } from "@components/Text";
+import {
+  Box,
+  ButtonLinear,
+  Screen,
+  Text,
+  Icon,
+  Loading,
+  FormTextInput,
+  FormPasswordInput,
+} from "@components";
 
 import { ImageBackground, Platform, Pressable } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import ImageBg from "@assets/bg.png";
-import { Icon } from "@components/Icon";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@routes/index";
-import { Loading } from "@components/Loading";
+import { RootStackParamList } from "@routes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginType, loginSchema } from "./LoginSchema";
-import { FormTextInput } from "@components/Form/FormTextInput";
-import { FormPasswordInput } from "@components/Form/FormPasswordInput";
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, "LoginScreen">;
 
