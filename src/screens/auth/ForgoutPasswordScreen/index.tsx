@@ -1,10 +1,10 @@
-import {ImageBackground, Pressable} from 'react-native';
+import {ImageBackground, Pressable} from 'react-native'
 
-import ImageBg from '@assets/bg-cad.png';
-import {zodResolver} from '@hookform/resolvers/zod';
-import {useNavigation} from '@react-navigation/native';
-import {useForm} from 'react-hook-form';
-import {RFValue} from 'react-native-responsive-fontsize';
+import ImageBg from '@assets/bg-cad.png'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {useNavigation} from '@react-navigation/native'
+import {useForm} from 'react-hook-form'
+import {RFValue} from 'react-native-responsive-fontsize'
 
 import {
   Box,
@@ -12,28 +12,28 @@ import {
   Text,
   ButtonLinear,
   Loading,
-  FormTextInput,
-} from '@components';
+  FormTextInput
+} from '@components'
 
 import {
   ForgoutPasswordType,
-  forgoutPasswordSchema,
-} from './ForgoutPasswordSchema';
+  forgoutPasswordSchema
+} from './ForgoutPasswordSchema'
 
 export function ForgoutPasswordScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   const {control, formState, handleSubmit} = useForm<ForgoutPasswordType>({
     resolver: zodResolver(forgoutPasswordSchema),
     defaultValues: {
-      email: '',
+      email: ''
     },
-    mode: 'onChange',
-  });
+    mode: 'onChange'
+  })
   function submitForm(form: ForgoutPasswordType) {
-    console.log(form);
+    console.log(form)
   }
   if (!ImageBg) {
-    return <Loading />;
+    return <Loading />
   }
 
   return (
@@ -44,7 +44,7 @@ export function ForgoutPasswordScreen() {
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        flexDirection: 'column',
+        flexDirection: 'column'
       }}>
       <Screen scrollable removeBackgroundColor>
         <Box
@@ -92,5 +92,5 @@ export function ForgoutPasswordScreen() {
         </Box>
       </Screen>
     </ImageBackground>
-  );
+  )
 }

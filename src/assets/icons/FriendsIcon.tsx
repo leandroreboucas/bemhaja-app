@@ -1,5 +1,5 @@
-import {IIcon} from '@components/Icon/IIcon';
-import {Svg, Path} from 'react-native-svg';
+import {IIcon} from '@components/Icon/IIcon'
+import {Svg, Path} from 'react-native-svg'
 
 export function FriendsIcon({size = 24, color}: IIcon) {
   return (
@@ -10,5 +10,5 @@ export function FriendsIcon({size = 24, color}: IIcon) {
         fill={color}
       />
     </Svg>
-  );
+  )
 }

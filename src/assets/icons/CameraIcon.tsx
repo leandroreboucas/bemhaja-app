@@ -1,5 +1,5 @@
-import {IIcon} from '@components/Icon/IIcon';
-import {Svg, Path, Circle, G} from 'react-native-svg';
+import {IIcon} from '@components/Icon/IIcon'
+import {Svg, Path, Circle, G} from 'react-native-svg'
 
 export function CameraIcon({size = 24, color}: IIcon) {
   return (
@@ -15,5 +15,5 @@ export function CameraIcon({size = 24, color}: IIcon) {
         />
       </G>
     </Svg>
-  );
+  )
 }

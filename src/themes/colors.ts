@@ -27,8 +27,8 @@ const pallete = {
   gray_100: '#F6F6F6',
 
   gray_disabled_Background: '#E1E1E1',
-  gray_disabled_Content: '#8E8E8E',
-};
+  gray_disabled_Content: '#8E8E8E'
+}
 
 export const colors = {
   ...pallete,
@@ -36,5 +36,5 @@ export const colors = {
   mainBackground: pallete.white,
   backgroundContrast: pallete.black,
 
-  buttonPrimary: pallete.primary_800,
-};
+  buttonPrimary: pallete.primary_800
+}

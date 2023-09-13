@@ -1,33 +1,33 @@
-import {ReactNode} from 'react';
-import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
+import {ReactNode} from 'react'
+import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native'
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native'
 
-import {useAppSafeArea, useAppTheme} from '@hooks';
+import {useAppSafeArea, useAppTheme} from '@hooks'
 
-import {Box} from './Box';
-import {Icon} from './Icon';
-import {Text} from './Text';
-import {TouchableOpacityBox} from './TouchableOpacityBox';
+import {Box} from './Box'
+import {Icon} from './Icon'
+import {Text} from './Text'
+import {TouchableOpacityBox} from './TouchableOpacityBox'
 
 interface ScreenProps {
-  children: ReactNode;
-  canGoBack?: boolean;
-  scrollable?: boolean;
-  removeBackgroundColor?: boolean;
+  children: ReactNode
+  canGoBack?: boolean
+  scrollable?: boolean
+  removeBackgroundColor?: boolean
 }
 
 export function Screen({
   canGoBack = false,
   scrollable = false,
   children,
-  removeBackgroundColor = false,
+  removeBackgroundColor = false
 }: ScreenProps) {
-  const {top, bottom} = useAppSafeArea();
-  const {colors} = useAppTheme();
-  const navigation = useNavigation();
+  const {top, bottom} = useAppSafeArea()
+  const {colors} = useAppTheme()
+  const navigation = useNavigation()
 
-  const Container = scrollable ? ScroolViewContainer : ViewContainer;
+  const Container = scrollable ? ScroolViewContainer : ViewContainer
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -55,12 +55,12 @@ export function Screen({
         </Box>
       </Container>
     </KeyboardAvoidingView>
-  );
+  )
 }
 
 interface Props {
-  children: ReactNode;
-  backgroundColor?: string;
+  children: ReactNode
+  backgroundColor?: string
 }
 function ScroolViewContainer({children, backgroundColor}: Props) {
   return (
@@ -69,9 +69,9 @@ function ScroolViewContainer({children, backgroundColor}: Props) {
       style={{flex: 1, backgroundColor}}>
       {children}
     </ScrollView>
-  );
+  )
 }
 
 function ViewContainer({children, backgroundColor}: Props) {
-  return <View style={{flex: 1, backgroundColor}}>{children}</View>;
+  return <View style={{flex: 1, backgroundColor}}>{children}</View>
 }

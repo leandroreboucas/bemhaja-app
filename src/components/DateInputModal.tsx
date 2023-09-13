@@ -1,30 +1,30 @@
-import React, {ReactElement, useRef, useState} from 'react';
+import React, {ReactElement, useRef, useState} from 'react'
 import {
   Pressable,
   TextInput as RNTextInput,
-  TextInputProps as RNTextInputProps,
-} from 'react-native';
+  TextInputProps as RNTextInputProps
+} from 'react-native'
 
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {RFValue} from 'react-native-responsive-fontsize';
+import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import {RFValue} from 'react-native-responsive-fontsize'
 
-import {useAppTheme} from '@hooks';
+import {useAppTheme} from '@hooks'
 
-import {Box, BoxProps} from './Box';
-import {Text} from './Text';
+import {Box, BoxProps} from './Box'
+import {Text} from './Text'
 
 export interface DateInputProps extends RNTextInputProps {
-  label: string;
-  errorMessage?: string;
-  required?: boolean;
-  rightComponent?: ReactElement;
-  boxProps?: BoxProps;
-  removeLabel?: boolean;
-  setDateField: (date: Date | undefined) => void;
+  label: string
+  errorMessage?: string
+  required?: boolean
+  rightComponent?: ReactElement
+  boxProps?: BoxProps
+  removeLabel?: boolean
+  setDateField: (date: Date | undefined) => void
 }
 
-const maximumDate = new Date();
-maximumDate.setFullYear(maximumDate.getFullYear() - 18);
+const maximumDate = new Date()
+maximumDate.setFullYear(maximumDate.getFullYear() - 18)
 
 export function DateInputModal({
   label,
@@ -36,12 +36,12 @@ export function DateInputModal({
   setDateField,
   ...rnTextInputProps
 }: DateInputProps) {
-  const [date, setDate] = useState(maximumDate);
+  const [date, setDate] = useState(maximumDate)
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
 
-  const {colors} = useAppTheme();
-  const inputRef = useRef<RNTextInput>(null);
+  const {colors} = useAppTheme()
+  const inputRef = useRef<RNTextInput>(null)
 
   const $textInputContainer: BoxProps = {
     flex: 1,
@@ -50,21 +50,21 @@ export function DateInputModal({
     borderColor: errorMessage ? 'error' : 'gray_500',
     padding: 's8',
     borderRadius: 'br10',
-    backgroundColor: 'gray_100',
-  };
+    backgroundColor: 'gray_100'
+  }
 
   function showDatePicker() {
-    setDatePickerVisibility(true);
+    setDatePickerVisibility(true)
   }
 
   function hideDatePicker() {
-    setDatePickerVisibility(false);
+    setDatePickerVisibility(false)
   }
 
   function handleConfirm(date: Date) {
-    setDate(date!);
-    setDateField(date);
-    hideDatePicker();
+    setDate(date!)
+    setDateField(date)
+    hideDatePicker()
   }
 
   return (
@@ -102,7 +102,7 @@ export function DateInputModal({
               fontSize: RFValue(16),
               flexGrow: 1,
               flexShrink: 1,
-              color: 'black',
+              color: 'black'
             }}
             editable={false}
             pointerEvents="none"
@@ -118,5 +118,5 @@ export function DateInputModal({
         {errorMessage && <Text variant="error">{errorMessage}</Text>}
       </Pressable>
     </Box>
-  );
+  )
 }

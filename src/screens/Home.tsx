@@ -5,8 +5,8 @@ import {
   TextInput,
   Box,
   Text,
-  Screen,
-} from '@components';
+  Screen
+} from '@components'
 
 export function Home() {
   return (
@@ -70,5 +70,5 @@ export function Home() {
         </Box>
       </Box>
     </Screen>
-  );
+  )
 }
