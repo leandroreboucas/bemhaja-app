@@ -1,4 +1,5 @@
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+
 import {
   createRestyleComponent,
   backgroundColor,
@@ -27,5 +28,5 @@ export const TouchableOpacityBox = createRestyleComponent<
   ThemeProps
 >(
   [backgroundColor, spacing, layout, border, spacingShorthand],
-  TouchableOpacity
+  TouchableOpacity,
 );

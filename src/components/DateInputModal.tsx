@@ -1,15 +1,17 @@
+import React, { ReactElement, useRef, useState } from "react";
 import {
   Pressable,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
 } from "react-native";
-import { Box, BoxProps } from "./Box";
-import { Text } from "./Text";
-import { useAppTheme } from "@hooks";
-import React, { ReactElement, useRef, useState } from "react";
-import { RFValue } from "react-native-responsive-fontsize";
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { RFValue } from "react-native-responsive-fontsize";
+
+import { useAppTheme } from "@hooks";
+
+import { Box, BoxProps } from "./Box";
+import { Text } from "./Text";
 
 export interface DateInputProps extends RNTextInputProps {
   label: string;

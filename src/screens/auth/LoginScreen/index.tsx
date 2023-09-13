@@ -1,4 +1,12 @@
+import { ImageBackground, Platform, Pressable } from "react-native";
+
+import ImageBg from "@assets/bg.png";
 import { LogoIcon } from "@assets/icons/LogoIcon";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useForm } from "react-hook-form";
+import { RFValue } from "react-native-responsive-fontsize";
+
 import {
   Box,
   ButtonLinear,
@@ -9,14 +17,8 @@ import {
   FormTextInput,
   FormPasswordInput,
 } from "@components";
-
-import { ImageBackground, Platform, Pressable } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
-import ImageBg from "@assets/bg.png";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@routes";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { LoginType, loginSchema } from "./LoginSchema";
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, "LoginScreen">;
@@ -98,7 +100,7 @@ export function LoginScreen({ navigation }: ScreenProps) {
             <Text variant="padrao">Recuperar senha</Text>
           </Pressable>
         </Box>
-        <Box alignItems="center" mb={"s72"}>
+        <Box alignItems="center" mb="s72">
           <ButtonLinear
             disabled={!formState.isValid}
             onPress={handleSubmit(submitForm)}

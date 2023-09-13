@@ -1,15 +1,16 @@
-import { LinearGradient } from "expo-linear-gradient";
+import { ActivityIndicator } from "react-native";
 
 import { useTheme } from "@shopify/restyle";
+import { LinearGradient } from "expo-linear-gradient";
+import { RFValue } from "react-native-responsive-fontsize";
+
 import { ThemeProps } from "@themes";
 
 import { Text } from "./Text";
-import { ActivityIndicator } from "react-native";
 import {
   TouchableOpacityBox,
   TouchableOpacityBoxProps,
 } from "./TouchableOpacityBox";
-import { RFValue } from "react-native-responsive-fontsize";
 
 interface ButtonLinearProps extends TouchableOpacityBoxProps {
   title: string;

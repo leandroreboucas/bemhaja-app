@@ -1,14 +1,17 @@
+import { ActivityIndicator } from "react-native";
+
 import { useTheme } from "@shopify/restyle";
+import { RFValue } from "react-native-responsive-fontsize";
+
 import { ThemeProps } from "@themes";
 
-import { Text } from "./../Text";
-import { ActivityIndicator } from "react-native";
 import {
   TouchableOpacityBox,
   TouchableOpacityBoxProps,
 } from "../TouchableOpacityBox";
+
+import { Text } from "./../Text";
 import { ButtonPreset, buttonPresets } from "./ButtonPresets";
-import { RFValue } from "react-native-responsive-fontsize";
 
 interface ButtonProps extends TouchableOpacityBoxProps {
   title: string;

@@ -1,5 +1,8 @@
-import { StatusBar } from "expo-status-bar";
-import * as SplashScreen from "expo-splash-screen";
+import {
+  Poppins_300Light,
+  Poppins_500Medium,
+  Poppins_700Bold,
+} from "@expo-google-fonts/poppins";
 import {
   useFonts,
   Roboto_300Light,
@@ -7,18 +10,13 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-
-import {
-  Poppins_300Light,
-  Poppins_500Medium,
-  Poppins_700Bold,
-} from "@expo-google-fonts/poppins";
-
 import { ThemeProvider } from "@shopify/restyle";
-import { theme } from "@themes";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Router } from "@routes";
+import { theme } from "@themes";
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();

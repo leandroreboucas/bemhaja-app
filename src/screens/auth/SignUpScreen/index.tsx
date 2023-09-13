@@ -1,3 +1,11 @@
+import { ImageBackground, Pressable } from "react-native";
+
+import ImageBg from "@assets/bg-cad.png";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigation } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
+import { RFValue } from "react-native-responsive-fontsize";
+
 import {
   Box,
   Screen,
@@ -9,16 +17,6 @@ import {
   FormDateInputModal,
   FormPasswordInput,
 } from "@components";
-
-import { ImageBackground, Pressable } from "react-native";
-import ImageBg from "@assets/bg-cad.png";
-
-import { RFValue } from "react-native-responsive-fontsize";
-
-import { useNavigation } from "@react-navigation/native";
-
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { SignUpType, signUpSchema } from "./SignUpSchema";
 

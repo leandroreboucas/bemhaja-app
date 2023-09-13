@@ -20,7 +20,7 @@ export function Home() {
         <Text variant="title" color="black">
           Input
         </Text>
-        <Box gap="s8" width={"100%"}>
+        <Box gap="s8" width="100%">
           <TextInput label="E-mail" placeholder="Digite seu e-mail" />
           <TextInput
             label="E-mail"
@@ -38,7 +38,7 @@ export function Home() {
         <Text variant="title" color="black">
           Button Linear
         </Text>
-        <Box gap="s8" width={"100%"}>
+        <Box gap="s8" width="100%">
           <ButtonLinear title="Entrar" />
           <ButtonLinear title="Entrar" loading />
           <ButtonLinear title="Disabled" disabled />
@@ -46,7 +46,7 @@ export function Home() {
         <Text variant="title" color="black">
           Button
         </Text>
-        <Box gap="s8" width={"100%"}>
+        <Box gap="s8" width="100%">
           <Button title="Primary" />
           <Button title="Primary Disabled" disabled />
           <Button title="Outline" preset="outline" />
@@ -63,7 +63,7 @@ export function Home() {
           flexDirection="row"
           alignItems="center"
           justifyContent="center"
-          width={"100%"}
+          width="100%"
         >
           <Icon name="home" color="buttonPrimary" />
           <Icon name="events" color="buttonPrimary" />

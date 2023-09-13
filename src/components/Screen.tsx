@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
-import { Box } from "./Box";
-
-import { useAppSafeArea, useAppTheme } from "@hooks";
-import { Icon } from "./Icon";
-import { Text } from "./Text";
 import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
+
+import { useAppSafeArea, useAppTheme } from "@hooks";
+
+import { Box } from "./Box";
+import { Icon } from "./Icon";
+import { Text } from "./Text";
 import { TouchableOpacityBox } from "./TouchableOpacityBox";
 
 interface ScreenProps {

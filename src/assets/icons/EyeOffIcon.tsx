@@ -1,5 +1,4 @@
 import { IIcon } from "@components/Icon/IIcon";
-
 import { Svg, Path } from "react-native-svg";
 
 export function EyeOffIcon({ color, size = 24 }: IIcon) {

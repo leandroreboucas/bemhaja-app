@@ -1,3 +1,5 @@
+import { Pressable } from "react-native";
+
 import { AppleIcon } from "@assets/icons/AppleIcon";
 import { ArrowLeftIcon } from "@assets/icons/ArrowLeftIcon";
 import { CameraIcon } from "@assets/icons/CameraIcon";
@@ -11,7 +13,6 @@ import { GroupsIcon } from "@assets/icons/GroupsIcon";
 import { HomeIcon } from "@assets/icons/HomeIcon";
 import { useAppTheme } from "@hooks/useAppTheme";
 import { ThemeColors } from "@themes/index";
-import { Pressable } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 interface IconProps {
