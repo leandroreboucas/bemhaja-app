@@ -1,5 +1,6 @@
-import {IIcon} from '@components/Icon/IIcon'
-import {Svg, Path} from 'react-native-svg'
+import {Svg, Path} from 'react-native-svg';
+
+import {IIcon} from '@components';
 
 export function HomeIcon({size = 24, color}: IIcon) {
   return (
@@ -10,5 +11,5 @@ export function HomeIcon({size = 24, color}: IIcon) {
         fill={color}
       />
     </Svg>
-  )
+  );
 }

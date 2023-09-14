@@ -1,10 +1,5 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  },
-  // remove semicolons
-  "prettier.semi": false,
-
-  // remove trailing commas
-  "prettier.trailingComma": "none"
+  }
 }

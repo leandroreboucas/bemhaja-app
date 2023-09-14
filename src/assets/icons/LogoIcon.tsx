@@ -1,5 +1,5 @@
-import {RFValue} from 'react-native-responsive-fontsize'
-import {Svg, Path, Defs, LinearGradient, Stop} from 'react-native-svg'
+import {RFValue} from 'react-native-responsive-fontsize';
+import {Svg, Path, Defs, LinearGradient, Stop} from 'react-native-svg';
 
 export function LogoIcon() {
   return (
@@ -177,5 +177,5 @@ export function LogoIcon() {
         </LinearGradient>
       </Defs>
     </Svg>
-  )
+  );
 }

@@ -2,7 +2,6 @@ import {ImageBackground, Pressable} from 'react-native';
 
 import ImageBg from '@assets/bg-cad.png';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -17,11 +16,12 @@ import {
   FormDateInputModal,
   FormPasswordInput,
 } from '@components';
+import {useAuthNavigation} from '@hooks';
 
 import {SignUpType, signUpSchema} from './SignUpSchema';
 
 export function SignUpScreen() {
-  const navigation = useNavigation();
+  const navigation = useAuthNavigation();
 
   const {control, formState, handleSubmit} = useForm<SignUpType>({
     resolver: zodResolver(signUpSchema),

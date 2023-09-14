@@ -14,28 +14,28 @@ module.exports = {
               {
                 pattern: 'react+(|-native)',
                 group: 'external',
-                position: 'before'
+                position: 'before',
               },
               {
                 pattern: '@+(routes|screens|components|hooks|themes)',
                 group: 'internal',
-                position: 'before'
+                position: 'before',
               },
               {
                 pattern: './',
                 group: 'internal',
-                position: 'before'
-              }
+                position: 'before',
+              },
             ],
             pathGroupsExcludedImportTypes: ['react+(|-native)'],
             alphabetize: {
               order: 'asc',
-              caseInsensitive: true
+              caseInsensitive: true,
             },
-            'newlines-between': 'always'
-          }
-        ]
-      }
-    }
-  ]
-}
+            'newlines-between': 'always',
+          },
+        ],
+      },
+    },
+  ],
+};

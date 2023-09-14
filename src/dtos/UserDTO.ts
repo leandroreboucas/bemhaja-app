@@ -1,3 +1,3 @@
 export type UserDTO = {
-  id: string
-}
+  id: string;
+};

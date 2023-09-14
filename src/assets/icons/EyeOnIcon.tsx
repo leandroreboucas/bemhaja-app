@@ -1,5 +1,5 @@
-import {IIcon} from '@components/Icon/IIcon'
-import {Svg, Path} from 'react-native-svg'
+import {IIcon} from '@components/Icon/IIcon';
+import {Svg, Path} from 'react-native-svg';
 
 export function EyeOnIcon({color, size = 24}: IIcon) {
   return (
@@ -11,5 +11,5 @@ export function EyeOnIcon({color, size = 24}: IIcon) {
         fill={color}
       />
     </Svg>
-  )
+  );
 }

@@ -3,7 +3,6 @@ import {ImageBackground, Platform, Pressable} from 'react-native';
 import ImageBg from '@assets/bg.png';
 import {LogoIcon} from '@assets/icons/LogoIcon';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -17,13 +16,12 @@ import {
   FormTextInput,
   FormPasswordInput,
 } from '@components';
-import {RootStackParamList} from '@routes';
+import {useAuthNavigation} from '@hooks';
 
 import {LoginType, loginSchema} from './LoginSchema';
 
-type ScreenProps = NativeStackScreenProps<RootStackParamList, 'LoginScreen'>;
-
-export function LoginScreen({navigation}: ScreenProps) {
+export function LoginScreen() {
+  const navigation = useAuthNavigation();
   const {control, formState, handleSubmit} = useForm<LoginType>({
     resolver: zodResolver(loginSchema),
     defaultValues: {

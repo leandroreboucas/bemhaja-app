@@ -1,10 +1,10 @@
-import {z} from 'zod'
+import {z} from 'zod';
 
 export const loginSchema = z.object({
   email: z
     .string({
       required_error: 'E-mail é obrigatório',
-      invalid_type_error: 'E-mail precisa ser um texto'
+      invalid_type_error: 'E-mail precisa ser um texto',
     })
     .trim()
     .toLowerCase()
@@ -12,9 +12,9 @@ export const loginSchema = z.object({
   senha: z
     .string({
       required_error: 'Senha é obrigatório',
-      invalid_type_error: 'Senha precisa ser um texto'
+      invalid_type_error: 'Senha precisa ser um texto',
     })
-    .trim()
-})
+    .trim(),
+});
 
-export type LoginType = z.infer<typeof loginSchema>
+export type LoginType = z.infer<typeof loginSchema>;

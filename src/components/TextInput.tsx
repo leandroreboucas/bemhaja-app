@@ -1,24 +1,24 @@
-import {ReactElement, useRef} from 'react'
+import {ReactElement, useRef} from 'react';
 import {
   Pressable,
   TextInput as RNTextInput,
-  TextInputProps as RNTextInputProps
-} from 'react-native'
+  TextInputProps as RNTextInputProps,
+} from 'react-native';
 
-import {RFValue} from 'react-native-responsive-fontsize'
+import {RFValue} from 'react-native-responsive-fontsize';
 
-import {useAppTheme} from '@hooks'
+import {useAppTheme} from '@hooks';
 
-import {Box, BoxProps} from './Box'
-import {Text} from './Text'
+import {Box, BoxProps} from './Box';
+import {Text} from './Text';
 
 export interface TextInputProps extends RNTextInputProps {
-  label: string
-  errorMessage?: string
-  required?: boolean
-  rightComponent?: ReactElement
-  boxProps?: BoxProps
-  removeLabel?: boolean
+  label: string;
+  errorMessage?: string;
+  required?: boolean;
+  rightComponent?: ReactElement;
+  boxProps?: BoxProps;
+  removeLabel?: boolean;
 }
 
 export function TextInput({
@@ -30,8 +30,8 @@ export function TextInput({
   removeLabel = false,
   ...rnTextInputProps
 }: TextInputProps) {
-  const {colors} = useAppTheme()
-  const inputRef = useRef<RNTextInput>(null)
+  const {colors} = useAppTheme();
+  const inputRef = useRef<RNTextInput>(null);
 
   const $textInputContainer: BoxProps = {
     flexDirection: 'row',
@@ -39,11 +39,11 @@ export function TextInput({
     borderColor: errorMessage ? 'error' : 'gray_500',
     padding: 's8',
     borderRadius: 'br10',
-    backgroundColor: 'gray_100'
-  }
+    backgroundColor: 'gray_100',
+  };
 
   function focusInput() {
-    inputRef.current?.focus()
+    inputRef.current?.focus();
   }
 
   return (
@@ -65,7 +65,7 @@ export function TextInput({
               fontFamily: 'Roboto_400Regular',
               fontSize: RFValue(16),
               flexGrow: 1,
-              flexShrink: 1
+              flexShrink: 1,
             }}
             {...rnTextInputProps}
           />
@@ -78,5 +78,5 @@ export function TextInput({
         {errorMessage && <Text variant="error">{errorMessage}</Text>}
       </Pressable>
     </Box>
-  )
+  );
 }

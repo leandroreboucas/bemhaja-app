@@ -1,4 +1,4 @@
-import {RFValue} from 'react-native-responsive-fontsize'
+import {RFValue} from 'react-native-responsive-fontsize';
 
 export const spacing = {
   s4: RFValue(4),
@@ -13,5 +13,5 @@ export const spacing = {
   s72: RFValue(72),
   s80: RFValue(80),
   s100: RFValue(100),
-  s160: RFValue(160)
-}
+  s160: RFValue(160),
+};
