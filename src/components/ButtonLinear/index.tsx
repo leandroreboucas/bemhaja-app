@@ -5,11 +5,11 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppTheme} from '@hooks';
 
-import {Text} from './Text';
+import {Text} from '../Text';
 import {
   TouchableOpacityBox,
   TouchableOpacityBoxProps,
-} from './TouchableOpacityBox';
+} from '../TouchableOpacityBox';
 
 interface ButtonLinearProps extends TouchableOpacityBoxProps {
   title: string;

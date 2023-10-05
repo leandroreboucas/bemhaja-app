@@ -9,8 +9,8 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppTheme} from '@hooks';
 
-import {Box, BoxProps} from './Box';
-import {Text} from './Text';
+import {Box, BoxProps} from '../Box';
+import {Text} from '../Text';
 
 export interface TextInputProps extends RNTextInputProps {
   label: string;

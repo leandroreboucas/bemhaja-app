@@ -72,4 +72,29 @@ export const textVariants = {
     fontFamily: 'Roboto_400Regular',
     fontSize: RFValue(12),
   },
+  feed_user_name: {
+    color: 'primary_800',
+    fontFamily: 'Roboto_700Bold',
+    fontSize: RFValue(16),
+  },
+  feed_data_hora: {
+    color: 'gray_700',
+    fontFamily: 'Roboto_300Light',
+    fontSize: RFValue(12),
+  },
+  feed_data_hora_bold: {
+    color: 'gray_700',
+    fontFamily: 'Roboto_500Medium',
+    fontSize: RFValue(12),
+  },
+  feed_acao: {
+    color: 'primary_500',
+    fontFamily: 'Roboto_500Medium',
+    fontSize: RFValue(12),
+  },
+  feed_desc_evento: {
+    color: 'primary_600',
+    fontFamily: 'Roboto_500Medium',
+    fontSize: RFValue(18),
+  },
 };

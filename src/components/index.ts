@@ -12,3 +12,4 @@ export * from './Text';
 export * from './TextInput';
 export * from './TouchableOpacityBox';
 export * from './TabBarBottom';
+export * from './Feed';

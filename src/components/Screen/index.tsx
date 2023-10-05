@@ -5,10 +5,10 @@ import {useNavigation} from '@react-navigation/native';
 
 import {useAppSafeArea, useAppTheme} from '@hooks';
 
-import {Box} from './Box';
-import {Icon} from './Icon';
-import {Text} from './Text';
-import {TouchableOpacityBox} from './TouchableOpacityBox';
+import {Box} from '../Box';
+import {Icon} from '../Icon';
+import {Text} from '../Text';
+import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
 interface ScreenProps {
   children: ReactNode;
