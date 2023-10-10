@@ -3,6 +3,7 @@ import {Pressable} from 'react-native';
 import {AddEventIcon} from '@assets/icons/AddEventIcon';
 import {AppleIcon} from '@assets/icons/AppleIcon';
 import {ArrowLeftIcon} from '@assets/icons/ArrowLeftIcon';
+import {ArrowRightIcon} from '@assets/icons/ArrowRightIcon';
 import {CameraIcon} from '@assets/icons/CameraIcon';
 import {EventsIcon} from '@assets/icons/EventsIcon';
 import {EyeOffIcon} from '@assets/icons/EyeOffIcon';
@@ -12,6 +13,7 @@ import {FriendsIcon} from '@assets/icons/FriendsIcon';
 import {GoogleIcon} from '@assets/icons/GoogleIcon';
 import {GroupsIcon} from '@assets/icons/GroupsIcon';
 import {HomeIcon} from '@assets/icons/HomeIcon';
+import {NotificationIcon} from '@assets/icons/NotificationIcon';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppTheme} from '@hooks';
@@ -51,11 +53,13 @@ const iconRegistry = {
   eyeOn: EyeOnIcon,
   eyeOff: EyeOffIcon,
   arrowLeft: ArrowLeftIcon,
+  arrowRight: ArrowRightIcon,
   facebook: FacebookIcon,
   google: GoogleIcon,
   apple: AppleIcon,
   camera: CameraIcon,
   addEvents: AddEventIcon,
+  notification: NotificationIcon,
 };
 
 type IconType = typeof iconRegistry;

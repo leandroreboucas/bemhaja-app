@@ -46,6 +46,28 @@ export const feedListMock: FeedDTO[] = [
     data_atualizacao: '04/10/2023 11:02:03',
   },
   {
+    id: '3',
+    codigo: 3,
+    tipo: 'POSTAGEM_AVULSA',
+    usuario: {
+      id: '1',
+      nome: 'Leandro Rebouças',
+      email: 'contato@leandroreboucas.com',
+      foto: 'https://github.com/leandroreboucas.png',
+      data_nascimento: '24/08/1989',
+      ativo: true,
+      data_cadastro: '04/10/2023 11:02:03',
+      data_atualizacao: '04/10/2023 11:02:03',
+    },
+    titulo: 'O que é um almoço comunitário?',
+    texto:
+      'O acesso aos restaurantes populares é universal, ou seja, qualquer cidadão pode ser beneficiário do equipamento público. Contudo, a prioridade são os grupos populacionais específicos em situação de insegurança alimentar e nutricional e/ou vulnerabilidade social.',
+    foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF3NbeICvF0m3yeJQsnMaT7F5LguwKhWroKg&usqp=CAU',
+    data_cadastro: '04/10/2023 11:02:03',
+    data_atualizacao: '04/10/2023 11:02:03',
+  },
+
+  {
     id: '2',
     codigo: 2,
     tipo: 'EVENTO_FINALIZADO',

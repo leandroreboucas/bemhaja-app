@@ -1,4 +1,4 @@
-import {ListRenderItemInfo, Image} from 'react-native';
+import {Image} from 'react-native';
 
 import {FeedDTO} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';

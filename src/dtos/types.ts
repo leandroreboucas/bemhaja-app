@@ -9,6 +9,9 @@ export interface FeedDTO {
   usuario: UsuarioDTO;
   evento?: EventoDTO;
   evento_atitude_Finalizada?: EventoAtitudeFinalizadaDTO;
+  titulo?: string;
+  texto?: string;
+  foto?: string;
   data_cadastro: string;
   data_atualizacao: string;
 }

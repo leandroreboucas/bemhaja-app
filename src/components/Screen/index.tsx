@@ -5,12 +5,12 @@ import {useNavigation} from '@react-navigation/native';
 
 import {useAppSafeArea, useAppTheme} from '@hooks';
 
-import {Box} from '../Box';
+import {Box, BoxProps} from '../Box';
 import {Icon} from '../Icon';
 import {Text} from '../Text';
 import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
-interface ScreenProps {
+interface ScreenProps extends BoxProps {
   children: ReactNode;
   canGoBack?: boolean;
   scrollable?: boolean;
@@ -22,6 +22,8 @@ export function Screen({
   scrollable = false,
   children,
   removeBackgroundColor = false,
+  style,
+  ...boxProps
 }: ScreenProps) {
   const {top, bottom} = useAppSafeArea();
   const {colors} = useAppTheme();
@@ -38,8 +40,9 @@ export function Screen({
         }>
         <Box
           paddingHorizontal="s24"
-          paddingBottom="s24"
-          style={{paddingTop: top, paddingBottom: bottom}}>
+          // paddingBottom="s24"
+          style={[{paddingTop: top, paddingBottom: bottom}, style]}
+          {...boxProps}>
           {canGoBack && (
             <TouchableOpacityBox
               onPress={navigation.goBack}

@@ -97,4 +97,14 @@ export const textVariants = {
     fontFamily: 'Roboto_500Medium',
     fontSize: RFValue(18),
   },
+  feed_title: {
+    color: 'primary_500',
+    fontFamily: 'Roboto_500Medium',
+    fontSize: RFValue(14),
+  },
+  feed_text: {
+    color: 'gray_700',
+    fontFamily: 'Poppins_300Light',
+    fontSize: RFValue(14),
+  },
 };
