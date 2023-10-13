@@ -4,6 +4,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {Box} from '../Box';
 import {Icon} from '../Icon';
 import {Text} from '../Text';
+import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
 interface FeedFooterProps {
   evento: EventoDTO;
@@ -11,8 +12,9 @@ interface FeedFooterProps {
 
 export function FeedFooter({evento}: FeedFooterProps) {
   return (
-    <Box
+    <TouchableOpacityBox
       flex={1}
+      backgroundColor="white"
       flexDirection="row"
       marginBottom="s16"
       justifyContent="space-between"
@@ -30,6 +32,6 @@ export function FeedFooter({evento}: FeedFooterProps) {
         justifyContent="center">
         <Icon name="arrowRight" color="white" size={RFValue(12)} />
       </Box>
-    </Box>
+    </TouchableOpacityBox>
   );
 }

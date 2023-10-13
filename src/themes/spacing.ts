@@ -14,4 +14,7 @@ export const spacing = {
   s80: RFValue(80),
   s100: RFValue(100),
   s160: RFValue(160),
+  s22n: RFValue(-22),
+  s28n: RFValue(-28),
+  s30n: RFValue(-30),
 };

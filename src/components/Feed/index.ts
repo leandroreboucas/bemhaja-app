@@ -1,4 +1,4 @@
-import {FeedContentNewEvent} from './FeedContentNewEvent';
+import {FeedEvent} from './FeedEvent';
 import {FeedFooter} from './FeedFooter';
 import {FeedHeader} from './FeedHeader';
 import {FeedImage} from './FeedImage';
@@ -10,7 +10,7 @@ import {FeedTitle} from './FeedTitle';
 export const Feed = {
   Root: FeedRoot,
   Header: FeedHeader,
-  ContentNewEvent: FeedContentNewEvent,
+  ContentNewEvent: FeedEvent,
   Separator: FeedSeparator,
   Title: FeedTitle,
   Image: FeedImage,

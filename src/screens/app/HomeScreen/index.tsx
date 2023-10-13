@@ -1,9 +1,10 @@
 import {useEffect, useState} from 'react';
-import {FlatList, ListRenderItemInfo} from 'react-native';
+import {FlatList, ListRenderItemInfo, Platform} from 'react-native';
 
 import {FeedDTO, feedService} from '@dtos';
+import {RFValue} from 'react-native-responsive-fontsize';
 
-import {Feed, Header, Screen} from '@components';
+import {Box, Feed, Header, Screen} from '@components';
 import {useAppNavigation} from '@hooks';
 
 export function HomeScreen() {
@@ -40,14 +41,25 @@ export function HomeScreen() {
 
   return (
     <Screen style={{paddingBottom: 0, paddingTop: 0, paddingHorizontal: 0}}>
+      <Header contentRadius />
       <FlatList
+        style={{
+          borderRadius: RFValue(10),
+        }}
+        contentContainerStyle={{
+          borderRadius: RFValue(10),
+          paddingBottom: RFValue(100),
+        }}
         showsVerticalScrollIndicator={false}
         data={feedList}
         keyExtractor={item => item.id}
         renderItem={renderItem}
+        bounces
+        decelerationRate="fast"
         ItemSeparatorComponent={() => <Feed.Separator />}
-        ListHeaderComponent={<Header />}
-        stickyHeaderHiddenOnScroll
+        // ListHeaderComponent={<Header />}
+        // stickyHeaderIndices={[0]}
+        // stickyHeaderHiddenOnScroll
       />
     </Screen>
   );

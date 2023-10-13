@@ -15,6 +15,7 @@ export function FeedHeader({item}: FeedHeaderProps) {
   return (
     <Box
       flex={1}
+      backgroundColor="white"
       flexDirection="row"
       marginTop="s20"
       marginBottom="s16"

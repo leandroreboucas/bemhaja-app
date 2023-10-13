@@ -11,7 +11,7 @@ interface FeedContentNewEventProps {
   item: FeedDTO;
 }
 
-export function FeedContentNewEvent({item}: FeedContentNewEventProps) {
+export function FeedEvent({item}: FeedContentNewEventProps) {
   return (
     <Box
       flex={1}

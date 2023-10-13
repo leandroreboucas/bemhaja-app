@@ -4,6 +4,11 @@ import {Box} from '../Box';
 
 export function FeedSeparator() {
   return (
-    <Box flexDirection="row" backgroundColor="gray_300" height={RFValue(5)} />
+    <Box
+      marginHorizontal="s24"
+      flexDirection="row"
+      backgroundColor="gray_300"
+      height={RFValue(5)}
+    />
   );
 }

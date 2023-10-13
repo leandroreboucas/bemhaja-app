@@ -8,11 +8,7 @@ interface FeedRootProps {
 
 export function FeedRoot({children}: FeedRootProps) {
   return (
-    <Box
-      marginHorizontal="s16"
-      paddingHorizontal="s8"
-      backgroundColor="white"
-      borderRadius="br10">
+    <Box marginHorizontal="s16" paddingHorizontal="s8" borderRadius="br10">
       {children}
     </Box>
   );
