@@ -1,8 +1,8 @@
-import {FeedDTO} from '../types';
+import {FeedDTO, PageAPI} from '../types';
 
 import {feedApi} from './feedApi';
 
-async function getList(): Promise<FeedDTO[]> {
+async function getList(): Promise<PageAPI<FeedDTO>> {
   return await feedApi.getList();
 }
 

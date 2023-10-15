@@ -1,4 +1,4 @@
-import {Dimensions, ImageBackground} from 'react-native';
+import {ImageBackground} from 'react-native';
 
 import AddEvent from '@assets/icons/addEvent.svg';
 import TabBottomPng from '@assets/tabBottom.png';

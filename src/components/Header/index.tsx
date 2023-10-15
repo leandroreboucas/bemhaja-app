@@ -1,4 +1,4 @@
-import {Image, ImageBackground, Platform} from 'react-native';
+import {Image, ImageBackground} from 'react-native';
 
 import HeaderImg from '@assets/header.png';
 import {BemHajaIcon} from '@assets/icons/BemHajaIcon';
@@ -64,7 +64,7 @@ export function Header({contentRadius = false}: HeaderProps) {
           backgroundColor="white"
           marginHorizontal="s16"
           // marginBottom={Platform.OS === 'android' ? 's22n' : 's30n'}
-          marginBottom="s28n"
+          marginBottom="s29n"
         />
       )}
     </>

@@ -4,11 +4,11 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Box} from '../Box';
 
-interface FeedImage {
+interface FeedImageProps {
   foto: string;
 }
 
-export function FeedImage({foto}: FeedImage) {
+export function FeedImage({foto}: FeedImageProps) {
   return (
     <Box flex={1} marginBottom="s16">
       <Image

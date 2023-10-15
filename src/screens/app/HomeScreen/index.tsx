@@ -1,22 +1,40 @@
 import {useEffect, useState} from 'react';
-import {FlatList, ListRenderItemInfo, Platform} from 'react-native';
+import {FlatList, ListRenderItemInfo, Image, Dimensions} from 'react-native';
 
+import ImgEmpty from '@assets/empty_data.png';
 import {FeedDTO, feedService} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {Box, Feed, Header, Screen} from '@components';
-import {useAppNavigation} from '@hooks';
+import {Box, EmptyData, Feed, Header, Screen, Text} from '@components';
+
+// import {useAppNavigation} from '@hooks';
 
 export function HomeScreen() {
   const [feedList, setFeedList] = useState<FeedDTO[]>([]);
-  const navigation = useAppNavigation();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<boolean | null>(null);
+  // const navigation = useAppNavigation();
 
-  function goSettings() {
-    navigation.navigate('SettingsScreen');
+  // function goSettings() {
+  //   navigation.navigate('SettingsScreen');
+  // }
+
+  async function fetchData() {
+    try {
+      setError(false);
+      setLoading(true);
+      const list = await feedService.getList();
+      setFeedList(list.data);
+      // setFeedList([]);
+    } catch (error) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
-    feedService.getList().then(list => setFeedList(list));
+    fetchData();
   }, []);
 
   function renderItem({item}: ListRenderItemInfo<FeedDTO>) {
@@ -40,20 +58,30 @@ export function HomeScreen() {
   }
 
   return (
-    <Screen style={{paddingBottom: 0, paddingTop: 0, paddingHorizontal: 0}}>
+    <Screen
+      style={{paddingBottom: 0, paddingTop: 0, paddingHorizontal: 0, flex: 1}}>
       <Header contentRadius />
       <FlatList
         style={{
           borderRadius: RFValue(10),
         }}
         contentContainerStyle={{
+          flex: feedList.length === 0 ? 1 : undefined,
           borderRadius: RFValue(10),
-          paddingBottom: RFValue(100),
         }}
         showsVerticalScrollIndicator={false}
         data={feedList}
         keyExtractor={item => item.id}
         renderItem={renderItem}
+        ListEmptyComponent={
+          <EmptyData
+            loading={loading}
+            error={error}
+            refetch={fetchData}
+            text='Você pode adicionar um evento clicando no ícone de "+" na barra
+          inferior.'
+          />
+        }
         bounces
         decelerationRate="fast"
         ItemSeparatorComponent={() => <Feed.Separator />}
