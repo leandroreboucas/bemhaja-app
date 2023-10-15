@@ -25,7 +25,8 @@ export function HomeScreen() {
       const list = await feedService.getList();
       setFeedList(list.data);
       // setFeedList([]);
-    } catch (error) {
+    } catch (err) {
+      console.log(err);
       setError(true);
     } finally {
       setLoading(false);
