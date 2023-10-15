@@ -1,8 +1,8 @@
-import {EventoDTO} from '../types';
+import {EventoDTO, PageAPI} from '../types';
 
 import {eventApi} from './eventApi';
 
-async function getList(): Promise<EventoDTO[]> {
+async function getList(): Promise<PageAPI<EventoDTO>> {
   return await eventApi.getList();
 }
 

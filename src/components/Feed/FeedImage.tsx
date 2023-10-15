@@ -10,7 +10,7 @@ interface FeedImageProps {
 
 export function FeedImage({foto}: FeedImageProps) {
   return (
-    <Box flex={1} marginBottom="s16">
+    <Box flex={1} marginTop="s16">
       <Image
         source={{uri: foto}}
         resizeMode="cover"

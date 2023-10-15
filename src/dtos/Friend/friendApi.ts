@@ -1,10 +1,10 @@
-import {EventoDTO, PageAPI} from '../types';
+import {PageAPI, UsuarioDTO} from '../types';
 
-import {eventListMock} from './eventListMock';
+import {friendListMock} from './friendListMock';
 
-async function getList(): Promise<PageAPI<EventoDTO>> {
+async function getList(): Promise<PageAPI<UsuarioDTO>> {
   await new Promise(resolve => setTimeout(resolve, 3000));
-  const data: PageAPI<EventoDTO> = {
+  const data: PageAPI<UsuarioDTO> = {
     meta: {
       total: 24,
       per_page: 10,
@@ -16,11 +16,11 @@ async function getList(): Promise<PageAPI<EventoDTO>> {
       next_page_url: '/?page=2',
       previous_page_url: null,
     },
-    data: eventListMock,
+    data: friendListMock,
   };
   return data;
 }
 
-export const eventApi = {
+export const friendApi = {
   getList,
 };

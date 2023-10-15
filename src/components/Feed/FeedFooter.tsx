@@ -16,6 +16,7 @@ export function FeedFooter({evento}: FeedFooterProps) {
       flex={1}
       backgroundColor="white"
       flexDirection="row"
+      marginTop="s16"
       marginBottom="s16"
       justifyContent="space-between"
       alignItems="center">

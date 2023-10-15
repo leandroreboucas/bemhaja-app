@@ -27,5 +27,40 @@ export const eventListMock: EventoDTO[] = [
     finalizado: false,
     data_cadastro: '04/10/2023 11:02:03',
     data_atualizacao: '04/10/2023 11:02:03',
+    meta: {
+      participantes: 10,
+    },
+  },
+
+  {
+    id: '2',
+    codigo: 2,
+    foto: 'https://img.freepik.com/fotos-gratis/medicos-femininos-de-vista-frontal-ajudando-o-paciente_23-2149844605.jpg?size=626&ext=jpg',
+    descricao: 'Visita ao hospital',
+    visibilidade: 'REDE_AMIGOS',
+    data_hora_inicio: '15/10/2023 11:00',
+    data_hora_final: undefined,
+    presencial_endereco: 'Avenida principal, Centro - São Paulo',
+    virtual_link: undefined,
+    tematico_descricao: undefined,
+    observacoes:
+      'As visitas ao C.T.I. acontecem somente de segunda-feira a sexta-feira das 11:00h as 12:00 e das 17:00h as 18:00h; e nos finais de semana, das 14:00h as 17:00h.',
+    usuario: {
+      id: '1',
+      nome: 'Leandro Rebouças',
+      email: 'contato@leandroreboucas.com',
+      foto: 'https://github.com/leandroreboucas.png',
+      data_nascimento: '24/08/1989',
+      ativo: true,
+      data_cadastro: '04/10/2023 11:02:03',
+      data_atualizacao: '04/10/2023 11:02:03',
+    },
+    arquivado: false,
+    finalizado: false,
+    data_cadastro: '04/10/2023 11:02:03',
+    data_atualizacao: '04/10/2023 11:02:03',
+    meta: {
+      participantes: 7,
+    },
   },
 ];

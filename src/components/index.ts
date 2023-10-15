@@ -15,3 +15,6 @@ export * from './TabBarBottom';
 export * from './Feed';
 export * from './Header';
 export * from './EmptyData';
+export * from './FilterHeaderEvents';
+export * from './FriendCard';
+export * from './Search';

@@ -14,6 +14,7 @@ import {GoogleIcon} from '@assets/icons/GoogleIcon';
 import {GroupsIcon} from '@assets/icons/GroupsIcon';
 import {HomeIcon} from '@assets/icons/HomeIcon';
 import {NotificationIcon} from '@assets/icons/NotificationIcon';
+import {SearchIcon} from '@assets/icons/SearchIcon';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppTheme} from '@hooks';
@@ -60,6 +61,7 @@ const iconRegistry = {
   camera: CameraIcon,
   addEvents: AddEventIcon,
   notification: NotificationIcon,
+  search: SearchIcon,
 };
 
 type IconType = typeof iconRegistry;

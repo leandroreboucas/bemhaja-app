@@ -18,7 +18,6 @@ export function FeedHeader({item}: FeedHeaderProps) {
       backgroundColor="white"
       flexDirection="row"
       marginTop="s16"
-      marginBottom="s16"
       alignItems="center">
       <Box flexDirection="row" flex={1} gap="s8" flexGrow={1}>
         <Image

@@ -107,4 +107,29 @@ export const textVariants = {
     fontFamily: 'Poppins_300Light',
     fontSize: RFValue(14),
   },
+  event_filter_screen: {
+    color: 'primary_300',
+    fontFamily: 'Roboto_500Medium',
+    fontSize: RFValue(12),
+  },
+  friends_title_screen: {
+    color: 'primary_800',
+    fontFamily: 'Roboto_700Bold',
+    fontSize: RFValue(24),
+  },
+  friends_subtitle_screen: {
+    color: 'primary_500',
+    fontFamily: 'Roboto_400Regular',
+    fontSize: RFValue(14),
+  },
+  friends_card_name: {
+    color: 'black',
+    fontFamily: 'Poppins_300Light',
+    fontSize: RFValue(18),
+  },
+  friends_meta_events_count: {
+    color: 'gray_700',
+    fontFamily: 'Roboto_400Regular',
+    fontSize: RFValue(12),
+  },
 };

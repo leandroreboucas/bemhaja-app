@@ -11,7 +11,7 @@ import {EmptyData, Feed, Header, Screen} from '@components';
 export function HomeScreen() {
   const [feedList, setFeedList] = useState<FeedDTO[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<boolean | null>(null);
+  const [error, setError] = useState(false);
   // const navigation = useAppNavigation();
 
   // function goSettings() {
@@ -41,9 +41,9 @@ export function HomeScreen() {
     return (
       <Feed.Root>
         <Feed.Header item={item} />
-        {item.tipo === 'EVENTO_CRIADO' && <Feed.ContentNewEvent item={item} />}
+        {item.tipo === 'EVENTO_CRIADO' && <Feed.Event item={item.evento!} />}
         {item.tipo === 'EVENTO_FINALIZADO' && (
-          <Feed.ContentNewEvent item={item} />
+          <Feed.Event item={item.evento!} />
         )}
         {item.tipo === 'POSTAGEM_AVULSA' && (
           <>

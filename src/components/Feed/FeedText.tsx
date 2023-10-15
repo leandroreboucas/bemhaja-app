@@ -7,7 +7,7 @@ interface FeedTextProps {
 
 export function FeedText({text}: FeedTextProps) {
   return (
-    <Box flex={1} marginBottom="s16">
+    <Box flex={1} marginTop="s16">
       <Text variant="feed_text" textAlign="justify">
         {text}
       </Text>

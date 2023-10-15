@@ -41,6 +41,9 @@ export const feedListMock: FeedDTO[] = [
       finalizado: false,
       data_cadastro: '04/10/2023 11:02:03',
       data_atualizacao: '04/10/2023 11:02:03',
+      meta: {
+        participantes: 10,
+      },
     },
     data_cadastro: '04/10/2023 11:02:03',
     data_atualizacao: '04/10/2023 11:02:03',

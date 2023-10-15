@@ -14,7 +14,7 @@ export function FeedTitle({item}: FeedTitleProps) {
       flexDirection="row"
       alignItems="center"
       justifyContent="center"
-      marginBottom="s16">
+      marginTop="s16">
       {item.tipo === 'POSTAGEM_AVULSA' && (
         <Text variant="feed_title">{item.titulo}</Text>
       )}

@@ -10,7 +10,7 @@ import {FeedTitle} from './FeedTitle';
 export const Feed = {
   Root: FeedRoot,
   Header: FeedHeader,
-  ContentNewEvent: FeedEvent,
+  Event: FeedEvent,
   Separator: FeedSeparator,
   Title: FeedTitle,
   Image: FeedImage,

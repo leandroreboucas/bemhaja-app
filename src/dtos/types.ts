@@ -31,6 +31,9 @@ export interface UsuarioDTO {
   ativo: boolean;
   data_cadastro: string;
   data_atualizacao: string;
+  meta?: {
+    eventos?: number;
+  };
 }
 
 export interface AtitudeGrupoDTO {
@@ -77,6 +80,9 @@ export interface EventoDTO {
   finalizado: boolean;
   data_cadastro: string;
   data_atualizacao: string;
+  meta?: {
+    participantes?: number;
+  };
 }
 
 export interface EventoAtitudeDTO {
