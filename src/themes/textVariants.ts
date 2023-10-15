@@ -132,4 +132,19 @@ export const textVariants = {
     fontFamily: 'Roboto_400Regular',
     fontSize: RFValue(12),
   },
+  group_title: {
+    color: 'white',
+    fontFamily: 'Poppins_500Medium',
+    fontSize: RFValue(14),
+  },
+  group_subtitle: {
+    color: 'gray_600',
+    fontFamily: 'Roboto_500Medium',
+    fontSize: RFValue(8),
+  },
+  group_count_atitude: {
+    color: 'primary_500',
+    fontFamily: 'Roboto_700Bold',
+    fontSize: RFValue(18),
+  },
 };

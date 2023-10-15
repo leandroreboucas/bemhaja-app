@@ -4,6 +4,7 @@ const pallete = {
   primary_600: '#A5A4C8',
 
   primary_500: '#1383FD',
+  primary_400: '#4379E1',
   primary_300: '#88C4FD',
   primary_100: '#CDE5FE',
 

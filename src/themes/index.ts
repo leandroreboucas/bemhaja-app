@@ -10,6 +10,7 @@ const theme = createTheme({
   spacing,
   textVariants,
   borderRadii: {
+    br4: RFValue(4),
     br10: RFValue(10),
     br20: RFValue(20),
   },

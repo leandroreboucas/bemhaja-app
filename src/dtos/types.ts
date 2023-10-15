@@ -128,6 +128,18 @@ export interface MetaDataPageAPI {
   previous_page_url: string | null; // null;
 }
 
+export interface GrupoAtitudeDTO {
+  id: string;
+  codigo: number;
+  descricao: string;
+  ativo: boolean;
+  data_cadastro: string;
+  data_atualizacao: string;
+  meta?: {
+    atitudes?: number;
+  };
+}
+
 /**
  * @description Interface que define o formato de uma página de dados da API.
  * @template Data Tipo do dado da página.
