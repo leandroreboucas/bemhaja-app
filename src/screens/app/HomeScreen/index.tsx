@@ -1,11 +1,10 @@
 import {useEffect, useState} from 'react';
-import {FlatList, ListRenderItemInfo, Image, Dimensions} from 'react-native';
+import {FlatList, ListRenderItemInfo} from 'react-native';
 
-import ImgEmpty from '@assets/empty_data.png';
 import {FeedDTO, feedService} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {Box, EmptyData, Feed, Header, Screen, Text} from '@components';
+import {EmptyData, Feed, Header, Screen} from '@components';
 
 // import {useAppNavigation} from '@hooks';
 
