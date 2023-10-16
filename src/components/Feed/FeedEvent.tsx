@@ -3,15 +3,16 @@ import {Image} from 'react-native';
 import {EventoDTO} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {Box} from '../Box';
+import {Box, BoxProps} from '../Box';
 import {Text} from '../Text';
 import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
 interface FeedContentNewEventProps {
   item: EventoDTO;
+  boxProps?: BoxProps;
 }
 
-export function FeedEvent({item}: FeedContentNewEventProps) {
+export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
   function getVisibleName({visibilidade}: Pick<EventoDTO, 'visibilidade'>) {
     if (visibilidade === 'PARTICIPANTES_EVENTO') {
       return 'Participantes do evento';
@@ -31,7 +32,8 @@ export function FeedEvent({item}: FeedContentNewEventProps) {
       padding="s8"
       marginTop="s16"
       backgroundColor="gray_100"
-      borderRadius="br10">
+      borderRadius="br10"
+      {...boxProps}>
       <TouchableOpacityBox
         flex={1}
         flexDirection="row"

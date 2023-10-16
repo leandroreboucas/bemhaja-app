@@ -43,8 +43,8 @@ export interface AtitudeGrupoDTO {
   descricao_ingles: string;
   descricao_espanhol: string;
   ativo: boolean;
-  data_cadastro: Date;
-  data_atualizacao: Date;
+  data_cadastro: string;
+  data_atualizacao: string;
 }
 
 export interface AtitudeDTO {
@@ -56,8 +56,8 @@ export interface AtitudeDTO {
   descricao_espanhol: string;
   ativo: boolean;
   aprovado: boolean | null;
-  data_cadastro: Date;
-  data_atualizacao: Date;
+  data_cadastro: string;
+  data_atualizacao: string;
 }
 
 export interface EventoDTO {
@@ -101,19 +101,22 @@ export interface EventoCampanhaDTO {
   evento: EventoDTO;
   foto: string;
   descricao: string;
-  data_cadastro: Date;
-  data_atualizacao: Date;
+  data_cadastro: string;
+  data_atualizacao: string;
 }
 
 export interface EventoAtitudeFinalizadaDTO {
   id: string;
   codigo: number;
+  tipo: 'AUDIO' | 'VIDEO' | 'IMAGE' | 'TEXT';
   evento: EventoDTO;
   usuario: UsuarioDTO;
   atitude: AtitudeDTO;
   midia_link: string;
-  data_cadastro: Date;
-  data_atualizacao: Date;
+  titulo?: string;
+  texto?: string;
+  data_cadastro: string;
+  data_atualizacao: string;
 }
 
 export interface MetaDataPageAPI {

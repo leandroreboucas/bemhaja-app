@@ -5,6 +5,7 @@ import {AppleIcon} from '@assets/icons/AppleIcon';
 import {ArrowLeftIcon} from '@assets/icons/ArrowLeftIcon';
 import {ArrowRightIcon} from '@assets/icons/ArrowRightIcon';
 import {CameraIcon} from '@assets/icons/CameraIcon';
+import {CheckedIcon} from '@assets/icons/CheckedIcon';
 import {EventsIcon} from '@assets/icons/EventsIcon';
 import {EyeOffIcon} from '@assets/icons/EyeOffIcon';
 import {EyeOnIcon} from '@assets/icons/EyeOnIcon';
@@ -14,6 +15,7 @@ import {GoogleIcon} from '@assets/icons/GoogleIcon';
 import {GroupsIcon} from '@assets/icons/GroupsIcon';
 import {HomeIcon} from '@assets/icons/HomeIcon';
 import {NotificationIcon} from '@assets/icons/NotificationIcon';
+import {PlayIcon} from '@assets/icons/PlayIcon';
 import {SearchIcon} from '@assets/icons/SearchIcon';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -62,6 +64,8 @@ const iconRegistry = {
   addEvents: AddEventIcon,
   notification: NotificationIcon,
   search: SearchIcon,
+  checked: CheckedIcon,
+  play: PlayIcon,
 };
 
 type IconType = typeof iconRegistry;

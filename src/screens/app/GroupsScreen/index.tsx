@@ -16,7 +16,7 @@ import {
 const FILTER_HEIGHT = RFValue(40);
 export function GroupsScreen() {
   const [filter, setFilter] = useState('');
-  const [list, setList] = useState<UsuarioDTO[]>([]);
+  const [list, setList] = useState<GrupoAtitudeDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 

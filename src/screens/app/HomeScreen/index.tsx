@@ -40,19 +40,83 @@ export function HomeScreen() {
   function renderItem({item}: ListRenderItemInfo<FeedDTO>) {
     return (
       <Feed.Root>
+        {/**
+         * Header é aplicado a todos os tipos
+         */}
         <Feed.Header item={item} />
-        {item.tipo === 'EVENTO_CRIADO' && <Feed.Event item={item.evento!} />}
-        {item.tipo === 'EVENTO_FINALIZADO' && (
-          <Feed.Event item={item.evento!} />
-        )}
+
+        {/**
+         * Evento criado
+         */}
+        {item.tipo === 'EVENTO_CRIADO' || item.tipo === 'EVENTO_FINALIZADO' ? (
+          <Feed.Event item={item.evento!} boxProps={{marginBottom: 's16'}} />
+        ) : null}
+
+        {/**
+         * Postagem avulsa
+         */}
         {item.tipo === 'POSTAGEM_AVULSA' && (
           <>
-            <Feed.Title item={item} />
+            {item.titulo && <Feed.Title title={item.titulo} />}
             {item.foto && <Feed.Image foto={item.foto} />}
             {item.texto && <Feed.Text text={item.texto} />}
           </>
         )}
-        {item.evento && <Feed.Footer evento={item.evento} />}
+
+        {/**
+         * Atitude realizada
+         */}
+        {item.tipo === 'ATITUDE_REALIZADA' && (
+          <>
+            {item.evento_atitude_Finalizada?.atitude.descricao && (
+              <Feed.Title
+                title={item.evento_atitude_Finalizada?.atitude.descricao}
+              />
+            )}
+
+            {/**
+             * Imagem
+             */}
+            {item.evento_atitude_Finalizada?.tipo === 'IMAGE' && (
+              <Feed.Image foto={item.evento_atitude_Finalizada.midia_link} />
+            )}
+
+            {/**
+             * Video
+             */}
+            {item.evento_atitude_Finalizada?.tipo === 'VIDEO' && (
+              <Feed.Video uri={item.evento_atitude_Finalizada.midia_link} />
+            )}
+
+            {/**
+             * Audio
+             */}
+            {item.evento_atitude_Finalizada?.tipo === 'AUDIO' && (
+              <Feed.Audio uri={item.evento_atitude_Finalizada.midia_link} />
+            )}
+
+            {item.evento_atitude_Finalizada?.titulo && (
+              <Feed.Title title={item.evento_atitude_Finalizada?.titulo} />
+            )}
+            {item.evento_atitude_Finalizada?.texto && (
+              <Feed.Text text={item.evento_atitude_Finalizada?.texto} />
+            )}
+          </>
+        )}
+
+        {/**
+         * Footer apenas para atitudes realizadas e postagens avulsas
+         */}
+        {item.tipo === 'ATITUDE_REALIZADA' ||
+        item.tipo === 'POSTAGEM_AVULSA' ? (
+          <Feed.Footer
+            evento={
+              item.tipo === 'ATITUDE_REALIZADA'
+                ? item.evento_atitude_Finalizada?.evento!
+                : item.evento!
+            }
+          />
+        ) : null}
       </Feed.Root>
     );
   }
@@ -85,6 +149,8 @@ export function HomeScreen() {
         bounces
         decelerationRate="fast"
         ItemSeparatorComponent={() => <Feed.Separator />}
+        initialNumToRender={1}
+
         // ListHeaderComponent={<Header />}
         // stickyHeaderIndices={[0]}
         // stickyHeaderHiddenOnScroll

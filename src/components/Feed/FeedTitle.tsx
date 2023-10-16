@@ -1,13 +1,14 @@
-import {FeedDTO} from '@dtos';
-
 import {Box} from '../Box';
 import {Text} from '../Text';
 
 interface FeedTitleProps {
-  item: FeedDTO;
+  title: string;
 }
 
-export function FeedTitle({item}: FeedTitleProps) {
+export function FeedTitle({title}: FeedTitleProps) {
+  if (!title) {
+    return null;
+  }
   return (
     <Box
       flex={1}
@@ -15,9 +16,7 @@ export function FeedTitle({item}: FeedTitleProps) {
       alignItems="center"
       justifyContent="center"
       marginTop="s16">
-      {item.tipo === 'POSTAGEM_AVULSA' && (
-        <Text variant="feed_title">{item.titulo}</Text>
-      )}
+      <Text variant="feed_title">{title}</Text>
     </Box>
   );
 }

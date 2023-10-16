@@ -11,6 +11,9 @@ interface FeedFooterProps {
 }
 
 export function FeedFooter({evento}: FeedFooterProps) {
+  if (!evento) {
+    return null;
+  }
   return (
     <TouchableOpacityBox
       flex={1}

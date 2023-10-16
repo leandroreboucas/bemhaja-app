@@ -12,7 +12,7 @@ export function FeedImage({foto}: FeedImageProps) {
   return (
     <Box flex={1} marginTop="s16">
       <Image
-        source={{uri: foto}}
+        source={{uri: foto, cache: 'only-if-cached'}}
         resizeMode="cover"
         style={{
           height: RFValue(300),

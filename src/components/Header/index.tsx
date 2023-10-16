@@ -17,10 +17,11 @@ interface HeaderProps {
 
 export function Header({contentRadius = false}: HeaderProps) {
   const {top} = useAppSafeArea();
+  const imageUri = Image.resolveAssetSource(HeaderImg).uri;
   return (
     <>
       <ImageBackground
-        source={HeaderImg}
+        source={{uri: imageUri, cache: 'only-if-cached'}}
         resizeMode="cover"
         style={{
           height: contentRadius ? RFValue(120) : RFValue(110),

@@ -50,6 +50,12 @@ export function FeedHeader({item}: FeedHeaderProps) {
             <Text variant="feed_acao">Postagem</Text>
           </>
         )}
+        {item.tipo === 'ATITUDE_REALIZADA' && (
+          <>
+            <Icon name="checked" color="gray_600" size={RFValue(14)} />
+            <Text variant="feed_acao">Atitude</Text>
+          </>
+        )}
       </Box>
     </Box>
   );
