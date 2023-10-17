@@ -8,9 +8,10 @@ import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
 interface FeedFooterProps {
   evento: EventoDTO;
+  text?: string;
 }
 
-export function FeedFooter({evento}: FeedFooterProps) {
+export function FeedFooter({evento, text}: FeedFooterProps) {
   if (!evento) {
     return null;
   }
@@ -25,7 +26,7 @@ export function FeedFooter({evento}: FeedFooterProps) {
       alignItems="center">
       <Box gap="s16" flexDirection="row" alignItems="center">
         <Icon name="events" color="primary_500" size={RFValue(16)} />
-        <Text variant="feed_title">{evento.descricao}</Text>
+        <Text variant="feed_title">{text ? text : evento.descricao}</Text>
       </Box>
       <Box
         backgroundColor="primary_500"

@@ -15,6 +15,7 @@ import {GoogleIcon} from '@assets/icons/GoogleIcon';
 import {GroupsIcon} from '@assets/icons/GroupsIcon';
 import {HomeIcon} from '@assets/icons/HomeIcon';
 import {NotificationIcon} from '@assets/icons/NotificationIcon';
+import {PinIcon} from '@assets/icons/PinIcon';
 import {PlayIcon} from '@assets/icons/PlayIcon';
 import {SearchIcon} from '@assets/icons/SearchIcon';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -66,6 +67,7 @@ const iconRegistry = {
   search: SearchIcon,
   checked: CheckedIcon,
   play: PlayIcon,
+  pin: PinIcon,
 };
 
 type IconType = typeof iconRegistry;

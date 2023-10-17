@@ -149,7 +149,6 @@ export function HomeScreen() {
         bounces
         decelerationRate="fast"
         ItemSeparatorComponent={() => <Feed.Separator />}
-        initialNumToRender={1}
 
         // ListHeaderComponent={<Header />}
         // stickyHeaderIndices={[0]}

@@ -4,15 +4,7 @@ import {FlatList, ListRenderItemInfo} from 'react-native';
 import {GrupoAtitudeDTO, groupService} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {
-  Box,
-  EmptyData,
-  Feed,
-  Header,
-  Screen,
-  Text,
-  TouchableOpacityBox,
-} from '@components';
+import {Box, EmptyData, Feed, Header, Screen, Text} from '@components';
 const FILTER_HEIGHT = RFValue(40);
 export function GroupsScreen() {
   const [filter, setFilter] = useState('');
@@ -86,7 +78,7 @@ export function GroupsScreen() {
         borderTopStartRadius="br10"
         borderTopEndRadius="br10">
         <Text paddingLeft="s16" variant="friends_title_screen">
-          Grupo de atitudes
+          BemHaja Mundo
         </Text>
         {/* <TouchableOpacityBox paddingRight="s16">
           <Text variant="friends_subtitle_screen">Solicitações(1)</Text>

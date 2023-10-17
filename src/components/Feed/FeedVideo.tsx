@@ -1,5 +1,3 @@
-import {Dimensions} from 'react-native';
-
 import {Video, ResizeMode} from 'expo-av';
 import {RFValue} from 'react-native-responsive-fontsize';
 

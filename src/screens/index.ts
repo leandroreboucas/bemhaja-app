@@ -8,3 +8,4 @@ export * from './app/FriendsScreen';
 export * from './app/GroupsScreen';
 export * from './app/SettingsScreen';
 export * from './app/ActionSheetScreen';
+export * from './app/EventDetail';

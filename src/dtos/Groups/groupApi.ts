@@ -3,7 +3,7 @@ import {PageAPI, GrupoAtitudeDTO} from '../types';
 import {groupListMock} from './groupListMock';
 
 async function getList(): Promise<PageAPI<GrupoAtitudeDTO>> {
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   const data: PageAPI<GrupoAtitudeDTO> = {
     meta: {
       total: 24,

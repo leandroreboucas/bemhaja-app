@@ -57,7 +57,7 @@ export function FriendsScreen() {
         <Box>
           <Text variant="friends_card_name">{item.nome}</Text>
           <Text variant="friends_meta_events_count">
-            Eventos envolvidos: {item.meta?.eventos || 0}
+            BemHaja: {item.meta?.eventos || 0}
           </Text>
         </Box>
       </Box>

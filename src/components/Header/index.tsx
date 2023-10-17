@@ -6,22 +6,30 @@ import {LogoOnlyIcon} from '@assets/icons/LogoOnlyIcon';
 import {StatusBar} from 'expo-status-bar';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {useAppSafeArea} from '@hooks';
+import {useAppNavigation, useAppSafeArea} from '@hooks';
 
 import {Box} from '../Box';
 import {Icon} from '../Icon';
+import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
 interface HeaderProps {
   contentRadius?: boolean;
+  canGoBack?: boolean;
 }
 
-export function Header({contentRadius = false}: HeaderProps) {
+export function Header({
+  contentRadius = false,
+  canGoBack = false,
+}: HeaderProps) {
   const {top} = useAppSafeArea();
+  const navigation = useAppNavigation();
   const imageUri = Image.resolveAssetSource(HeaderImg).uri;
+
   return (
     <>
       <ImageBackground
         source={{uri: imageUri, cache: 'only-if-cached'}}
+        // source={HeaderImg}
         resizeMode="cover"
         style={{
           height: contentRadius ? RFValue(120) : RFValue(110),
@@ -38,6 +46,16 @@ export function Header({contentRadius = false}: HeaderProps) {
           borderBottomStartRadius="br10"
           borderBottomEndRadius="br10"
           style={{paddingTop: top}}>
+          {canGoBack && (
+            <TouchableOpacityBox
+              onPress={navigation.goBack}
+              height={RFValue(48)}
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="center">
+              <Icon name="arrowLeft" color="white" />
+            </TouchableOpacityBox>
+          )}
           <Box
             height={RFValue(48)}
             flexDirection="row"
@@ -59,10 +77,10 @@ export function Header({contentRadius = false}: HeaderProps) {
       </ImageBackground>
       {contentRadius && (
         <Box
+          backgroundColor="white"
           borderTopStartRadius="br10"
           borderTopEndRadius="br10"
           height={RFValue(30)}
-          backgroundColor="white"
           marginHorizontal="s16"
           // marginBottom={Platform.OS === 'android' ? 's22n' : 's30n'}
           marginBottom="s29n"

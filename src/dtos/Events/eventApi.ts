@@ -3,7 +3,7 @@ import {EventoDTO, PageAPI} from '../types';
 import {eventListMock} from './eventListMock';
 
 async function getList(): Promise<PageAPI<EventoDTO>> {
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   const data: PageAPI<EventoDTO> = {
     meta: {
       total: 24,

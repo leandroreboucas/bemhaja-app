@@ -70,7 +70,7 @@ export function FilterHeaderEvents({setFilterEvents}: FilterHeaderEventsProps) {
         <Text
           variant="event_filter_screen"
           color={filter === EVENTOS_AMIGOS ? 'primary_700' : 'gray_700'}>
-          DEMAIS EVENTOS
+          EVENTOS
         </Text>
       </TouchableOpacityBox>
     </Box>

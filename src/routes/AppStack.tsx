@@ -4,16 +4,20 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 
-import {SettingsScreen} from '@screens';
+import {EventDetail, SettingsScreen} from '@screens';
 
 import {AppTabNavigator, AppTabRoutes} from './AppTabNavigator';
 
-type AppRoutes = {
+export type AppRoutes = {
   AppTabNavigator: NavigatorScreenParams<AppTabRoutes>;
   SettingsScreen: undefined;
+  EventDetail: {
+    event_id: string;
+  };
 };
 
 export type IAppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>;
+
 const {Navigator, Screen} = createNativeStackNavigator<AppRoutes>();
 export function AppStack() {
   return (
@@ -25,6 +29,7 @@ export function AppStack() {
       }}>
       <Screen name="AppTabNavigator" component={AppTabNavigator} />
       <Screen name="SettingsScreen" component={SettingsScreen} />
+      <Screen name="EventDetail" component={EventDetail} />
     </Navigator>
   );
 }

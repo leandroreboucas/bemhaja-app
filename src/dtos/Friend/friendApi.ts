@@ -3,7 +3,7 @@ import {PageAPI, UsuarioDTO} from '../types';
 import {friendListMock} from './friendListMock';
 
 async function getList(): Promise<PageAPI<UsuarioDTO>> {
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   const data: PageAPI<UsuarioDTO> = {
     meta: {
       total: 24,

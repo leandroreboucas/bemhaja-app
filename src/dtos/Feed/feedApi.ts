@@ -3,7 +3,7 @@ import {FeedDTO, PageAPI} from '../types';
 import {feedListMock} from './feedListMock';
 
 async function getList(): Promise<PageAPI<FeedDTO>> {
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   const data: PageAPI<FeedDTO> = {
     meta: {
       total: 24,

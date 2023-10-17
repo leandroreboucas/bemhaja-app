@@ -3,6 +3,8 @@ import {Image} from 'react-native';
 import {EventoDTO} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';
 
+import {useAppNavigation} from '@hooks';
+
 import {Box, BoxProps} from '../Box';
 import {Text} from '../Text';
 import {TouchableOpacityBox} from '../TouchableOpacityBox';
@@ -13,6 +15,12 @@ interface FeedContentNewEventProps {
 }
 
 export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
+  const navigation = useAppNavigation();
+
+  function goEventDetail(event_id: string) {
+    navigation.navigate('EventDetail', {event_id});
+  }
+
   function getVisibleName({visibilidade}: Pick<EventoDTO, 'visibilidade'>) {
     if (visibilidade === 'PARTICIPANTES_EVENTO') {
       return 'Participantes do evento';
@@ -42,7 +50,8 @@ export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
         borderRightColor="primary_700"
         borderRightWidth={RFValue(4)}
         borderTopRightRadius="br10"
-        alignItems="center">
+        alignItems="center"
+        onPress={() => goEventDetail(item.id)}>
         <Image
           source={{uri: item?.foto}}
           style={{
