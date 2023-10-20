@@ -31,8 +31,8 @@ export const mapScreenToProps: Record<
     size: 24,
   },
   GroupsScreen: {
-    label: 'Grupos',
-    icon: 'groups',
+    label: 'Mundo',
+    icon: 'world',
     size: 24,
   },
 };

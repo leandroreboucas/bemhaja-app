@@ -1,6 +1,13 @@
 import {Box, ButtonLinear} from '@components';
+import {useAppNavigation} from '@hooks';
 
 export function ActionSheetScreen() {
+  const navigation = useAppNavigation();
+
+  function goEventNew() {
+    navigation.navigate('EventNew');
+  }
+
   return (
     <Box flex={1} style={{backgroundColor: '#A3A3A3'}}>
       <Box flex={1} />
@@ -16,9 +23,13 @@ export function ActionSheetScreen() {
           borderRadius="br20"
           paddingHorizontal="s34"
           paddingVertical="s16">
-          <ButtonLinear title="Nova atitude" />
-          <ButtonLinear title="Nova postagem" />
-          <ButtonLinear title="Novo evento" />
+          <ButtonLinear title="Nova atitude" iconLeft="checked" />
+          <ButtonLinear title="Nova postagem" iconLeft="post" />
+          <ButtonLinear
+            title="Novo evento"
+            iconLeft="events"
+            onPress={goEventNew}
+          />
         </Box>
       </Box>
     </Box>

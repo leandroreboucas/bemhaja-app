@@ -1,6 +1,7 @@
 import {Pressable} from 'react-native';
 
 import {AddEventIcon} from '@assets/icons/AddEventIcon';
+import {AddUserIcon} from '@assets/icons/AddUserIcon';
 import {AppleIcon} from '@assets/icons/AppleIcon';
 import {ArrowLeftIcon} from '@assets/icons/ArrowLeftIcon';
 import {ArrowRightIcon} from '@assets/icons/ArrowRightIcon';
@@ -17,7 +18,9 @@ import {HomeIcon} from '@assets/icons/HomeIcon';
 import {NotificationIcon} from '@assets/icons/NotificationIcon';
 import {PinIcon} from '@assets/icons/PinIcon';
 import {PlayIcon} from '@assets/icons/PlayIcon';
+import {PostIcon} from '@assets/icons/PostIcon';
 import {SearchIcon} from '@assets/icons/SearchIcon';
+import {WorldIcon} from '@assets/icons/WorldIcon';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppTheme} from '@hooks';
@@ -68,6 +71,9 @@ const iconRegistry = {
   checked: CheckedIcon,
   play: PlayIcon,
   pin: PinIcon,
+  post: PostIcon,
+  world: WorldIcon,
+  addUser: AddUserIcon,
 };
 
 type IconType = typeof iconRegistry;

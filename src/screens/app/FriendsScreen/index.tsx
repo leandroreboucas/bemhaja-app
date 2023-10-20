@@ -96,11 +96,21 @@ export function FriendsScreen() {
       {/**
        * Search
        */}
-      <Box marginHorizontal="s16" justifyContent="flex-end">
-        <Box alignItems="flex-end">
-          <Icon name="search" size={RFValue(14)} color="gray_700" />
-        </Box>
-        <TextInput removeLabel label="Pesquisar" />
+      <Box
+        flexDirection="row"
+        marginHorizontal="s16"
+        marginTop="s16"
+        alignItems="center"
+        justifyContent="flex-start">
+        <TouchableOpacityBox alignItems="center" width={RFValue(48)}>
+          <Icon name="addUser" size={RFValue(32)} color="primary_400" />
+        </TouchableOpacityBox>
+        <TextInput
+          boxProps={{flex: 1, marginLeft: 's16'}}
+          removeLabel
+          placeholder="Pesquisar"
+          label=""
+        />
       </Box>
 
       <FlatList

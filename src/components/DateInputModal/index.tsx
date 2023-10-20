@@ -21,6 +21,7 @@ export interface DateInputProps extends RNTextInputProps {
   boxProps?: BoxProps;
   removeLabel?: boolean;
   setDateField: (date: Date | undefined) => void;
+  typeMode?: 'date' | 'time' | 'datetime';
 }
 
 const maximumDate = new Date();
@@ -34,6 +35,7 @@ export function DateInputModal({
   boxProps,
   removeLabel = false,
   setDateField,
+  typeMode = 'date',
   ...rnTextInputProps
 }: DateInputProps) {
   const [date, setDate] = useState(maximumDate);
@@ -71,7 +73,7 @@ export function DateInputModal({
     <Box {...boxProps}>
       {isDatePickerVisible && (
         <DateTimePickerModal
-          mode="date"
+          mode={typeMode}
           locale="pt-BR"
           cancelTextIOS="Cancelar"
           confirmTextIOS="Confirmar"

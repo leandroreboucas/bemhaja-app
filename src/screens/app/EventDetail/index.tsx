@@ -47,7 +47,7 @@ export function EventDetail({route}: ScreenProps) {
   function renderItem({item}: ListRenderItemInfo<EventoDTO>) {
     return (
       <Box
-        marginHorizontal="s16"
+        marginHorizontal="s24"
         borderRadius="br10"
         backgroundColor="gray_100"
         alignItems="center"
@@ -356,7 +356,7 @@ export function EventDetail({route}: ScreenProps) {
         paddingHorizontal: 0,
         flex: 1,
       }}>
-      <Header contentRadius canGoBack />
+      <Header contentRadius canGoBack title="Detalhes do evento" />
       <FlatList
         style={{
           borderRadius: RFValue(10),

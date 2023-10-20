@@ -5,6 +5,8 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppTheme} from '@hooks';
 
+import {Box} from '../Box';
+import {Icon, IconNames} from '../Icon';
 import {Text} from '../Text';
 import {
   TouchableOpacityBox,
@@ -16,6 +18,7 @@ interface ButtonLinearProps extends TouchableOpacityBoxProps {
   loading?: boolean;
   disabled?: boolean;
   buttonWidth?: number;
+  iconLeft?: IconNames;
 }
 
 export function ButtonLinear({
@@ -23,6 +26,7 @@ export function ButtonLinear({
   loading,
   disabled = false,
   buttonWidth,
+  iconLeft = undefined,
   ...touchableOpacityBoxProps
 }: ButtonLinearProps) {
   const {colors} = useAppTheme();
@@ -43,6 +47,7 @@ export function ButtonLinear({
         width: buttonWidth,
       }}>
       <TouchableOpacityBox
+        flexDirection="row"
         disabled={disabled || loading}
         paddingHorizontal="s24"
         alignItems="center"
@@ -52,9 +57,18 @@ export function ButtonLinear({
         {loading ? (
           <ActivityIndicator color={colors.white} />
         ) : (
-          <Text variant="button" color={buttonContrast}>
-            {title}
-          </Text>
+          <Box flexDirection="row" alignItems="center" justifyContent="center">
+            {iconLeft && (
+              <Box marginHorizontal="s16">
+                <Icon name={iconLeft} color="white" size={24} />
+              </Box>
+            )}
+            <Box>
+              <Text variant="button" color={buttonContrast}>
+                {title}
+              </Text>
+            </Box>
+          </Box>
         )}
       </TouchableOpacityBox>
     </LinearGradient>
