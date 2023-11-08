@@ -1,9 +1,16 @@
-import {FeedDTO, PageAPI} from '../types';
+import { Page } from 'src/@types/pages';
 
-import {feedApi} from './feedApi';
+import { apiAdapter } from '../Api/apiAdapter';
+import { FeedDTO } from '../types';
 
-async function getList(): Promise<PageAPI<FeedDTO>> {
-  return await feedApi.getList();
+import { feedApi } from './feedApi';
+
+async function getList(page: number): Promise<Page<FeedDTO>> {
+  const feedPageApi = await feedApi.getList({ page, perPage: 10 });
+  return {
+    data: feedPageApi.data,
+    meta: apiAdapter.toMetaDataPage(feedPageApi.meta),
+  };
 }
 
 export const feedService = {

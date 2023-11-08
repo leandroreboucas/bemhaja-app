@@ -2,10 +2,10 @@ export interface FeedDTO {
   id: string;
   codigo: number;
   tipo:
-    | 'EVENTO_CRIADO'
-    | 'EVENTO_FINALIZADO'
-    | 'ATITUDE_REALIZADA'
-    | 'POSTAGEM_AVULSA';
+  | 'EVENTO_CRIADO'
+  | 'EVENTO_FINALIZADO'
+  | 'ATITUDE_REALIZADA'
+  | 'POSTAGEM_AVULSA';
   usuario: UsuarioDTO;
   evento?: EventoDTO;
   evento_atitude_Finalizada?: EventoAtitudeFinalizadaDTO;
@@ -150,4 +150,9 @@ export interface GrupoAtitudeDTO {
 export interface PageAPI<Data> {
   meta: MetaDataPageAPI;
   data: Data[];
+}
+
+export interface PageParam {
+  page: number;
+  perPage: number;
 }

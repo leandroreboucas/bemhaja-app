@@ -1,8 +1,9 @@
-import {FeedDTO, PageAPI} from '../types';
+import { FeedDTO, PageAPI, PageParam } from '../types';
 
-import {feedListMock} from './feedListMock';
+import { feedListMock } from './feedListMock';
 
-async function getList(): Promise<PageAPI<FeedDTO>> {
+async function getList(params?: PageParam): Promise<PageAPI<FeedDTO>> {
+  //todo: adicinar parametros de paginação no axios
   await new Promise(resolve => setTimeout(resolve, 1000));
   const data: PageAPI<FeedDTO> = {
     meta: {
