@@ -11,6 +11,8 @@ import {EventsIcon} from '@assets/icons/EventsIcon';
 import {EyeOffIcon} from '@assets/icons/EyeOffIcon';
 import {EyeOnIcon} from '@assets/icons/EyeOnIcon';
 import {FacebookIcon} from '@assets/icons/FacebookIcon';
+import {FriendAddIcon} from '@assets/icons/FriendAddIcon';
+import {FriendDeleteIcon} from '@assets/icons/FriendDeleteIcon';
 import {FriendsIcon} from '@assets/icons/FriendsIcon';
 import {GoogleIcon} from '@assets/icons/GoogleIcon';
 import {GroupsIcon} from '@assets/icons/GroupsIcon';
@@ -76,6 +78,8 @@ const iconRegistry = {
   world: WorldIcon,
   addUser: AddUserIcon,
   upload: UploadIcon,
+  friendAdd: FriendAddIcon,
+  friendDelete: FriendDeleteIcon,
 };
 
 type IconType = typeof iconRegistry;

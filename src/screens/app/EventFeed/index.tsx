@@ -39,7 +39,6 @@ export function EventFeed({route}: ScreenProps) {
 
   return (
     <Screen
-      scrollable
       style={{
         paddingBottom: 0,
         paddingTop: 0,

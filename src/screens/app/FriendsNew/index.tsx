@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {ListRenderItemInfo, Image, FlatList} from 'react-native';
+import {ListRenderItemInfo, FlatList} from 'react-native';
 
 import {UsuarioDTO, friendService} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -10,10 +10,10 @@ import {
   Header,
   Screen,
   TextInput,
-  Text,
   EmptyData,
   Feed,
   TouchableOpacityBox,
+  FriendCard,
 } from '@components';
 import {useAppNavigation} from '@hooks';
 
@@ -67,25 +67,7 @@ export function FriendsNew() {
           />
         )}
 
-        <Box
-          flexDirection="row"
-          marginHorizontal="s16"
-          alignItems="center"
-          paddingVertical="s16"
-          gap="s16">
-          <Image
-            source={{uri: item.foto}}
-            style={{width: RFValue(48), height: RFValue(48)}}
-            borderRadius={RFValue(48) / 2}
-            resizeMode="cover"
-          />
-          <Box>
-            <Text variant="friends_card_name">{item.nome}</Text>
-            <Text variant="friends_meta_events_count">
-              BemHaja: {item.meta?.eventos || 0}
-            </Text>
-          </Box>
-        </Box>
+        <FriendCard item={item} />
       </Box>
     );
   }

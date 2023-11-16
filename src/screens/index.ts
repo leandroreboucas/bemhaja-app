@@ -14,3 +14,4 @@ export * from './app/PostNew';
 export * from './app/AttitudeNew';
 export * from './app/EventFeed';
 export * from './app/FriendsNew';
+export * from './app/FriendsRequests';

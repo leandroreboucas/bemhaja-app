@@ -5,36 +5,42 @@ import {UsuarioDTO, friendService} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
-  Box,
-  EmptyData,
-  Header,
-  Icon,
-  Feed,
   Screen,
+  Header,
+  Box,
   Text,
-  TextInput,
-  TouchableOpacityBox,
   FriendCard,
+  EmptyData,
+  Feed,
+  Icon,
 } from '@components';
-import {useAppNavigation} from '@hooks';
-
 const FILTER_HEIGHT = RFValue(40);
-
-export function FriendsScreen() {
-  const navigation = useAppNavigation();
-  const [filter, setFilter] = useState('');
+export function FriendsRequests() {
   const [list, setList] = useState<UsuarioDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  function goFreiendsNew() {
-    navigation.navigate('FriendsNew');
+  function renderItemPendents({item}: ListRenderItemInfo<UsuarioDTO>) {
+    return (
+      <Box
+        flex={1}
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between">
+        <FriendCard item={item} />
+        <Box
+          flexDirection="row"
+          alignItems="center"
+          marginRight="s16"
+          gap="s16">
+          <Icon name="friendAdd" size={32} color="primary_500" />
+          <Icon name="friendDelete" size={32} color="primary_500" />
+        </Box>
+      </Box>
+    );
   }
-
-  function goFreiendsRequests() {
-    navigation.navigate('FriendsRequests');
+  function renderItemRequests({item}: ListRenderItemInfo<UsuarioDTO>) {
+    return <FriendCard item={item} />;
   }
-
   async function fetchData() {
     try {
       setError(false);
@@ -51,10 +57,6 @@ export function FriendsScreen() {
     }
   }
 
-  function renderItem({item}: ListRenderItemInfo<UsuarioDTO>) {
-    return <FriendCard item={item} />;
-  }
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -62,7 +64,7 @@ export function FriendsScreen() {
   return (
     <Screen
       style={{paddingBottom: 0, paddingTop: 0, paddingHorizontal: 0, flex: 1}}>
-      <Header contentRadius />
+      <Header contentRadius canGoBack title="Solicitações" />
 
       {/**
        * Cabeçalho
@@ -77,36 +79,9 @@ export function FriendsScreen() {
         borderTopStartRadius="br10"
         borderTopEndRadius="br10">
         <Text paddingLeft="s16" variant="friends_title_screen">
-          Amigos
+          Aguardando aprovação
         </Text>
-        <TouchableOpacityBox paddingRight="s16" onPress={goFreiendsRequests}>
-          <Text variant="friends_subtitle_screen">Solicitações(1)</Text>
-        </TouchableOpacityBox>
       </Box>
-
-      {/**
-       * Search
-       */}
-      <Box
-        flexDirection="row"
-        marginHorizontal="s16"
-        marginTop="s16"
-        alignItems="center"
-        justifyContent="flex-start">
-        <TouchableOpacityBox
-          alignItems="center"
-          width={RFValue(48)}
-          onPress={goFreiendsNew}>
-          <Icon name="addUser" size={RFValue(32)} color="primary_400" />
-        </TouchableOpacityBox>
-        <TextInput
-          boxProps={{flex: 1, marginLeft: 's16'}}
-          removeLabel
-          placeholder="Pesquisar"
-          label=""
-        />
-      </Box>
-
       <FlatList
         style={{
           borderRadius: RFValue(10),
@@ -118,7 +93,37 @@ export function FriendsScreen() {
         showsVerticalScrollIndicator={false}
         data={list}
         keyExtractor={item => item.id}
-        renderItem={renderItem}
+        renderItem={renderItemPendents}
+        ListEmptyComponent={
+          <EmptyData
+            loading={loading}
+            error={error}
+            refetch={fetchData}
+            text=""
+          />
+        }
+        bounces
+        decelerationRate="fast"
+        ItemSeparatorComponent={() => <Feed.Separator />}
+        // ListHeaderComponent={<Header />}
+        // stickyHeaderIndices={[0]}
+        // stickyHeaderHiddenOnScroll
+      />
+      <Text paddingLeft="s34" variant="friends_title_screen">
+        Solicitações enviadas
+      </Text>
+      <FlatList
+        style={{
+          borderRadius: RFValue(10),
+        }}
+        contentContainerStyle={{
+          flex: list.length === 0 ? 1 : undefined,
+          borderRadius: RFValue(10),
+        }}
+        showsVerticalScrollIndicator={false}
+        data={list}
+        keyExtractor={item => item.id}
+        renderItem={renderItemRequests}
         ListEmptyComponent={
           <EmptyData
             loading={loading}
