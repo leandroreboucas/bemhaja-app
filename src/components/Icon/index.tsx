@@ -20,6 +20,7 @@ import {PinIcon} from '@assets/icons/PinIcon';
 import {PlayIcon} from '@assets/icons/PlayIcon';
 import {PostIcon} from '@assets/icons/PostIcon';
 import {SearchIcon} from '@assets/icons/SearchIcon';
+import {UploadIcon} from '@assets/icons/UploadIcon';
 import {WorldIcon} from '@assets/icons/WorldIcon';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -74,6 +75,7 @@ const iconRegistry = {
   post: PostIcon,
   world: WorldIcon,
   addUser: AddUserIcon,
+  upload: UploadIcon,
 };
 
 type IconType = typeof iconRegistry;

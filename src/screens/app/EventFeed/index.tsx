@@ -1,14 +1,20 @@
-import {useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {FlatList, ListRenderItemInfo, RefreshControl} from 'react-native';
 
 import {FeedDTO, useFeedList} from '@dtos';
 import {useScrollToTop} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {EmptyData, Feed, Header, Screen} from '@components';
+import {Screen, Header, Feed, EmptyData} from '@components';
 import {useAppTheme} from '@hooks';
+import {AppRoutes} from '@routes';
 
-export function HomeScreen() {
+type ScreenProps = NativeStackScreenProps<AppRoutes, 'EventFeed'>;
+
+export function EventFeed({route}: ScreenProps) {
+  const [eventFeed, setEventFeed] = useState<FeedDTO[]>([]);
+  console.log(route.params.event_id);
   const {list, error, loading, refresh, fetchNextPage} = useFeedList();
   const {colors} = useAppTheme();
 
@@ -19,25 +25,43 @@ export function HomeScreen() {
     return <Feed.Item item={listRender} />;
   }
 
+  function fecthData() {
+    const {event_id} = route.params;
+    const feed = list.filter(
+      item =>
+        item.evento?.id === event_id ||
+        item.evento_atitude_Finalizada?.evento.id === event_id,
+    );
+    setEventFeed(feed);
+  }
+
+  useEffect(() => fecthData(), [list]);
+
   return (
     <Screen
-      style={{paddingBottom: 0, paddingTop: 0, paddingHorizontal: 0, flex: 1}}>
-      <Header contentRadius />
+      scrollable
+      style={{
+        paddingBottom: 0,
+        paddingTop: 0,
+        paddingHorizontal: 0,
+        flex: 1,
+      }}>
+      <Header contentRadius canGoBack title="Feed do evento" />
       <FlatList
-        ref={flatListRef}
+        // ref={flatListRef}
         style={{
           borderRadius: RFValue(10),
         }}
         contentContainerStyle={{
-          flex: list.length === 0 ? 1 : undefined,
+          flex: eventFeed.length === 0 ? 1 : undefined,
           borderRadius: RFValue(10),
         }}
         showsVerticalScrollIndicator={false}
-        data={list}
+        data={eventFeed}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.1}
+        // onEndReached={fetchNextPage}
+        // onEndReachedThreshold={0.1}
         refreshing={loading}
         refreshControl={
           <RefreshControl

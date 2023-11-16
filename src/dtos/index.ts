@@ -6,3 +6,4 @@ export * from './Friend/friendService';
 export * from './Groups/groupService';
 export * from './Feed/useCases/useFeedList';
 export * from './Api/apiAdapter';
+export * from './hooks/usePaginatedList';

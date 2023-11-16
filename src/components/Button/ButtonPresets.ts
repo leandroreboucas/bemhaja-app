@@ -1,9 +1,9 @@
-import {RFValue} from 'react-native-responsive-fontsize';
+import { RFValue } from 'react-native-responsive-fontsize';
 
-import {TouchableOpacityBoxProps} from '@components';
-import {ThemeColors} from '@themes';
+import { TouchableOpacityBoxProps } from '@components';
+import { ThemeColors } from '@themes';
 
-export type ButtonPreset = 'primary' | 'outline';
+export type ButtonPreset = 'primary' | 'outline' | 'gray';
 
 export interface ButtonUI {
   container: TouchableOpacityBoxProps;
@@ -45,6 +45,20 @@ export const buttonPresets: Record<
         borderColor: 'gray_disabled_Background',
       },
       content: 'gray_disabled_Content',
+    },
+  },
+  gray: {
+    default: {
+      container: {
+        backgroundColor: 'gray_400',
+      },
+      content: 'gray_700',
+    },
+    disabled: {
+      container: {
+        backgroundColor: 'gray_disabled_Background',
+      },
+      content: 'gray_disabled_Background',
     },
   },
 };

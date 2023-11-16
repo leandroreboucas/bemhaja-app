@@ -18,3 +18,4 @@ export * from './EmptyData';
 export * from './FilterHeaderEvents';
 export * from './FriendCard';
 export * from './Search';
+export * from './Modal/Search';

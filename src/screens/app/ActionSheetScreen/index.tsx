@@ -8,6 +8,14 @@ export function ActionSheetScreen() {
     navigation.navigate('EventNew');
   }
 
+  function goPostNew() {
+    navigation.navigate('PostNew');
+  }
+
+  function goAttitudeNew() {
+    navigation.navigate('AttitudeNew');
+  }
+
   return (
     <Box flex={1} style={{backgroundColor: '#A3A3A3'}}>
       <Box flex={1} />
@@ -23,8 +31,16 @@ export function ActionSheetScreen() {
           borderRadius="br20"
           paddingHorizontal="s34"
           paddingVertical="s16">
-          <ButtonLinear title="Nova atitude" iconLeft="checked" />
-          <ButtonLinear title="Nova postagem" iconLeft="post" />
+          <ButtonLinear
+            title="Nova atitude"
+            iconLeft="checked"
+            onPress={goAttitudeNew}
+          />
+          <ButtonLinear
+            title="Nova postagem"
+            iconLeft="post"
+            onPress={goPostNew}
+          />
           <ButtonLinear
             title="Novo evento"
             iconLeft="events"

@@ -38,5 +38,6 @@ export const colors = {
   mainBackground: pallete.white,
   backgroundContrast: pallete.black,
 
-  buttonPrimary: pallete.primary_800,
+  // buttonPrimary: pallete.primary_800,
+  buttonPrimary: pallete.primary_500,
 };

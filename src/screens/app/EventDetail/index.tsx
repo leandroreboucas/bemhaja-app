@@ -19,7 +19,7 @@ import {AppRoutes} from '@routes';
 
 type ScreenProps = NativeStackScreenProps<AppRoutes, 'EventDetail'>;
 
-export function EventDetail({route}: ScreenProps) {
+export function EventDetail({route, navigation}: ScreenProps) {
   const [event, setEvent] = useState<EventoDTO>();
   const [list, setList] = useState<EventoDTO[]>([]);
   const [loading, setLoading] = useState(true);
@@ -300,7 +300,8 @@ export function EventDetail({route}: ScreenProps) {
             flexDirection="row"
             marginBottom="s16"
             justifyContent="space-between"
-            alignItems="center">
+            alignItems="center"
+            onPress={goEventFeed}>
             <Box gap="s16" flexDirection="row" alignItems="center">
               <Icon name="events" color="primary_500" size={RFValue(16)} />
               <Text variant="feed_title">Ver postagens relacionadas</Text>
@@ -342,6 +343,10 @@ export function EventDetail({route}: ScreenProps) {
         </Box>
       </Box>
     );
+  }
+
+  function goEventFeed() {
+    navigation.navigate('EventFeed', {event_id: route.params.event_id});
   }
 
   useEffect(() => {

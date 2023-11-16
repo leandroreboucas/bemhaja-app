@@ -1,43 +1,35 @@
 import {useEffect, useState} from 'react';
-import {FlatList, Image, ListRenderItemInfo} from 'react-native';
+import {ListRenderItemInfo, Image, FlatList} from 'react-native';
 
 import {UsuarioDTO, friendService} from '@dtos';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
   Box,
-  EmptyData,
+  Button,
   Header,
-  Icon,
-  Feed,
   Screen,
-  Text,
   TextInput,
+  Text,
+  EmptyData,
+  Feed,
   TouchableOpacityBox,
-  SearchModal,
 } from '@components';
 import {useAppNavigation} from '@hooks';
 
-const FILTER_HEIGHT = RFValue(40);
-
-export function FriendsScreen() {
+export function FriendsNew() {
   const navigation = useAppNavigation();
   const [filter, setFilter] = useState('');
   const [list, setList] = useState<UsuarioDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  function goFreiendsNew() {
-    navigation.navigate('FriendsNew');
-  }
+  const [selected, setSelected] = useState<UsuarioDTO>();
 
   async function fetchData() {
     try {
       setError(false);
       setLoading(true);
       const list = await friendService.getList();
-
-      // setList([]);
       setList(list.data);
     } catch (err) {
       console.log(err);
@@ -51,21 +43,48 @@ export function FriendsScreen() {
     return (
       <Box
         flexDirection="row"
-        marginHorizontal="s16"
         alignItems="center"
-        paddingVertical="s16"
+        marginHorizontal="s16"
         gap="s16">
-        <Image
-          source={{uri: item.foto}}
-          style={{width: RFValue(48), height: RFValue(48)}}
-          borderRadius={RFValue(48) / 2}
-          resizeMode="cover"
-        />
-        <Box>
-          <Text variant="friends_card_name">{item.nome}</Text>
-          <Text variant="friends_meta_events_count">
-            BemHaja: {item.meta?.eventos || 0}
-          </Text>
+        {selected?.id !== item.id ? (
+          <TouchableOpacityBox
+            width={RFValue(24)}
+            height={RFValue(24)}
+            style={{borderRadius: 99999}}
+            borderColor="gray_700"
+            borderWidth={RFValue(1)}
+            onPress={() => setSelected(item)}
+          />
+        ) : (
+          <TouchableOpacityBox
+            width={RFValue(24)}
+            height={RFValue(24)}
+            style={{borderRadius: 99999}}
+            backgroundColor="primary_500"
+            borderColor="gray_700"
+            borderWidth={RFValue(1)}
+            onPress={() => setSelected(undefined)}
+          />
+        )}
+
+        <Box
+          flexDirection="row"
+          marginHorizontal="s16"
+          alignItems="center"
+          paddingVertical="s16"
+          gap="s16">
+          <Image
+            source={{uri: item.foto}}
+            style={{width: RFValue(48), height: RFValue(48)}}
+            borderRadius={RFValue(48) / 2}
+            resizeMode="cover"
+          />
+          <Box>
+            <Text variant="friends_card_name">{item.nome}</Text>
+            <Text variant="friends_meta_events_count">
+              BemHaja: {item.meta?.eventos || 0}
+            </Text>
+          </Box>
         </Box>
       </Box>
     );
@@ -75,31 +94,18 @@ export function FriendsScreen() {
     fetchData();
   }, []);
 
+  function goBack() {
+    navigation.goBack();
+  }
   return (
     <Screen
-      style={{paddingBottom: 0, paddingTop: 0, paddingHorizontal: 0, flex: 1}}>
-      <Header contentRadius />
-
-      {/**
-       * Cabeçalho
-       */}
-      <Box
-        height={FILTER_HEIGHT}
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="space-between"
-        marginHorizontal="s16"
-        gap="s4"
-        borderTopStartRadius="br10"
-        borderTopEndRadius="br10">
-        <Text paddingLeft="s16" variant="friends_title_screen">
-          Amigos
-        </Text>
-        <TouchableOpacityBox paddingRight="s16">
-          <Text variant="friends_subtitle_screen">Solicitações(1)</Text>
-        </TouchableOpacityBox>
-      </Box>
-
+      style={{
+        paddingBottom: 0,
+        paddingTop: 0,
+        paddingHorizontal: 0,
+        flex: 1,
+      }}>
+      <Header contentRadius canGoBack title="Convidar amigo" />
       {/**
        * Search
        */}
@@ -109,20 +115,13 @@ export function FriendsScreen() {
         marginTop="s16"
         alignItems="center"
         justifyContent="flex-start">
-        <TouchableOpacityBox
-          alignItems="center"
-          width={RFValue(48)}
-          onPress={goFreiendsNew}>
-          <Icon name="addUser" size={RFValue(32)} color="primary_400" />
-        </TouchableOpacityBox>
         <TextInput
-          boxProps={{flex: 1, marginLeft: 's16'}}
+          boxProps={{flex: 1, marginHorizontal: 's16'}}
           removeLabel
           placeholder="Pesquisar"
           label=""
         />
       </Box>
-
       <FlatList
         style={{
           borderRadius: RFValue(10),
@@ -150,6 +149,19 @@ export function FriendsScreen() {
         // stickyHeaderIndices={[0]}
         // stickyHeaderHiddenOnScroll
       />
+      <Box
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-around"
+        marginBottom="s24">
+        <Button
+          onPress={goBack}
+          title="Voltar"
+          preset="gray"
+          width={RFValue(150)}
+        />
+        <Button title="Convidar" preset="primary" width={RFValue(150)} />
+      </Box>
     </Screen>
   );
 }

@@ -35,7 +35,7 @@ export function Header({
       navigation.navigate('AppTabNavigator', {screen: 'HomeScreen'});
       return;
     }
-    console.log('chamou');
+
     navigation.goBack();
   }
 
