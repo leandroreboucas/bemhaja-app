@@ -1,5 +1,4 @@
-import { MetaDataPage } from '../../@types/pages';
-import { MetaDataPageAPI } from '../types';
+import { MetaDataPageAPI, MetaDataPage } from '../types';
 
 function toMetaDataPage(meta: MetaDataPageAPI): MetaDataPage {
     return {

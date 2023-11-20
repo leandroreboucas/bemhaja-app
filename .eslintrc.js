@@ -1,7 +1,10 @@
 module.exports = {
   root: true,
-  extends: ['universe/native'],
-  plugins: ['import'],
+  extends: [
+    'universe/native',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
+  ],
+  plugins: ['import', '@tanstack/query'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],

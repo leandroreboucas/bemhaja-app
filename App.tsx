@@ -11,12 +11,15 @@ import {
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto';
 import {ThemeProvider} from '@shopify/restyle';
+import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
 import * as SplashScreen from 'expo-splash-screen';
 import {StatusBar} from 'expo-status-bar';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {Router} from '@routes';
 import {theme} from '@themes';
+
+const queryClient = new QueryClient();
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -38,11 +41,13 @@ export default function App() {
   SplashScreen.hideAsync();
 
   return (
-    <SafeAreaProvider>
-      <StatusBar style="auto" backgroundColor="transparent" translucent />
-      <ThemeProvider theme={theme}>
-        <Router />
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <StatusBar style="auto" backgroundColor="transparent" translucent />
+        <ThemeProvider theme={theme}>
+          <Router />
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }

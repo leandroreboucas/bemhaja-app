@@ -9,7 +9,7 @@ import {EmptyData, Feed, Header, Screen} from '@components';
 import {useAppTheme} from '@hooks';
 
 export function HomeScreen() {
-  const {list, error, loading, refresh, fetchNextPage} = useFeedList();
+  const {list, isError, isLoading, refresh, fetchNextPage} = useFeedList();
   const {colors} = useAppTheme();
 
   const flatListRef = useRef<FlatList<FeedDTO>>(null);
@@ -38,10 +38,10 @@ export function HomeScreen() {
         renderItem={renderItem}
         onEndReached={fetchNextPage}
         onEndReachedThreshold={0.1}
-        refreshing={loading}
+        refreshing={isLoading}
         refreshControl={
           <RefreshControl
-            refreshing={loading}
+            refreshing={isLoading}
             onRefresh={refresh}
             colors={['#fff']}
             progressBackgroundColor={colors.primary_500}
@@ -49,8 +49,8 @@ export function HomeScreen() {
         }
         ListEmptyComponent={
           <EmptyData
-            loading={loading}
-            error={error}
+            loading={isLoading}
+            error={isError}
             refetch={refresh}
             text='Você pode adicionar um evento clicando no ícone de "+" na barra
           inferior.'

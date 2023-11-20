@@ -19,3 +19,4 @@ export * from './FilterHeaderEvents';
 export * from './FriendCard';
 export * from './Search';
 export * from './Modal/Search';
+export * from './Toast';

@@ -1,7 +1,5 @@
-import { Page } from 'src/@types/pages';
-
 import { apiAdapter } from '../Api/apiAdapter';
-import { FeedDTO } from '../types';
+import { Page, FeedDTO } from '../types';
 
 import { feedApi } from './feedApi';
 

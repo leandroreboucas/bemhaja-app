@@ -15,7 +15,7 @@ type ScreenProps = NativeStackScreenProps<AppRoutes, 'EventFeed'>;
 export function EventFeed({route}: ScreenProps) {
   const [eventFeed, setEventFeed] = useState<FeedDTO[]>([]);
   console.log(route.params.event_id);
-  const {list, error, loading, refresh, fetchNextPage} = useFeedList();
+  const {list, isError, isLoading, refresh, fetchNextPage} = useFeedList();
   const {colors} = useAppTheme();
 
   const flatListRef = useRef<FlatList<FeedDTO>>(null);
@@ -61,10 +61,10 @@ export function EventFeed({route}: ScreenProps) {
         renderItem={renderItem}
         // onEndReached={fetchNextPage}
         // onEndReachedThreshold={0.1}
-        refreshing={loading}
+        refreshing={isLoading}
         refreshControl={
           <RefreshControl
-            refreshing={loading}
+            refreshing={isLoading}
             onRefresh={refresh}
             colors={['#fff']}
             progressBackgroundColor={colors.primary_500}
@@ -72,8 +72,8 @@ export function EventFeed({route}: ScreenProps) {
         }
         ListEmptyComponent={
           <EmptyData
-            loading={loading}
-            error={error}
+            loading={isLoading}
+            error={isError}
             refetch={refresh}
             text='Você pode adicionar um evento clicando no ícone de "+" na barra
           inferior.'
