@@ -10,6 +10,7 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto';
+import {AuthCredentialsProvider} from '@services';
 import {ThemeProvider} from '@shopify/restyle';
 import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
 import * as SplashScreen from 'expo-splash-screen';
@@ -41,13 +42,15 @@ export default function App() {
   SplashScreen.hideAsync();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <StatusBar style="auto" backgroundColor="transparent" translucent />
-        <ThemeProvider theme={theme}>
-          <Router />
-        </ThemeProvider>
-      </SafeAreaProvider>
-    </QueryClientProvider>
+    <AuthCredentialsProvider>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>
+          <StatusBar style="auto" backgroundColor="transparent" translucent />
+          <ThemeProvider theme={theme}>
+            <Router />
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </QueryClientProvider>
+    </AuthCredentialsProvider>
   );
 }
