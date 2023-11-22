@@ -3,6 +3,7 @@ import {Image, ImageBackground} from 'react-native';
 import HeaderImg from '@assets/header.png';
 import {BemHajaIcon} from '@assets/icons/BemHajaIcon';
 import {LogoOnlyIcon} from '@assets/icons/LogoOnlyIcon';
+import {useAuthCredentials} from '@services';
 import {StatusBar} from 'expo-status-bar';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -29,6 +30,8 @@ export function Header({
   const {top} = useAppSafeArea();
   const navigation = useAppNavigation();
   const imageUri = Image.resolveAssetSource(HeaderImg).uri;
+  const {authCredentials} = useAuthCredentials();
+  const user = authCredentials?.user!;
 
   function goNavigate() {
     if (goHome) {
@@ -37,6 +40,10 @@ export function Header({
     }
 
     navigation.goBack();
+  }
+
+  function goMyProfile() {
+    navigation.navigate('MyProfileScreen');
   }
 
   return (
@@ -99,12 +106,20 @@ export function Header({
               </Box>
               <Box flexDirection="row" gap="s16" alignItems="center">
                 <Icon name="notification" color="white" size={24} />
-                <Image
-                  source={{uri: 'https://github.com/leandroreboucas.png'}}
-                  style={{width: RFValue(48), height: RFValue(48)}}
-                  borderRadius={RFValue(48) / 2}
-                  resizeMode="cover"
-                />
+
+                <TouchableOpacityBox onPress={goMyProfile}>
+                  <Image
+                    source={{uri: user?.foto}}
+                    style={{
+                      width: RFValue(48),
+                      height: RFValue(48),
+                      borderWidth: 2,
+                      borderColor: 'white',
+                    }}
+                    borderRadius={RFValue(48) / 2}
+                    resizeMode="cover"
+                  />
+                </TouchableOpacityBox>
               </Box>
             </>
           )}

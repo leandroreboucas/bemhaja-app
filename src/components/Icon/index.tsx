@@ -22,6 +22,7 @@ import {PinIcon} from '@assets/icons/PinIcon';
 import {PlayIcon} from '@assets/icons/PlayIcon';
 import {PostIcon} from '@assets/icons/PostIcon';
 import {SearchIcon} from '@assets/icons/SearchIcon';
+import {SettingsIcon} from '@assets/icons/SettingsIcon';
 import {UploadIcon} from '@assets/icons/UploadIcon';
 import {WorldIcon} from '@assets/icons/WorldIcon';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -80,6 +81,7 @@ const iconRegistry = {
   upload: UploadIcon,
   friendAdd: FriendAddIcon,
   friendDelete: FriendDeleteIcon,
+  settings: SettingsIcon,
 };
 
 type IconType = typeof iconRegistry;

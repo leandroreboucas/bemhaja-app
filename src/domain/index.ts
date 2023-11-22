@@ -8,3 +8,4 @@ export * from './Feed/useCases/useFeedList';
 export * from './Api/apiAdapter';
 
 export * from './Infra';
+export * from './Auth';

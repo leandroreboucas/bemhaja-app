@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
-import {UsuarioDTO, friendService} from '@dtos';
+import {UsuarioDTO, friendService} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {

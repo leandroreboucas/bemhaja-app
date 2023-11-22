@@ -1,4 +1,4 @@
-import { QueryKeys } from '@dtos';
+import { QueryKeys } from '@domain';
 import { useQuery } from '@tanstack/react-query';
 
 import { userService } from '../userService';

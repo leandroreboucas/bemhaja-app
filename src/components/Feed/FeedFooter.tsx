@@ -1,4 +1,4 @@
-import {EventoDTO} from '@dtos';
+import {EventoDTO} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Box} from '../Box';

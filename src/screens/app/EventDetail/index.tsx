@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {FlatList, Image, ListRenderItemInfo} from 'react-native';
 
-import {EventoDTO, eventService} from '@dtos';
+import {EventoDTO, eventService} from '@domain';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RFValue} from 'react-native-responsive-fontsize';
 

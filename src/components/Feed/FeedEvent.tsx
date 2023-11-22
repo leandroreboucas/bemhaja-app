@@ -1,6 +1,6 @@
 import {Image} from 'react-native';
 
-import {EventoDTO} from '@dtos';
+import {EventoDTO} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppNavigation} from '@hooks';

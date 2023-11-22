@@ -1,6 +1,6 @@
 import {Image} from 'react-native';
 
-import {UsuarioDTO} from '@dtos';
+import {UsuarioDTO} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Box} from '../Box';

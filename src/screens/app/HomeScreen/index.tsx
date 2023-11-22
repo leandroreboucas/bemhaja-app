@@ -1,7 +1,7 @@
 import {useRef} from 'react';
 import {FlatList, ListRenderItemInfo, RefreshControl} from 'react-native';
 
-import {FeedDTO, useFeedList} from '@dtos';
+import {FeedDTO, useFeedList} from '@domain';
 import {useScrollToTop} from '@react-navigation/native';
 import {RFValue} from 'react-native-responsive-fontsize';
 

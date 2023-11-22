@@ -1,6 +1,6 @@
 import {ListRenderItemInfo} from 'react-native';
 
-import {FeedDTO} from '@dtos';
+import {FeedDTO} from '@domain';
 
 import {FeedAudio} from './FeedAudio';
 import {FeedEvent} from './FeedEvent';
@@ -14,16 +14,17 @@ import {FeedVideo} from './FeedVideo';
 
 interface FeedItemProps {
   item: ListRenderItemInfo<FeedDTO>;
+  removeProfile?: boolean;
 }
 
-export function FeedItem({item: listFlat}: FeedItemProps) {
+export function FeedItem({item: listFlat, removeProfile}: FeedItemProps) {
   const item = listFlat.item;
   return (
     <FeedRoot>
       {/**
        * Header é aplicado a todos os tipos
        */}
-      <FeedHeader item={item} />
+      <FeedHeader item={item} removeProfile={removeProfile} />
 
       {/**
        * Evento criado

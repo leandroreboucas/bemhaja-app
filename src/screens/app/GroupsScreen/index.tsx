@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
-import {GrupoAtitudeDTO, groupService} from '@dtos';
+import {GrupoAtitudeDTO, groupService} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Box, EmptyData, Feed, Header, Screen, Text} from '@components';

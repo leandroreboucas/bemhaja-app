@@ -1,7 +1,8 @@
-import {ImageBackground, Platform, Pressable} from 'react-native';
+import {Alert, ImageBackground, Platform, Pressable} from 'react-native';
 
 import ImageBg from '@assets/bg.png';
 import {LogoIcon} from '@assets/icons/LogoIcon';
+import {useAuthSigIn} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -21,6 +22,11 @@ import {useAuthNavigation} from '@hooks';
 import {LoginType, loginSchema} from './LoginSchema';
 
 export function LoginScreen() {
+  const {isLoading, signIn} = useAuthSigIn({
+    onError(message) {
+      Alert.alert(message);
+    },
+  });
   const navigation = useAuthNavigation();
   const {control, formState, handleSubmit} = useForm<LoginType>({
     resolver: zodResolver(loginSchema),
@@ -41,6 +47,10 @@ export function LoginScreen() {
 
   function submitForm(form: LoginType) {
     console.log(form);
+    signIn({
+      email: form.email,
+      password: form.senha,
+    });
   }
 
   if (!ImageBg) {
@@ -97,6 +107,7 @@ export function LoginScreen() {
         </Box>
         <Box alignItems="center" mb="s72">
           <ButtonLinear
+            loading={isLoading}
             disabled={!formState.isValid}
             onPress={handleSubmit(submitForm)}
             title="Entrar"

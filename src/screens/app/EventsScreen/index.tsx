@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
-import {EventoDTO, eventService} from '@dtos';
+import {EventoDTO, eventService} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {EmptyData, Feed, FilterHeaderEvents, Header, Screen} from '@components';
