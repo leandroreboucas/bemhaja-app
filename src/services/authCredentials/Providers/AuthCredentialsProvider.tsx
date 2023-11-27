@@ -1,9 +1,10 @@
 import {PropsWithChildren, createContext, useEffect, useState} from 'react';
 
-import {AuthCredentialsAPI, authService} from '@domain';
-
 import {authCredentialsStorage} from '../authCredentialsStorage';
 import {AuthCredentialsService} from '../authCredentialsType';
+
+import {authService} from './../../../domain/Auth/authService';
+import {AuthCredentialsAPI} from './../../../domain/Auth/authTypes';
 
 export const AuthCredentialsContext = createContext<AuthCredentialsService>({
   authCredentials: null,

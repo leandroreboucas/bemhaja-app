@@ -1,6 +1,7 @@
-import {ImageBackground, Pressable} from 'react-native';
+import {Alert, ImageBackground, Pressable} from 'react-native';
 
 import ImageBg from '@assets/bg-cad.png';
+import {useAuthResetPassword} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -22,6 +23,15 @@ import {
 
 export function ForgoutPasswordScreen() {
   const navigation = useAuthNavigation();
+  const {isLoading, resetPassword} = useAuthResetPassword({
+    onSucess: () => {
+      Alert.alert(
+        '',
+        'Foi enviado um e-mail com os passos para recuperação da senha',
+      );
+      navigation.goBack();
+    },
+  });
   const {control, formState, handleSubmit} = useForm<ForgoutPasswordType>({
     resolver: zodResolver(forgoutPasswordSchema),
     defaultValues: {
@@ -31,6 +41,7 @@ export function ForgoutPasswordScreen() {
   });
   function submitForm(form: ForgoutPasswordType) {
     console.log(form);
+    resetPassword(form);
   }
   if (!ImageBg) {
     return <Loading />;
@@ -74,6 +85,7 @@ export function ForgoutPasswordScreen() {
 
         <Box alignItems="center" mb="s28">
           <ButtonLinear
+            loading={isLoading}
             disabled={!formState.isValid}
             onPress={handleSubmit(submitForm)}
             title="Recuperar senha"

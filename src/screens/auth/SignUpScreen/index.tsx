@@ -1,7 +1,11 @@
-import {ImageBackground, Pressable} from 'react-native';
+import {useState} from 'react';
+import {Alert, ImageBackground, Pressable} from 'react-native';
 
 import ImageBg from '@assets/bg-cad.png';
+import {useAuthSigIn, useAuthSignUp} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {dateUtils} from '@utils';
+import * as ImagePicker from 'expo-image-picker';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -9,7 +13,6 @@ import {
   Box,
   Screen,
   Text,
-  Icon,
   ButtonLinear,
   Loading,
   FormTextInput,
@@ -21,9 +24,11 @@ import {useAuthNavigation} from '@hooks';
 import {SignUpType, signUpSchema} from './SignUpSchema';
 
 export function SignUpScreen() {
+  const [photoBase64, setPhotoBase64] = useState<string | null>(null);
+  const [userPhoto, setUserPhoto] = useState<string | null>(null);
   const navigation = useAuthNavigation();
 
-  const {control, formState, handleSubmit} = useForm<SignUpType>({
+  const {control, formState, handleSubmit, watch} = useForm<SignUpType>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       nome: '',
@@ -35,8 +40,49 @@ export function SignUpScreen() {
     mode: 'onChange',
   });
 
+  const {signIn, isLoading: isLoadingSigIn} = useAuthSigIn();
+
+  const {isLoading, signUp} = useAuthSignUp({
+    onSucess: () => {
+      signIn({
+        email: watch('email'),
+        password: watch('confirma_senha'),
+      });
+    },
+    onError: message => {
+      Alert.alert(message);
+    },
+  });
+
+  async function handleUserPhotoSelect() {
+    try {
+      const photoSelected = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        quality: 1,
+        base64: true,
+        aspect: [4, 4],
+      });
+      if (!photoSelected.canceled) {
+        setUserPhoto(photoSelected.assets[0].uri);
+        setPhotoBase64(photoSelected.assets[0].base64!);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  }
+
   function submitForm(form: SignUpType) {
     console.log(form);
+    signUp({
+      foto: userPhoto ? photoBase64 : userPhoto,
+      nome: form.nome,
+      email: form.email,
+      data_nascimento: dateUtils.formattedDate(form.data_nascimento),
+      senha: form.senha,
+      adm: false,
+    });
   }
 
   if (!ImageBg) {
@@ -67,21 +113,39 @@ export function SignUpScreen() {
             Cadastro
           </Text>
         </Box>
-        <Box paddingBottom="s28" alignItems="center" justifyContent="center">
-          <Icon name="camera" size={140} color="primary_300" />
+        {/* <Box paddingBottom="s28" alignItems="center" justifyContent="center">
+          {userPhoto ? (
+            <ImageCached
+              style={{
+                borderRadius: RFValue(140 / 2),
+                width: RFValue(140),
+                height: RFValue(140),
+              }}
+              source={{
+                uri: userPhoto,
+              }}
+              contentFit="cover"
+            />
+          ) : (
+            <Icon name="camera" size={140} color="primary_300" />
+          )}
         </Box>
-        <Box paddingBottom="s28" alignItems="center" justifyContent="center">
+        <TouchableOpacityBox
+          onPress={handleUserPhotoSelect}
+          paddingBottom="s28"
+          alignItems="center"
+          justifyContent="center">
           <Text variant="change_image" textDecorationLine="underline">
-            Escolha uma foto
+            Alterar foto
           </Text>
-        </Box>
+        </TouchableOpacityBox> */}
         <FormTextInput
           control={control}
           name="nome"
           removeLabel
           required
           label="Nome"
-          placeholder="Nome Completo"
+          placeholder="Nome"
           boxProps={{mb: 's28'}}
           keyboardType="default"
         />
@@ -129,6 +193,7 @@ export function SignUpScreen() {
 
         <Box alignItems="center" mb="s28">
           <ButtonLinear
+            loading={isLoading || isLoadingSigIn}
             disabled={!formState.isValid}
             onPress={handleSubmit(submitForm)}
             title="Cadastrar"

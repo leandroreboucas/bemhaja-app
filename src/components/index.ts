@@ -20,3 +20,4 @@ export * from './FriendCard';
 export * from './Search';
 export * from './Modal/Search';
 export * from './Toast';
+export * from './ImageCache';

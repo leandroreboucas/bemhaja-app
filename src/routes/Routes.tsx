@@ -1,10 +1,10 @@
 import {ActivityIndicator} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
-import {useAuthCredentials} from '@services';
 import {is} from 'date-fns/locale';
 
 import {Box} from '@components';
+import {useAuthCredentials} from '@hooks';
 
 import {AppStack} from './AppStack';
 import {AuthStack} from './AuthStack';

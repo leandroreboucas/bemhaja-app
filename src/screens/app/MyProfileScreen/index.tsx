@@ -8,11 +8,10 @@ import {
 
 import {AuthCredentialsAPI, FeedDTO, useFeedList} from '@domain';
 import {useScrollToTop} from '@react-navigation/native';
-import {useAuthCredentials} from '@services';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Screen, Header, Feed, Box, Text, EmptyData, Icon} from '@components';
-import {useAppNavigation, useAppTheme} from '@hooks';
+import {useAuthCredentials, useAppNavigation, useAppTheme} from '@hooks';
 
 export function MyProfileScreen() {
   const {list, isError, isLoading, refresh, fetchNextPage} = useFeedList();

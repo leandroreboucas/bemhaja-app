@@ -1,5 +1,6 @@
-import { useAuthCredentials } from '@services';
 import { useMutation } from '@tanstack/react-query';
+
+import { useAuthCredentials } from '@hooks';
 
 import { authService } from '../authService';
 import { AuthCredentialsAPI } from '../authTypes';

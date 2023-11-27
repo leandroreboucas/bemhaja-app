@@ -1,30 +1,41 @@
-import { api } from '@services';
-import { AxiosError } from 'axios';
+import { api } from '@api';
+
+import { fileService } from '../File';
 
 import { authApi } from './authApi';
-import { AuthCredentialsAPI } from './authTypes';
+import {
+    AuthCredentialsAPI,
+    SignUpData,
+    UserResponseRegister,
+} from './authTypes';
 
 async function signIn(
     email: string,
     password: string,
 ): Promise<AuthCredentialsAPI> {
-    try {
-        const authCredentialsAPI = await authApi.signIn(email, password);
-        if (!authCredentialsAPI.user.foto) {
-            authCredentialsAPI.user.foto = `https://ui-avatars.com/api/?name=${authCredentialsAPI.user.nome}&size=48`;
-        }
-        authCredentialsAPI.user.email = email;
-        return authCredentialsAPI;
-    } catch (error) {
-        if (error instanceof AxiosError) {
-            if (error.response?.status === 401 || error.response?.status === 400) {
-                throw new Error('Email ou senha estão incorretos.');
-            }
-        }
-        throw new Error(
-            'Estamos com problemas tecnicos, tente novamente mais tarde.',
-        );
+    const authCredentialsAPI = await authApi.signIn(email, password);
+    if (!authCredentialsAPI.user.foto) {
+        authCredentialsAPI.user.foto = `https://ui-avatars.com/api/?name=${authCredentialsAPI.user.nome}&size=48`;
     }
+    authCredentialsAPI.user.email = email;
+    return authCredentialsAPI;
+}
+
+async function signUp(data: SignUpData): Promise<UserResponseRegister> {
+    // if (data.foto) {
+    //     const photoBucket = await fileService.getUrlUpload({
+    //         contentType: 'image/jpeg',
+    //         fileName: `${new Date().getTime()}.jpg`,
+    //         folder: 'app/profile',
+    //         uri: data.foto!,
+    //     });
+    //     data.foto = photoBucket;
+    // }
+    return await authApi.signUp(data);
+}
+
+async function resetPassword(data: { email: string }): Promise<void> {
+    await authApi.resetPassword(data);
 }
 
 function updateToken(token: string) {
@@ -32,11 +43,13 @@ function updateToken(token: string) {
 }
 
 function removeToken() {
-    api.defaults.headers.common.Authorization = null;
+    delete api.defaults.headers.common.Authorization;
 }
 
 export const authService = {
     signIn,
     updateToken,
     removeToken,
+    signUp,
+    resetPassword,
 };

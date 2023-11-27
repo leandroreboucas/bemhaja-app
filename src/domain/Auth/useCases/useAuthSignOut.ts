@@ -1,4 +1,4 @@
-import { useAuthCredentials } from '@services';
+import { useAuthCredentials } from '@hooks';
 
 export function useAuthSigOut() {
     const { removeCredentials } = useAuthCredentials();

@@ -3,11 +3,10 @@ import {Image, ImageBackground} from 'react-native';
 import HeaderImg from '@assets/header.png';
 import {BemHajaIcon} from '@assets/icons/BemHajaIcon';
 import {LogoOnlyIcon} from '@assets/icons/LogoOnlyIcon';
-import {useAuthCredentials} from '@services';
 import {StatusBar} from 'expo-status-bar';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {useAppNavigation, useAppSafeArea} from '@hooks';
+import {useAuthCredentials, useAppNavigation, useAppSafeArea} from '@hooks';
 
 import {Box} from '../Box';
 import {Icon} from '../Icon';
