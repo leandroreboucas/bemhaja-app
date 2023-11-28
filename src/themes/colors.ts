@@ -30,6 +30,7 @@ const pallete = {
   gray_disabled_Background: '#E1E1E1',
   gray_disabled_Content: '#8E8E8E',
   gray_background_header: '#D9D9D9',
+  gray_background_pdf: '#D1D1D1',
 };
 
 export const colors = {

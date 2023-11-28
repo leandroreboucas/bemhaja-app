@@ -1,62 +1,81 @@
-import {useRef, useState} from 'react';
-import {
-  FlatList,
-  ListRenderItemInfo,
-  Image,
-  RefreshControl,
-} from 'react-native';
+import {useEffect, useState} from 'react';
+import {ScrollView} from 'react-native';
 
-import {AuthCredentialsAPI, FeedDTO, useFeedList} from '@domain';
-import {useScrollToTop} from '@react-navigation/native';
+import {useUserGetProfile} from '@domain';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {dateUtils} from '@utils';
+import {parse, parseISO} from 'date-fns';
+import * as ImagePicker from 'expo-image-picker';
+import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {Screen, Header, Feed, Box, Text, EmptyData, Icon} from '@components';
-import {useAuthCredentials, useAppNavigation, useAppTheme} from '@hooks';
+import {
+  Box,
+  Screen,
+  Text,
+  ButtonLinear,
+  FormTextInput,
+  FormDateInputModal,
+  ImageCached,
+  Icon,
+  TouchableOpacityBox,
+  Header,
+  Loading,
+} from '@components';
+import {useAuthCredentials, useAuthNavigation} from '@hooks';
+
+import {myProfileSchema, myProfileType} from './myProfileSchema';
 
 export function MyProfileScreen() {
-  const {list, isError, isLoading, refresh, fetchNextPage} = useFeedList();
-  const {colors} = useAppTheme();
   const {authCredentials} = useAuthCredentials();
-  const navigation = useAppNavigation();
+  const {user, isFetching} = useUserGetProfile(authCredentials?.user?.email);
+  const [photoBase64, setPhotoBase64] = useState<string | null>(null);
+  const [userPhoto, setUserPhoto] = useState<string | null>(null);
+  const navigation = useAuthNavigation();
 
-  const flatListRef = useRef<FlatList<FeedDTO>>(null);
-  useScrollToTop(flatListRef);
+  const {control, formState, handleSubmit, setValue} = useForm<myProfileType>({
+    resolver: zodResolver(myProfileSchema),
+    defaultValues: {
+      nome: '',
+      email: '',
+      data_nascimento: undefined,
+    },
+    mode: 'onChange',
+  });
 
-  function goConfig() {
-    navigation.navigate('ConfigScreen');
+  useEffect(() => {
+    if (user) {
+      if (user.foto) {
+        setUserPhoto(user.foto);
+      }
+      setValue('nome', user.nome);
+      setValue('email', user.email);
+      setValue('data_nascimento', parseISO(user.data_nascimento.split('T')[0]));
+    }
+  }, [user]);
+
+  async function handleUserPhotoSelect() {
+    try {
+      const photoSelected = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        quality: 1,
+        base64: true,
+        aspect: [4, 4],
+      });
+      if (!photoSelected.canceled) {
+        setUserPhoto(photoSelected.assets[0].uri);
+        setPhotoBase64(photoSelected.assets[0].base64!);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
   }
 
-  function Profile() {
-    const user = authCredentials?.user!;
-    return (
-      <Box
-        flexDirection="row"
-        marginHorizontal="s24"
-        alignItems="center"
-        paddingVertical="s16"
-        gap="s16">
-        <Image
-          source={{uri: user.foto}}
-          style={{width: RFValue(60), height: RFValue(60)}}
-          borderRadius={RFValue(60) / 2}
-          resizeMode="cover"
-        />
-        <Box flex={1}>
-          <Text variant="friends_title_screen">{user.nome}</Text>
-          <Text variant="friends_meta_events_count">{user.email}</Text>
-        </Box>
-        <Icon
-          name="settings"
-          size={36}
-          color="primary_800"
-          onPress={goConfig}
-        />
-      </Box>
-    );
-  }
-
-  function renderItem(listRender: ListRenderItemInfo<FeedDTO>) {
-    return <Feed.Item item={listRender} removeProfile />;
+  function submitForm(form: myProfileType) {
+    console.log(dateUtils.formattedDate(form.data_nascimento));
+    console.log(form);
   }
 
   return (
@@ -67,49 +86,84 @@ export function MyProfileScreen() {
         paddingHorizontal: 0,
         flex: 1,
       }}>
-      <Header contentRadius canGoBack title="Meu feed" />
-      <Profile />
-      <FlatList
-        // ref={flatListRef}
-        style={{
-          borderRadius: RFValue(10),
-        }}
-        contentContainerStyle={{
-          flex: list.length === 0 ? 1 : undefined,
-          borderRadius: RFValue(10),
-        }}
-        showsVerticalScrollIndicator={false}
-        data={list}
-        keyExtractor={item => item.id}
-        renderItem={renderItem}
-        // onEndReached={fetchNextPage}
-        // onEndReachedThreshold={0.1}
-        refreshing={isLoading}
-        refreshControl={
-          <RefreshControl
-            refreshing={isLoading}
-            onRefresh={refresh}
-            colors={['#fff']}
-            progressBackgroundColor={colors.primary_500}
-          />
-        }
-        ListEmptyComponent={
-          <EmptyData
-            loading={isLoading}
-            error={isError}
-            refetch={refresh}
-            text='Você pode adicionar um evento clicando no ícone de "+" na barra
-          inferior.'
-          />
-        }
-        bounces
-        decelerationRate="fast"
-        ItemSeparatorComponent={() => <Feed.Separator />}
+      <Header contentRadius canGoBack title="Meu perfil" />
+      {isFetching ? (
+        <Loading />
+      ) : (
+        <ScrollView style={{marginHorizontal: RFValue(16)}}>
+          <Box marginTop="s16">
+            <Box
+              paddingBottom="s28"
+              alignItems="center"
+              justifyContent="center">
+              {userPhoto ? (
+                <ImageCached
+                  style={{
+                    borderRadius: RFValue(140 / 2),
+                    width: RFValue(140),
+                    height: RFValue(140),
+                  }}
+                  source={{
+                    uri: userPhoto,
+                  }}
+                  contentFit="cover"
+                />
+              ) : (
+                <Icon name="camera" size={140} color="primary_300" />
+              )}
+            </Box>
+            <TouchableOpacityBox
+              onPress={handleUserPhotoSelect}
+              paddingBottom="s28"
+              alignItems="center"
+              justifyContent="center">
+              <Text variant="change_image" textDecorationLine="underline">
+                Alterar foto
+              </Text>
+            </TouchableOpacityBox>
+            <FormTextInput
+              control={control}
+              name="nome"
+              removeLabel
+              required
+              label="Nome"
+              placeholder="Nome"
+              boxProps={{mb: 's28'}}
+              keyboardType="default"
+            />
 
-        // ListHeaderComponent={<Header />}
-        // stickyHeaderIndices={[0]}
-        // stickyHeaderHiddenOnScroll
-      />
+            <FormTextInput
+              control={control}
+              name="email"
+              removeLabel
+              required
+              label="E-mail"
+              placeholder="E-mail"
+              boxProps={{mb: 's28'}}
+              keyboardType="email-address"
+            />
+
+            <FormDateInputModal
+              control={control}
+              name="data_nascimento"
+              removeLabel
+              required
+              label="Data de nascimento"
+              placeholder="Data de nascimento"
+              boxProps={{mb: 's28'}}
+            />
+
+            <Box alignItems="center" mb="s28">
+              <ButtonLinear
+                disabled={!formState.isValid}
+                onPress={handleSubmit(submitForm)}
+                title="Salvar alterações"
+                buttonWidth={RFValue(190)}
+              />
+            </Box>
+          </Box>
+        </ScrollView>
+      )}
     </Screen>
   );
 }

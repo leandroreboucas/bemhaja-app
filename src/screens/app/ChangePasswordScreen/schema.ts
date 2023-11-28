@@ -30,6 +30,10 @@ export const changePasswordSchema = z
             message: 'Senhas não conferem',
             path: ['confirmNewPassword'],
         },
-    );
+    )
+    .refine(({ oldPassword, newPassword }) => oldPassword !== newPassword, {
+        message: 'Nova senha não pode ser igual a antiga',
+        path: ['newPassword'],
+    });
 
 export type changePasswordType = z.infer<typeof changePasswordSchema>;

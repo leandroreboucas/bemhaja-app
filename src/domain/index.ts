@@ -9,3 +9,4 @@ export * from './Api/apiAdapter';
 
 export * from './Infra';
 export * from './Auth';
+export * from './User';

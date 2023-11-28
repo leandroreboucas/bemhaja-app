@@ -42,7 +42,7 @@ export function Header({
   }
 
   function goMyProfile() {
-    navigation.navigate('MyProfileScreen');
+    navigation.navigate('MyFeedScreen');
   }
 
   return (

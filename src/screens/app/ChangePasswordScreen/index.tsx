@@ -1,3 +1,6 @@
+import {Alert} from 'react-native';
+
+import {useUserUpdatePassword} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
@@ -16,9 +19,22 @@ export function ChangePasswordScreen() {
     mode: 'onChange',
   });
 
+  const {isLoading, updatePassword} = useUserUpdatePassword({
+    onSucess: () => {
+      Alert.alert('Sucesso', 'Senha alterada com sucesso');
+    },
+    onError: message => {
+      Alert.alert('Atenção', message);
+    },
+  });
+
   function submitForm(form: changePasswordType) {
-    console.log(form);
+    updatePassword({
+      newPassword: form.newPassword,
+      oldPassword: form.oldPassword,
+    });
   }
+
   return (
     <Screen
       style={{
@@ -27,7 +43,7 @@ export function ChangePasswordScreen() {
         paddingHorizontal: 0,
         flex: 1,
       }}>
-      <Header canGoBack title="Alterar senha" />
+      <Header contentRadius canGoBack title="Alterar senha" />
       <Box marginHorizontal="s28" marginTop="s16">
         <FormPasswordInput
           control={control}
@@ -61,6 +77,7 @@ export function ChangePasswordScreen() {
           }}
         />
         <Button
+          loading={isLoading}
           disabled={!formState.isValid}
           onPress={handleSubmit(submitForm)}
           title="Salvar alterações"

@@ -13,6 +13,7 @@ import {
   EventNew,
   FriendsNew,
   FriendsRequests,
+  MyFeedScreen,
   MyProfileScreen,
   PostNew,
   SettingsScreen,
@@ -35,10 +36,11 @@ export type AppRoutes = {
   };
   FriendsNew: undefined;
   FriendsRequests: undefined;
-  MyProfileScreen: undefined;
+  MyFeedScreen: undefined;
   ConfigScreen: undefined;
   TermsOfUseScreen: undefined;
   ChangePasswordScreen: undefined;
+  MyProfileScreen: undefined;
 };
 
 export type IAppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>;
@@ -62,10 +64,11 @@ export function AppStack() {
       <Screen name="EventFeed" component={EventFeed} />
       <Screen name="FriendsNew" component={FriendsNew} />
       <Screen name="FriendsRequests" component={FriendsRequests} />
-      <Screen name="MyProfileScreen" component={MyProfileScreen} />
+      <Screen name="MyFeedScreen" component={MyFeedScreen} />
       <Screen name="ConfigScreen" component={ConfigScreen} />
       <Screen name="TermsOfUseScreen" component={TermsOfUseScreen} />
       <Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
+      <Screen name="MyProfileScreen" component={MyProfileScreen} />
     </Navigator>
   );
 }

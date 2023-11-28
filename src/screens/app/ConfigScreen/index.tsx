@@ -1,7 +1,6 @@
 import {Alert} from 'react-native';
 
 import {useAuthSigOut} from '@domain';
-import * as WebBrowser from 'expo-web-browser';
 
 import {
   Screen,
@@ -34,6 +33,9 @@ export function ConfigScreen() {
   function handleGoChangePassword() {
     navigation.navigate('ChangePasswordScreen');
   }
+  function handleGoMyProfile() {
+    navigation.navigate('MyProfileScreen');
+  }
 
   return (
     <Screen
@@ -43,10 +45,11 @@ export function ConfigScreen() {
         paddingHorizontal: 0,
         flex: 1,
       }}>
-      <Header canGoBack title="Configurações" />
+      <Header contentRadius canGoBack title="Configurações" />
 
-      <Box marginHorizontal="s28" marginTop="s16">
+      <Box marginHorizontal="s28">
         <TouchableOpacityBox
+          onPress={handleGoMyProfile}
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between"

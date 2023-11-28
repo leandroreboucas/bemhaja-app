@@ -1,5 +1,6 @@
 export enum QueryKeys {
     UserGetById = 'UserGetById',
+    UserGetProfile = 'UserGetProfile',
     FeedList = 'FeedList',
 }
 
