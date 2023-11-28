@@ -17,3 +17,5 @@ export * from './app/FriendsNew';
 export * from './app/FriendsRequests';
 export * from './app/MyProfileScreen';
 export * from './app/ConfigScreen';
+export * from './app/TermsOfUseScreen';
+export * from './app/ChangePasswordScreen';

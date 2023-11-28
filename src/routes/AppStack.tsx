@@ -6,6 +6,7 @@ import {
 
 import {
   AttitudeNew,
+  ChangePasswordScreen,
   ConfigScreen,
   EventDetail,
   EventFeed,
@@ -15,6 +16,7 @@ import {
   MyProfileScreen,
   PostNew,
   SettingsScreen,
+  TermsOfUseScreen,
 } from '@screens';
 
 import {AppTabNavigator, AppTabRoutes} from './AppTabNavigator';
@@ -35,6 +37,8 @@ export type AppRoutes = {
   FriendsRequests: undefined;
   MyProfileScreen: undefined;
   ConfigScreen: undefined;
+  TermsOfUseScreen: undefined;
+  ChangePasswordScreen: undefined;
 };
 
 export type IAppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>;
@@ -60,6 +64,8 @@ export function AppStack() {
       <Screen name="FriendsRequests" component={FriendsRequests} />
       <Screen name="MyProfileScreen" component={MyProfileScreen} />
       <Screen name="ConfigScreen" component={ConfigScreen} />
+      <Screen name="TermsOfUseScreen" component={TermsOfUseScreen} />
+      <Screen name="ChangePasswordScreen" component={ChangePasswordScreen} />
     </Navigator>
   );
 }

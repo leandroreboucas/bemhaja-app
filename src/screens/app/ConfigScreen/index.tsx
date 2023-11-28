@@ -1,6 +1,7 @@
 import {Alert} from 'react-native';
 
 import {useAuthSigOut} from '@domain';
+import * as WebBrowser from 'expo-web-browser';
 
 import {
   Screen,
@@ -11,8 +12,10 @@ import {
   Icon,
   TouchableOpacityBox,
 } from '@components';
+import {useAppNavigation} from '@hooks';
 
 export function ConfigScreen() {
+  const navigation = useAppNavigation();
   const {signOut} = useAuthSigOut();
   function logout() {
     Alert.alert('Deseja realmente sair da sua conta?', undefined, [
@@ -24,6 +27,14 @@ export function ConfigScreen() {
       {text: 'Sim', onPress: () => signOut()},
     ]);
   }
+
+  function handleGoTermOfUse() {
+    navigation.navigate('TermsOfUseScreen');
+  }
+  function handleGoChangePassword() {
+    navigation.navigate('ChangePasswordScreen');
+  }
+
   return (
     <Screen
       style={{
@@ -46,6 +57,7 @@ export function ConfigScreen() {
           <Icon name="arrowRight" size={20} color="gray_700" />
         </TouchableOpacityBox>
         <TouchableOpacityBox
+          onPress={handleGoChangePassword}
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between"
@@ -56,25 +68,18 @@ export function ConfigScreen() {
           <Icon name="arrowRight" size={20} color="gray_700" />
         </TouchableOpacityBox>
         <TouchableOpacityBox
+          onPress={handleGoTermOfUse}
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between"
           borderBottomColor="gray_disabled_Background"
           borderBottomWidth={1}
-          paddingVertical="s16">
-          <Text variant="padrao">Termos de uso</Text>
+          paddingVertical="s16"
+          marginBottom="s16">
+          <Text variant="padrao">Termos e condições de uso</Text>
           <Icon name="arrowRight" size={20} color="gray_700" />
         </TouchableOpacityBox>
-        <TouchableOpacityBox
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
-          borderBottomColor="gray_disabled_Background"
-          borderBottomWidth={1}
-          paddingVertical="s16">
-          <Text variant="padrao">Política de privacidade</Text>
-          <Icon name="arrowRight" size={20} color="gray_700" />
-        </TouchableOpacityBox>
+
         <Button title="Sair da conta" preset="primary" onPress={logout} />
       </Box>
     </Screen>
