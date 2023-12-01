@@ -1,5 +1,6 @@
 export interface AuthCredentialsAPI {
     token: string;
+    refreshToken: string;
     user: {
         foto: string;
         nome: string;

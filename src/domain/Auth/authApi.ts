@@ -1,5 +1,5 @@
 import { api } from '@api';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 
 import {
     AuthCredentialsAPI,
@@ -55,8 +55,25 @@ async function resetPassword(data: { email: string }): Promise<void> {
     }
 }
 
+async function refreshToken(): Promise<AuthCredentialsAPI> {
+    try {
+        const response = await api.post<AuthCredentialsAPI>('/token/refresh');
+        return response.data;
+    } catch (error) {
+        throw new Error(
+            'Estamos com problemas tecnicos, tente novamente mais tarde.',
+        );
+    }
+}
+
+function isRefreshTokenRequest(request: AxiosRequestConfig) {
+    return request.url === '/token/refresh';
+}
+
 export const authApi = {
     signIn,
     signUp,
     resetPassword,
+    refreshToken,
+    isRefreshTokenRequest,
 };

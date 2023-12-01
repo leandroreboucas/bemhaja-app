@@ -46,10 +46,20 @@ function removeToken() {
     delete api.defaults.headers.common.Authorization;
 }
 
+async function refreshToken(): Promise<AuthCredentialsAPI> {
+    const authCredentialsAPI = await authApi.refreshToken();
+    if (!authCredentialsAPI.user.foto) {
+        authCredentialsAPI.user.foto = `https://ui-avatars.com/api/?name=${authCredentialsAPI.user.nome}&size=48`;
+    }
+    return authCredentialsAPI;
+}
+
 export const authService = {
     signIn,
     updateToken,
     removeToken,
     signUp,
     resetPassword,
+    refreshToken,
+    isRefreshTokenRequest: authApi.isRefreshTokenRequest,
 };

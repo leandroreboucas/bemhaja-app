@@ -26,6 +26,7 @@ async function updatePassword(
 
 async function getProfile(): Promise<Usuario> {
     try {
+        console.log(api.defaults.headers);
         const response = await api.get<Usuario>('/user/profile');
         return response.data;
     } catch (error) {
