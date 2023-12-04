@@ -20,15 +20,6 @@ async function signIn(
 }
 
 async function signUp(data: SignUpData): Promise<UserResponseRegister> {
-    // if (data.foto) {
-    //     const photoBucket = await fileService.getUrlUpload({
-    //         contentType: 'image/jpeg',
-    //         fileName: `${new Date().getTime()}.jpg`,
-    //         folder: 'app/profile',
-    //         uri: data.foto!,
-    //     });
-    //     data.foto = photoBucket;
-    // }
     return await authApi.signUp(data);
 }
 

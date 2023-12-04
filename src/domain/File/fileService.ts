@@ -1,4 +1,3 @@
-import { imageUtils } from '@utils';
 import axios, { AxiosError } from 'axios';
 
 import { fileApi } from './fileApi';
@@ -17,25 +16,36 @@ async function getUrlUpload({
     uri,
 }: GetUrlUploadServiceRequest) {
     try {
+        const filename = uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+        const extend = filename.split('.')[1];
         const respUrl = await fileApi.getUrlUpload({ contentType, fileName, folder });
         const formData = new FormData();
         Object.entries(respUrl.fields).forEach(([field, value]) => {
             formData.append(field, value);
         });
-        const blob = await imageUtils.base64toBlob(uri);
-        formData.append('file', blob);
-        console.log(respUrl.url);
+
+        formData.append(
+            'file',
+            JSON.parse(
+                JSON.stringify({
+                    uri,
+                    name: filename,
+                    type: 'image/' + extend,
+                }),
+            ),
+        ); // Append the fileBlob to the formData with the specified name
 
         await axios.post(respUrl.url, formData, {
             headers: {
+                Accept: 'application/json',
                 'Content-Type': 'multipart/form-data',
             },
         });
+
         return `${respUrl.url}${respUrl.fields.key}`;
     } catch (error) {
-        console.log(error);
         if (error instanceof AxiosError) {
-            console.log(error.response);
+            console.log(JSON.stringify(error));
         }
         throw new Error(
             'Estamos com problemas tecnicos, tente novamente mais tarde.',

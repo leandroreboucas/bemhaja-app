@@ -1,5 +1,5 @@
 export interface Usuario {
-    id: string;
+    id?: string;
     codigo?: string;
     foto?: string;
     nome: string;
@@ -11,9 +11,9 @@ export interface Usuario {
     token_google?: string;
     token_apple?: string;
     token_onesignal?: string;
-    ativo: boolean;
-    data_cadastro: string;
-    data_atualizacao: string;
+    ativo?: boolean;
+    data_cadastro?: string;
+    data_atualizacao?: string;
     meta?: {
         eventos?: number;
     };

@@ -12,22 +12,3 @@ export function useAuthCredentials(): AuthCredentialsService {
     }
     return context;
 }
-
-// const useAuthCredentialsZustand = create<AuthCredentialsService>()(
-//     persist(
-//         set => ({
-//             authCredentials: null,
-//             saveCredentials: async authCredentials => {
-//                 set({ authCredentials });
-//             },
-//             removeCredentials: async () => {
-//                 set({ authCredentials: null });
-//             },
-//             isLoading: false,
-//         }),
-//         {
-//             name: '@bemhaja:authCredentials',
-//             storage,
-//         },
-//     ),
-// );

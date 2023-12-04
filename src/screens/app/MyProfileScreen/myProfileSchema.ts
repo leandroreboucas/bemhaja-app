@@ -2,6 +2,12 @@ import { stringUtils } from '@utils';
 import { z } from 'zod';
 
 export const myProfileSchema = z.object({
+    id: z
+        .string({
+            required_error: 'Id é obrigatório',
+            invalid_type_error: 'iD precisa ser um texto',
+        })
+        .trim(),
     nome: z
         .string({
             required_error: 'Nome é obrigatório',

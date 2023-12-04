@@ -3,6 +3,10 @@ import { AxiosError } from 'axios';
 
 import { Usuario } from './types';
 
+interface UpdateProfileResponse {
+    user: Usuario;
+}
+
 async function updatePassword(
     newPassword: string,
     oldPassword: string,
@@ -26,7 +30,6 @@ async function updatePassword(
 
 async function getProfile(): Promise<Usuario> {
     try {
-        console.log(api.defaults.headers);
         const response = await api.get<Usuario>('/user/profile');
         return response.data;
     } catch (error) {
@@ -36,7 +39,27 @@ async function getProfile(): Promise<Usuario> {
     }
 }
 
+async function updateProfile(data: Usuario): Promise<Usuario> {
+    try {
+        const response = await api.post<UpdateProfileResponse>(
+            '/user/profile',
+            data,
+        );
+        return response.data.user;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response?.status === 409) {
+                throw new Error(error.response.data.message);
+            }
+        }
+        throw new Error(
+            'Estamos com problemas tecnicos, tente novamente mais tarde.',
+        );
+    }
+}
+
 export const userApi = {
     updatePassword,
     getProfile,
+    updateProfile,
 };

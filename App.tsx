@@ -1,3 +1,4 @@
+import {ActionSheetProvider} from '@expo/react-native-action-sheet';
 import {
   Poppins_300Light,
   Poppins_500Medium,
@@ -47,7 +48,9 @@ export default function App() {
         <SafeAreaProvider>
           <StatusBar style="auto" backgroundColor="transparent" translucent />
           <ThemeProvider theme={theme}>
-            <Router />
+            <ActionSheetProvider>
+              <Router />
+            </ActionSheetProvider>
           </ThemeProvider>
         </SafeAreaProvider>
       </QueryClientProvider>

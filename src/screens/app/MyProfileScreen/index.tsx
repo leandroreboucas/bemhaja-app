@@ -1,41 +1,51 @@
 import {useEffect, useState} from 'react';
-import {ScrollView} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 
-import {useUserGetProfile} from '@domain';
+import {useUserGetProfile, useUserUpdateProfile} from '@domain';
+import {useActionSheet} from '@expo/react-native-action-sheet';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {dateUtils} from '@utils';
-import {parse, parseISO} from 'date-fns';
-import * as ImagePicker from 'expo-image-picker';
+import {dateUtils, mediaUtils} from '@utils';
+import {parseISO} from 'date-fns';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
   Box,
+  ButtonLinear,
+  FormDateInputModal,
+  FormTextInput,
+  Header,
+  Icon,
+  ImageCached,
+  Loading,
   Screen,
   Text,
-  ButtonLinear,
-  FormTextInput,
-  FormDateInputModal,
-  ImageCached,
-  Icon,
   TouchableOpacityBox,
-  Header,
-  Loading,
 } from '@components';
-import {useAuthCredentials, useAuthNavigation} from '@hooks';
+import {useAuthCredentials} from '@hooks';
 
 import {myProfileSchema, myProfileType} from './myProfileSchema';
 
 export function MyProfileScreen() {
   const {authCredentials} = useAuthCredentials();
   const {user, isFetching} = useUserGetProfile(authCredentials?.user?.email);
-  const [photoBase64, setPhotoBase64] = useState<string | null>(null);
+  const {isLoading, updateProfile} = useUserUpdateProfile({
+    onSucess: () => {
+      Alert.alert('Sucesso', 'Perfil atualizado com sucesso');
+    },
+    onError: message => {
+      Alert.alert('Atenção', message);
+    },
+  });
+
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
-  const navigation = useAuthNavigation();
+  const {showActionSheetWithOptions} = useActionSheet();
 
   const {control, formState, handleSubmit, setValue} = useForm<myProfileType>({
     resolver: zodResolver(myProfileSchema),
     defaultValues: {
+      id: '',
       nome: '',
       email: '',
       data_nascimento: undefined,
@@ -48,6 +58,7 @@ export function MyProfileScreen() {
       if (user.foto) {
         setUserPhoto(user.foto);
       }
+      setValue('id', user.id!);
       setValue('nome', user.nome);
       setValue('email', user.email);
       setValue('data_nascimento', parseISO(user.data_nascimento.split('T')[0]));
@@ -55,27 +66,46 @@ export function MyProfileScreen() {
   }, [user]);
 
   async function handleUserPhotoSelect() {
-    try {
-      const photoSelected = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        quality: 1,
-        base64: true,
-        aspect: [4, 4],
-      });
-      if (!photoSelected.canceled) {
-        setUserPhoto(photoSelected.assets[0].uri);
-        setPhotoBase64(photoSelected.assets[0].base64!);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-    }
+    const options = ['Câmera', 'Galeria', 'Cancelar'];
+    showActionSheetWithOptions(
+      {
+        options,
+
+        title: 'Escolha uma opção',
+        cancelButtonIndex: 2,
+
+        icons: [
+          <MaterialCommunityIcons name="camera" size={24} color="black" />,
+          <MaterialCommunityIcons name="image" size={24} color="black" />,
+          <MaterialCommunityIcons name="backspace" size={24} color="black" />,
+        ],
+      },
+      async selectedIndex => {
+        switch (selectedIndex) {
+          case 0:
+            const imageCamera = await mediaUtils.launchCameraImage();
+            if (imageCamera) {
+              setUserPhoto(imageCamera);
+            }
+            break;
+
+          case 1:
+            const imageGallery = await mediaUtils.launchLibraryImage();
+            if (imageGallery) {
+              setUserPhoto(imageGallery);
+            }
+            break;
+        }
+      },
+    );
   }
 
   function submitForm(form: myProfileType) {
-    console.log(dateUtils.formattedDate(form.data_nascimento));
-    console.log(form);
+    updateProfile({
+      ...form,
+      data_nascimento: dateUtils.formattedDate(form.data_nascimento),
+      foto: userPhoto || undefined,
+    });
   }
 
   return (
@@ -155,6 +185,7 @@ export function MyProfileScreen() {
 
             <Box alignItems="center" mb="s28">
               <ButtonLinear
+                loading={isLoading}
                 disabled={!formState.isValid}
                 onPress={handleSubmit(submitForm)}
                 title="Salvar alterações"
