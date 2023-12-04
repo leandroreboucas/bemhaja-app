@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { userService } from '../userService';
 
-import { MutationOptions } from './../../Infra';
+import { MutationOptions } from './../../Infra/types';
 
 interface Variables {
     newPassword: string;

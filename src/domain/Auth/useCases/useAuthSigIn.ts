@@ -1,11 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { useAuthCredentials } from '@hooks';
-
 import { authService } from '../authService';
 import { AuthCredentialsAPI } from '../authTypes';
 
-import { MutationOptions } from './../../Infra';
+import { useAuthCredentials } from './../../../hooks/useAuthCredentials';
+import { MutationOptions } from './../../Infra/types';
 
 interface Variables {
     email: string;
