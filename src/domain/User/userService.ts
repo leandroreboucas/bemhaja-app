@@ -31,8 +31,13 @@ async function updateProfile(data: Usuario): Promise<Usuario> {
     return user;
 }
 
+async function getAll(): Promise<Usuario[]> {
+    return await userApi.getAll();
+}
+
 export const userService = {
     updatePassword,
     getProfile,
     updateProfile,
+    getAll,
 };

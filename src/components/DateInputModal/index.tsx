@@ -22,6 +22,7 @@ export interface DateInputProps extends RNTextInputProps {
   removeLabel?: boolean;
   setDateField: (date: Date | undefined) => void;
   typeMode?: 'date' | 'time' | 'datetime';
+  birthday?: boolean;
 }
 
 const maximumDate = new Date();
@@ -36,9 +37,10 @@ export function DateInputModal({
   removeLabel = false,
   setDateField,
   typeMode = 'date',
+  birthday = true,
   ...rnTextInputProps
 }: DateInputProps) {
-  const [date, setDate] = useState(maximumDate);
+  const [date, setDate] = useState(birthday ? maximumDate : undefined);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -78,7 +80,7 @@ export function DateInputModal({
           cancelTextIOS="Cancelar"
           confirmTextIOS="Confirmar"
           date={date}
-          maximumDate={maximumDate}
+          maximumDate={birthday ? maximumDate : undefined}
           isVisible={isDatePickerVisible}
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}

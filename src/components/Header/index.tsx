@@ -6,12 +6,14 @@ import {LogoOnlyIcon} from '@assets/icons/LogoOnlyIcon';
 import {StatusBar} from 'expo-status-bar';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {useAuthCredentials, useAppNavigation, useAppSafeArea} from '@hooks';
+import {useAppNavigation, useAppSafeArea, useAuthCredentials} from '@hooks';
 
 import {Box} from '../Box';
 import {Icon} from '../Icon';
 import {Text} from '../Text';
 import {TouchableOpacityBox} from '../TouchableOpacityBox';
+
+import {ImageCached} from './../ImageCache';
 
 interface HeaderProps {
   contentRadius?: boolean;
@@ -107,7 +109,18 @@ export function Header({
                 <Icon name="notification" color="white" size={24} />
 
                 <TouchableOpacityBox onPress={goMyProfile}>
-                  <Image
+                  <ImageCached
+                    source={{uri: user?.foto}}
+                    style={{
+                      width: RFValue(48),
+                      height: RFValue(48),
+                      borderWidth: 2,
+                      borderColor: 'white',
+                      borderRadius: RFValue(48) / 2,
+                    }}
+                    contentFit="cover"
+                  />
+                  {/* <Image
                     source={{uri: user?.foto}}
                     style={{
                       width: RFValue(48),
@@ -117,7 +130,7 @@ export function Header({
                     }}
                     borderRadius={RFValue(48) / 2}
                     resizeMode="cover"
-                  />
+                  /> */}
                 </TouchableOpacityBox>
               </Box>
             </>

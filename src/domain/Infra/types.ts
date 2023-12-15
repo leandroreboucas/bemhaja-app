@@ -2,6 +2,9 @@ export enum QueryKeys {
     UserGetById = 'UserGetById',
     UserGetProfile = 'UserGetProfile',
     FeedList = 'FeedList',
+    BehaviorGetAll = 'BehaviorGetAll',
+    UserGetAll = 'UserGetAll',
+    FriendGetAll = 'FriendGetAll',
 }
 
 export interface MutationOptions<TData> {

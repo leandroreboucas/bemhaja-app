@@ -23,7 +23,7 @@ export const myProfileSchema = z.object({
         .trim()
         .toLowerCase()
         .email({ message: 'E-mail inválido' }),
-    data_nascimento: z.date({
+    data_nascimento: z.coerce.date({
         required_error: 'Data de nascimento é obrigatório',
         invalid_type_error: 'Data de nascimento precisa ser uma data válida',
     }),

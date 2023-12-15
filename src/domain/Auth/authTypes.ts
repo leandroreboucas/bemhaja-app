@@ -2,6 +2,7 @@ export interface AuthCredentialsAPI {
     token: string;
     refreshToken: string;
     user: {
+        id?: string;
         foto: string;
         nome: string;
         email: string;

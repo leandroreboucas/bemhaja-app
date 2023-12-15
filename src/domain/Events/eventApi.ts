@@ -1,6 +1,9 @@
-import {EventoDTO, PageAPI} from '../types';
+import { api } from '@api';
 
-import {eventListMock} from './eventListMock';
+import { EventoDTO, PageAPI } from '../types';
+
+import { eventListMock } from './eventListMock';
+import { CreateEventModel } from './eventTypes';
 
 async function getList(): Promise<PageAPI<EventoDTO>> {
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -21,6 +24,17 @@ async function getList(): Promise<PageAPI<EventoDTO>> {
   return data;
 }
 
+async function create(data: CreateEventModel): Promise<void> {
+  try {
+    await api.post<void>('/event', data);
+  } catch (error) {
+    throw new Error(
+      'Estamos com problemas técnicos, tente novamente mais tarde.',
+    );
+  }
+}
+
 export const eventApi = {
   getList,
+  create,
 };

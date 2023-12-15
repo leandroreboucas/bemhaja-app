@@ -120,7 +120,9 @@ export function MyProfileScreen() {
       {isFetching ? (
         <Loading />
       ) : (
-        <ScrollView style={{marginHorizontal: RFValue(16)}}>
+        <ScrollView
+          style={{marginHorizontal: RFValue(16)}}
+          keyboardShouldPersistTaps="handled">
           <Box marginTop="s16">
             <Box
               paddingBottom="s28"

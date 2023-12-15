@@ -1,26 +1,22 @@
-import {PageAPI, UsuarioDTO} from '../types';
+import { api } from '@api';
 
-import {friendListMock} from './friendListMock';
+import { Usuario } from '../User';
 
-async function getList(): Promise<PageAPI<UsuarioDTO>> {
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  const data: PageAPI<UsuarioDTO> = {
-    meta: {
-      total: 24,
-      per_page: 10,
-      current_page: 1,
-      last_page: 3,
-      first_page: 1,
-      first_page_url: '/?page=1',
-      last_page_url: '/?page=3',
-      next_page_url: '/?page=2',
-      previous_page_url: null,
-    },
-    data: friendListMock,
-  };
-  return data;
+interface GetAllResponse {
+  users: Usuario[];
+}
+
+async function getAll(): Promise<Usuario[]> {
+  try {
+    const response = await api.get<GetAllResponse>('/user/friends');
+    return response.data.users;
+  } catch (error) {
+    throw new Error(
+      'Estamos com problemas técnicos, tente novamente mais tarde.',
+    );
+  }
 }
 
 export const friendApi = {
-  getList,
+  getAll,
 };

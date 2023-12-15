@@ -7,14 +7,14 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {
   Box,
   EmptyData,
+  Feed,
+  FriendCard,
   Header,
   Icon,
-  Feed,
   Screen,
   Text,
   TextInput,
   TouchableOpacityBox,
-  FriendCard,
 } from '@components';
 import {useAppNavigation} from '@hooks';
 
@@ -39,10 +39,10 @@ export function FriendsScreen() {
     try {
       setError(false);
       setLoading(true);
-      const list = await friendService.getList();
+      const list = await friendService.getAll();
 
       // setList([]);
-      setList(list.data);
+      setList(list);
     } catch (err) {
       console.log(err);
       setError(true);
@@ -117,7 +117,7 @@ export function FriendsScreen() {
         }}
         showsVerticalScrollIndicator={false}
         data={list}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id!}
         renderItem={renderItem}
         ListEmptyComponent={
           <EmptyData

@@ -17,7 +17,8 @@ export interface FeedDTO {
 }
 
 export interface UsuarioDTO {
-  id: string;
+  id?: string;
+  codigo?: number;
   foto?: string;
   nome: string;
   email: string;
@@ -28,9 +29,10 @@ export interface UsuarioDTO {
   token_google?: string;
   token_apple?: string;
   token_onesignal?: string;
-  ativo: boolean;
-  data_cadastro: string;
-  data_atualizacao: string;
+  ativo?: boolean;
+  data_cadastro?: string;
+  data_atualizacao?: string;
+  atitudes_realizadas?: number | null;
   meta?: {
     eventos?: number;
   };

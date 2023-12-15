@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {ListRenderItemInfo, FlatList} from 'react-native';
+import {FlatList, ListRenderItemInfo} from 'react-native';
 
 import {UsuarioDTO, friendService} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -7,13 +7,13 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {
   Box,
   Button,
+  EmptyData,
+  Feed,
+  FriendCard,
   Header,
   Screen,
   TextInput,
-  EmptyData,
-  Feed,
   TouchableOpacityBox,
-  FriendCard,
 } from '@components';
 import {useAppNavigation} from '@hooks';
 
@@ -29,8 +29,8 @@ export function FriendsNew() {
     try {
       setError(false);
       setLoading(true);
-      const list = await friendService.getList();
-      setList(list.data);
+      const list = await friendService.getAll();
+      setList(list);
     } catch (err) {
       console.log(err);
       setError(true);
@@ -114,7 +114,7 @@ export function FriendsNew() {
         }}
         showsVerticalScrollIndicator={false}
         data={list}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id!}
         renderItem={renderItem}
         ListEmptyComponent={
           <EmptyData

@@ -1,4 +1,10 @@
-import {Controller, UseControllerProps, FieldValues} from 'react-hook-form';
+import {
+  Controller,
+  FieldValues,
+  Path,
+  PathValue,
+  UseControllerProps,
+} from 'react-hook-form';
 
 import {DateInputModal, DateInputProps} from './../DateInputModal';
 export function FormDateInputModal<FormType extends FieldValues>({
@@ -7,6 +13,22 @@ export function FormDateInputModal<FormType extends FieldValues>({
   rules,
   ...dateInputProps
 }: Omit<DateInputProps, 'setDateField'> & UseControllerProps<FormType>) {
+  function formatDate(date: PathValue<FormType, Path<FormType>>) {
+    if (!dateInputProps.typeMode && !!date) {
+      return date?.toLocaleDateString('pt-BR');
+    }
+    if (dateInputProps.typeMode === 'date' && !!date) {
+      return date?.toLocaleDateString('pt-BR');
+    }
+    if (dateInputProps.typeMode === 'datetime' && !!date) {
+      return (
+        date?.toLocaleDateString('pt-BR') +
+        ' ' +
+        date?.toLocaleTimeString('pt-BR')
+      );
+    }
+    return date;
+  }
   return (
     <Controller
       control={control}
@@ -14,7 +36,7 @@ export function FormDateInputModal<FormType extends FieldValues>({
       rules={rules}
       render={({field, fieldState}) => (
         <DateInputModal
-          value={field.value?.toLocaleDateString('pt-BR')}
+          value={formatDate(field.value)}
           errorMessage={fieldState.error?.message}
           setDateField={field.onChange}
           removeLabel

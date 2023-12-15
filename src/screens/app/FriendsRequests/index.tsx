@@ -5,14 +5,14 @@ import {UsuarioDTO, friendService} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
-  Screen,
-  Header,
   Box,
-  Text,
-  FriendCard,
   EmptyData,
   Feed,
+  FriendCard,
+  Header,
   Icon,
+  Screen,
+  Text,
 } from '@components';
 const FILTER_HEIGHT = RFValue(40);
 export function FriendsRequests() {
@@ -45,10 +45,10 @@ export function FriendsRequests() {
     try {
       setError(false);
       setLoading(true);
-      const list = await friendService.getList();
+      const list = await friendService.getAll();
 
       // setList([]);
-      setList(list.data);
+      setList(list);
     } catch (err) {
       console.log(err);
       setError(true);
@@ -92,7 +92,7 @@ export function FriendsRequests() {
         }}
         showsVerticalScrollIndicator={false}
         data={list}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id!}
         renderItem={renderItemPendents}
         ListEmptyComponent={
           <EmptyData
@@ -122,7 +122,7 @@ export function FriendsRequests() {
         }}
         showsVerticalScrollIndicator={false}
         data={list}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id!}
         renderItem={renderItemRequests}
         ListEmptyComponent={
           <EmptyData

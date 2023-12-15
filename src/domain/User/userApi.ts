@@ -7,6 +7,10 @@ interface UpdateProfileResponse {
     user: Usuario;
 }
 
+interface GetAllResponse {
+    users: Usuario[];
+}
+
 async function updatePassword(
     newPassword: string,
     oldPassword: string,
@@ -58,8 +62,25 @@ async function updateProfile(data: Usuario): Promise<Usuario> {
     }
 }
 
+async function getAll(): Promise<Usuario[]> {
+    try {
+        const response = await api.get<GetAllResponse>('/user');
+        return response.data.users;
+    } catch (error) {
+        if (error instanceof AxiosError) {
+            if (error.response?.status === 409) {
+                throw new Error(error.response.data.message);
+            }
+        }
+        throw new Error(
+            'Estamos com problemas tecnicos, tente novamente mais tarde.',
+        );
+    }
+}
+
 export const userApi = {
     updatePassword,
     getProfile,
     updateProfile,
+    getAll,
 };
