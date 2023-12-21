@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 
-import {EventoDTO, eventService} from '@domain';
+import {Evento, eventService} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {EmptyData, Feed, FilterHeaderEvents, Header, Screen} from '@components';
 
 export function EventsScreen() {
   const [filter, setFilter] = useState('');
-  const [list, setList] = useState<EventoDTO[]>([]);
+  const [list, setList] = useState<Evento[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -32,7 +32,7 @@ export function EventsScreen() {
     setFilter(param_filter);
   }
 
-  function renderItem({item}: ListRenderItemInfo<EventoDTO>) {
+  function renderItem({item}: ListRenderItemInfo<Evento>) {
     return (
       <Feed.Root>
         <Feed.Event item={item} />
@@ -60,7 +60,7 @@ export function EventsScreen() {
         }}
         showsVerticalScrollIndicator={false}
         data={list}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id!}
         renderItem={renderItem}
         ListEmptyComponent={
           <EmptyData
