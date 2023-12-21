@@ -1,6 +1,6 @@
-import { Usuario } from '../User';
+import {Usuario} from '../User';
 
-import { friendApi } from './friendApi';
+import {friendApi} from './friendApi';
 
 async function getAll(): Promise<Usuario[]> {
   return await friendApi.getAll();

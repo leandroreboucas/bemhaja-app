@@ -1,7 +1,7 @@
-import { RFValue } from 'react-native-responsive-fontsize';
+import {RFValue} from 'react-native-responsive-fontsize';
 
-import { TouchableOpacityBoxProps } from '@components';
-import { ThemeColors } from '@themes';
+import {TouchableOpacityBoxProps} from '@components';
+import {ThemeColors} from '@themes';
 
 export type ButtonPreset = 'primary' | 'outline' | 'gray';
 

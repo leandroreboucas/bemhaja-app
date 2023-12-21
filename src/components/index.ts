@@ -22,4 +22,3 @@ export * from './Text';
 export * from './TextInput';
 export * from './Toast';
 export * from './TouchableOpacityBox';
-

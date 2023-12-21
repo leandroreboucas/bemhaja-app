@@ -1,13 +1,17 @@
-import { api } from '@api';
+import {api} from '@api';
 
-import { EventoDTO, PageAPI } from '../types';
+import {PageAPI} from '../types';
 
-import { eventListMock } from './eventListMock';
-import { CreateEventModel } from './eventTypes';
+import {eventListMock} from './eventListMock';
+import {CreateEventModel, Evento} from './eventTypes';
 
-async function getList(): Promise<PageAPI<EventoDTO>> {
+interface ListResponse {
+  events: Evento[];
+}
+
+async function getList(): Promise<PageAPI<Evento>> {
   await new Promise(resolve => setTimeout(resolve, 1000));
-  const data: PageAPI<EventoDTO> = {
+  const data: PageAPI<Evento> = {
     meta: {
       total: 24,
       per_page: 10,
@@ -24,6 +28,11 @@ async function getList(): Promise<PageAPI<EventoDTO>> {
   return data;
 }
 
+async function getListMyEvents(): Promise<Evento[]> {
+  const response = await api.get<ListResponse>('/events/me');
+  return response.data.events;
+}
+
 async function create(data: CreateEventModel): Promise<void> {
   try {
     await api.post<void>('/event', data);
@@ -37,4 +46,5 @@ async function create(data: CreateEventModel): Promise<void> {
 export const eventApi = {
   getList,
   create,
+  getListMyEvents,
 };

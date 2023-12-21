@@ -36,8 +36,8 @@ export function HomeScreen() {
         data={list}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.1}
+        // onEndReached={fetchNextPage}
+        // onEndReachedThreshold={0.1}
         refreshing={isLoading}
         refreshControl={
           <RefreshControl

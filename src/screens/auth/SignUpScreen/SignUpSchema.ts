@@ -1,5 +1,6 @@
-import { stringUtils } from '@utils';
-import { z } from 'zod';
+import {z} from 'zod';
+
+import {stringUtils} from '@utils';
 
 export const signUpSchema = z
   .object({
@@ -17,7 +18,7 @@ export const signUpSchema = z
       })
       .trim()
       .toLowerCase()
-      .email({ message: 'E-mail inválido' }),
+      .email({message: 'E-mail inválido'}),
     data_nascimento: z.date({
       required_error: 'Data de nascimento é obrigatório',
       invalid_type_error: 'Data de nascimento precisa ser uma data válida',
@@ -35,7 +36,7 @@ export const signUpSchema = z
       })
       .trim(),
   })
-  .refine(({ senha, confirma_senha }) => senha === confirma_senha, {
+  .refine(({senha, confirma_senha}) => senha === confirma_senha, {
     message: 'Senhas não conferem',
     path: ['confirma_senha'],
   });

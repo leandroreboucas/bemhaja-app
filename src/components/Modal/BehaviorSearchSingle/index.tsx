@@ -16,19 +16,19 @@ import {TouchableOpacityBox} from './../../TouchableOpacityBox';
 
 interface BehaviorSearchProps {
   closeModal: () => void;
-  initialItemsSelected?: Behavior[];
-  changeItemsSelected: (items: Behavior[]) => void;
+  initialItemSelected?: Behavior | null;
+  changeItemSelected: (items: Behavior | null) => void;
 }
 
-export function BehaviorSearch({
+export function BehaviorSearchSingle({
   closeModal,
-  initialItemsSelected = [],
-  changeItemsSelected,
+  initialItemSelected = null,
+  changeItemSelected,
 }: BehaviorSearchProps) {
   const [filteredData, setFilteredData] = useState<Behavior[]>([]);
   const {behaviors, isError, isLoading, isFetching, refetch} =
     useBehaviorGetAll();
-  const [itemsSelected, setItemsSelected] = useState<Behavior[]>([]);
+  const [itemSelected, setItemSelected] = useState<Behavior | null>(null);
 
   function renderItem({item}: ListRenderItemInfo<Behavior>) {
     return (
@@ -38,7 +38,7 @@ export function BehaviorSearch({
         marginHorizontal="s16"
         gap="s16"
         onPress={() => handleChengeStatusCheckbox(item)}>
-        {!itemsSelected.includes(item!) ? (
+        {itemSelected?.id !== item.id ? (
           <Box
             width={RFValue(24)}
             height={RFValue(24)}
@@ -63,16 +63,10 @@ export function BehaviorSearch({
   }
 
   function handleChengeStatusCheckbox(item: Behavior) {
-    if (!itemsSelected.includes(item!)) {
-      const items = [...itemsSelected, item!];
-      setItemsSelected(items);
+    if (itemSelected?.id !== item.id) {
+      setItemSelected(item);
     } else {
-      const items = [...itemsSelected];
-      const index = items.indexOf(item!);
-      if (index > -1) {
-        items.splice(index, 1);
-      }
-      setItemsSelected(items);
+      setItemSelected(null);
     }
   }
 
@@ -81,14 +75,14 @@ export function BehaviorSearch({
   }
 
   function handleInitialItemsSelected() {
-    if (initialItemsSelected.length > 0) {
-      setItemsSelected(initialItemsSelected);
+    if (initialItemSelected?.id) {
+      setItemSelected(initialItemSelected);
     }
-    const selectedItems = behaviors.filter(item =>
-      initialItemsSelected.includes(item),
+    const selectedItems = behaviors.filter(
+      item => initialItemSelected?.id === item.id!,
     );
     const nonSelectedItems = behaviors.filter(
-      item => !initialItemsSelected.includes(item),
+      item => initialItemSelected?.id !== item.id!,
     );
 
     // Coloca os itens selecionados no topo
@@ -96,7 +90,7 @@ export function BehaviorSearch({
   }
 
   function handleConfirm() {
-    changeItemsSelected(itemsSelected);
+    changeItemSelected(itemSelected);
     closeModal();
   }
 
@@ -130,7 +124,7 @@ export function BehaviorSearch({
         alignItems="center"
         justifyContent="center">
         <Text paddingLeft="s16" variant="friends_title_screen">
-          Selecionar atitude(s)
+          Selecionar atitude
         </Text>
       </Box>
       {/**

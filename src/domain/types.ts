@@ -1,13 +1,15 @@
+import {Evento} from './Events/eventTypes';
+
 export interface FeedDTO {
   id: string;
   codigo: number;
   tipo:
-  | 'EVENTO_CRIADO'
-  | 'EVENTO_FINALIZADO'
-  | 'ATITUDE_REALIZADA'
-  | 'POSTAGEM_AVULSA';
+    | 'EVENTO_CRIADO'
+    | 'EVENTO_FINALIZADO'
+    | 'ATITUDE_REALIZADA'
+    | 'POSTAGEM_AVULSA';
   usuario: UsuarioDTO;
-  evento?: EventoDTO;
+  evento?: Evento;
   evento_atitude_Finalizada?: EventoAtitudeFinalizadaDTO;
   titulo?: string;
   texto?: string;
@@ -111,7 +113,7 @@ export interface EventoAtitudeFinalizadaDTO {
   id: string;
   codigo: number;
   tipo: 'AUDIO' | 'VIDEO' | 'IMAGE' | 'TEXT';
-  evento: EventoDTO;
+  evento: Evento;
   usuario: UsuarioDTO;
   atitude: AtitudeDTO;
   midia_link: string;

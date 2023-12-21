@@ -5,20 +5,21 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
 import {
-  useFonts,
   Roboto_300Light,
   Roboto_400Regular,
   Roboto_500Medium,
   Roboto_700Bold,
+  useFonts,
 } from '@expo-google-fonts/roboto';
-import {AuthCredentialsProvider} from '@services';
 import {ThemeProvider} from '@shopify/restyle';
-import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import * as SplashScreen from 'expo-splash-screen';
 import {StatusBar} from 'expo-status-bar';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
 import {Router} from '@routes';
+import {AuthCredentialsProvider} from '@services';
 import {theme} from '@themes';
 
 const queryClient = new QueryClient();
@@ -54,6 +55,7 @@ export default function App() {
           </ThemeProvider>
         </SafeAreaProvider>
       </QueryClientProvider>
+      <Toast />
     </AuthCredentialsProvider>
   );
 }

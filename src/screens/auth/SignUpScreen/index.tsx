@@ -1,25 +1,25 @@
 import {useState} from 'react';
-import {Alert, ImageBackground, Pressable} from 'react-native';
+import {ImageBackground, Pressable} from 'react-native';
 
 import ImageBg from '@assets/bg-cad.png';
 import {useAuthSigIn, useAuthSignUp} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {dateUtils} from '@utils';
 import * as ImagePicker from 'expo-image-picker';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
   Box,
-  Screen,
-  Text,
   ButtonLinear,
-  Loading,
-  FormTextInput,
   FormDateInputModal,
   FormPasswordInput,
+  FormTextInput,
+  Loading,
+  Screen,
+  Text,
 } from '@components';
 import {useAuthNavigation} from '@hooks';
+import {dateUtils, toastUtils} from '@utils';
 
 import {SignUpType, signUpSchema} from './SignUpSchema';
 
@@ -50,7 +50,7 @@ export function SignUpScreen() {
       });
     },
     onError: message => {
-      Alert.alert(message);
+      toastUtils.showToast(message, 'error');
     },
   });
 

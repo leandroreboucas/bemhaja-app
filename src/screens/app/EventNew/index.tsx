@@ -1,16 +1,15 @@
 import {useState} from 'react';
-import {Alert, Modal, Platform, ScrollView} from 'react-native';
+import {Modal, Platform, ScrollView} from 'react-native';
 
 import {Behavior, Usuario, useEventCreate} from '@domain';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {dateUtils, mediaUtils} from '@utils';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
-  BehaviorSearch,
+  BehaviorsSearch,
   Box,
   Button,
   FormDateInputModal,
@@ -25,6 +24,7 @@ import {
   TouchableOpacityBox,
 } from '@components';
 import {useAppNavigation} from '@hooks';
+import {dateUtils, mediaUtils, toastUtils} from '@utils';
 
 import {EventNewType, eventNewSchema} from './eventNewSchema';
 
@@ -43,10 +43,11 @@ export function EventNew() {
   const {create, isLoading} = useEventCreate({
     onSucess: () => {
       //todo: show success message
+      toastUtils.showToast('Evento criado com sucesso', 'success');
       navigation.navigate('AppTabNavigator', {screen: 'HomeScreen'});
     },
     onError: message => {
-      Alert.alert('Atenção', message);
+      toastUtils.showToast(message, 'error');
     },
   });
 
@@ -508,7 +509,7 @@ export function EventNew() {
         </ScrollView>
       </Screen>
       <Modal visible={isVisibleBehaviorModal} statusBarTranslucent transparent>
-        <BehaviorSearch
+        <BehaviorsSearch
           initialItemsSelected={behaviors}
           closeModal={handleCloseBehaviorModal}
           changeItemsSelected={changeBehaviorsSelecteds}

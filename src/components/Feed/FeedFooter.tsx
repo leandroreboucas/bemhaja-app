@@ -1,4 +1,4 @@
-import {EventoDTO} from '@domain';
+import {Evento} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Box} from '../Box';
@@ -7,7 +7,7 @@ import {Text} from '../Text';
 import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
 interface FeedFooterProps {
-  evento: EventoDTO;
+  evento: Evento;
   text?: string;
 }
 
@@ -26,7 +26,7 @@ export function FeedFooter({evento, text}: FeedFooterProps) {
       alignItems="center">
       <Box gap="s16" flexDirection="row" alignItems="center">
         <Icon name="events" color="primary_500" size={RFValue(16)} />
-        <Text variant="feed_title">{text ? text : evento.descricao}</Text>
+        <Text variant="feed_title">{text ? text : evento.nome}</Text>
       </Box>
       <Box
         backgroundColor="primary_500"

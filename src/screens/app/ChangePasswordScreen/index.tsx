@@ -1,10 +1,9 @@
-import {Alert} from 'react-native';
-
 import {useUserUpdatePassword} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
-import {Screen, Header, FormPasswordInput, Box, Button} from '@components';
+import {Box, Button, FormPasswordInput, Header, Screen} from '@components';
+import {toastUtils} from '@utils';
 
 import {changePasswordSchema, changePasswordType} from './schema';
 
@@ -21,10 +20,10 @@ export function ChangePasswordScreen() {
 
   const {isLoading, updatePassword} = useUserUpdatePassword({
     onSucess: () => {
-      Alert.alert('Sucesso', 'Senha alterada com sucesso');
+      toastUtils.showToast('Senha alterada com sucesso', 'success');
     },
     onError: message => {
-      Alert.alert('Atenção', message);
+      toastUtils.showToast(message, 'error');
     },
   });
 

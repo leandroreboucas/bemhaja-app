@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {FlatList, Image, ListRenderItemInfo} from 'react-native';
 
-import {EventoDTO, eventService} from '@domain';
+import {Evento, eventService} from '@domain';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -20,8 +20,8 @@ import {AppRoutes} from '@routes';
 type ScreenProps = NativeStackScreenProps<AppRoutes, 'EventDetail'>;
 
 export function EventDetail({route, navigation}: ScreenProps) {
-  const [event, setEvent] = useState<EventoDTO>();
-  const [list, setList] = useState<EventoDTO[]>([]);
+  const [event, setEvent] = useState<Evento>();
+  const [list, setList] = useState<Evento[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -44,7 +44,7 @@ export function EventDetail({route, navigation}: ScreenProps) {
     }
   }
 
-  function renderItem({item}: ListRenderItemInfo<EventoDTO>) {
+  function renderItem({item}: ListRenderItemInfo<Evento>) {
     return (
       <Box
         marginHorizontal="s24"
@@ -70,7 +70,7 @@ export function EventDetail({route, navigation}: ScreenProps) {
         <Box backgroundColor="gray_100" flex={1} paddingHorizontal="s8">
           {/** Descrição */}
           <Text marginTop="s16" variant="friends_title_screen">
-            {item?.descricao}
+            {item?.nome}
           </Text>
 
           {/** Observação */}
@@ -372,7 +372,7 @@ export function EventDetail({route, navigation}: ScreenProps) {
         }}
         showsVerticalScrollIndicator={false}
         data={list}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id!}
         renderItem={renderItem}
         ListEmptyComponent={
           <EmptyData

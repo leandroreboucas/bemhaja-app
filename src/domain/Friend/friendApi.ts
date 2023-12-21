@@ -1,6 +1,6 @@
-import { api } from '@api';
+import {api} from '@api';
 
-import { Usuario } from '../User';
+import {Usuario} from '../User';
 
 interface GetAllResponse {
   users: Usuario[];

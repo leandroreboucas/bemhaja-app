@@ -1,4 +1,4 @@
-import {Alert, ImageBackground, Platform, Pressable} from 'react-native';
+import {ImageBackground, Platform, Pressable} from 'react-native';
 
 import ImageBg from '@assets/bg.png';
 import {LogoIcon} from '@assets/icons/LogoIcon';
@@ -10,21 +10,25 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {
   Box,
   ButtonLinear,
-  Screen,
-  Text,
+  FormPasswordInput,
+  FormTextInput,
   Icon,
   Loading,
-  FormTextInput,
-  FormPasswordInput,
+  Screen,
+  Text,
 } from '@components';
 import {useAuthNavigation} from '@hooks';
+import {toastUtils} from '@utils';
 
 import {LoginType, loginSchema} from './LoginSchema';
 
 export function LoginScreen() {
   const {isLoading, signIn} = useAuthSigIn({
+    onSucess: () => {
+      toastUtils.showToast('Bem vindo de volta, BemHaja 🙏🏻', 'success');
+    },
     onError(message) {
-      Alert.alert(message);
+      toastUtils.showToast(message, 'error');
     },
   });
   const navigation = useAuthNavigation();

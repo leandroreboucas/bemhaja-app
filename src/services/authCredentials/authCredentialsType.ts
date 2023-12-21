@@ -1,8 +1,8 @@
-import { AuthCredentialsAPI } from '@domain';
+import {AuthCredentialsAPI} from '@domain';
 
 export interface AuthCredentialsService {
-    authCredentials: AuthCredentialsAPI | null;
-    saveCredentials: (authCredentials: AuthCredentialsAPI) => Promise<void>;
-    removeCredentials: () => Promise<void>;
-    isLoading: boolean;
+  authCredentials: AuthCredentialsAPI | null;
+  saveCredentials: (authCredentials: AuthCredentialsAPI) => Promise<void>;
+  removeCredentials: () => Promise<void>;
+  isLoading: boolean;
 }

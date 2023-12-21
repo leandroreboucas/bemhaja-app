@@ -20,7 +20,8 @@ module.exports = {
                 position: 'before',
               },
               {
-                pattern: '@+(routes|screens|components|hooks|themes)',
+                pattern:
+                  '@+(routes|screens|components|hooks|themes|expo|assets|utils|types|config|queries|store|navigation|services|constants|styles|context|provide)',
                 group: 'internal',
                 position: 'before',
               },

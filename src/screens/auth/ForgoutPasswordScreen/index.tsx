@@ -1,4 +1,4 @@
-import {Alert, ImageBackground, Pressable} from 'react-native';
+import {ImageBackground, Pressable} from 'react-native';
 
 import ImageBg from '@assets/bg-cad.png';
 import {useAuthResetPassword} from '@domain';
@@ -8,13 +8,14 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 import {
   Box,
+  ButtonLinear,
+  FormTextInput,
+  Loading,
   Screen,
   Text,
-  ButtonLinear,
-  Loading,
-  FormTextInput,
 } from '@components';
 import {useAuthNavigation} from '@hooks';
+import {toastUtils} from '@utils';
 
 import {
   ForgoutPasswordType,
@@ -25,9 +26,9 @@ export function ForgoutPasswordScreen() {
   const navigation = useAuthNavigation();
   const {isLoading, resetPassword} = useAuthResetPassword({
     onSucess: () => {
-      Alert.alert(
-        '',
+      toastUtils.showToast(
         'Foi enviado um e-mail com os passos para recuperação da senha',
+        'success',
       );
       navigation.goBack();
     },

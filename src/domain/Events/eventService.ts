@@ -1,10 +1,10 @@
-import { fileService } from '../File';
-import { EventoDTO, PageAPI } from '../types';
+import {fileService} from '../File';
+import {PageAPI} from '../types';
 
-import { eventApi } from './eventApi';
-import { CreateEventModel } from './eventTypes';
+import {eventApi} from './eventApi';
+import {CreateEventModel, Evento} from './eventTypes';
 
-async function getList(): Promise<PageAPI<EventoDTO>> {
+async function getList(): Promise<PageAPI<Evento>> {
   return await eventApi.getList();
 }
 
@@ -13,7 +13,7 @@ async function create(data: CreateEventModel): Promise<void> {
     const photoBucket = await fileService.getUrlUpload({
       contentType: 'image/jpeg',
       fileName: `${new Date().getTime()}.jpg`,
-      folder: 'app/profile',
+      folder: 'app/events',
       uri: data.event.foto!,
     });
     data.event.foto = photoBucket;
@@ -21,7 +21,12 @@ async function create(data: CreateEventModel): Promise<void> {
   return await eventApi.create(data);
 }
 
+async function getListMyEvents(): Promise<Evento[]> {
+  return await eventApi.getListMyEvents();
+}
+
 export const eventService = {
   getList,
   create,
+  getListMyEvents,
 };

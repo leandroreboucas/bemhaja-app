@@ -1,11 +1,10 @@
 import {useEffect, useState} from 'react';
-import {Alert, ScrollView} from 'react-native';
+import {ScrollView} from 'react-native';
 
 import {useUserGetProfile, useUserUpdateProfile} from '@domain';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {dateUtils, mediaUtils} from '@utils';
 import {parseISO} from 'date-fns';
 import {useForm} from 'react-hook-form';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -24,6 +23,7 @@ import {
   TouchableOpacityBox,
 } from '@components';
 import {useAuthCredentials} from '@hooks';
+import {dateUtils, mediaUtils, toastUtils} from '@utils';
 
 import {myProfileSchema, myProfileType} from './myProfileSchema';
 
@@ -32,10 +32,10 @@ export function MyProfileScreen() {
   const {user, isFetching} = useUserGetProfile(authCredentials?.user?.email);
   const {isLoading, updateProfile} = useUserUpdateProfile({
     onSucess: () => {
-      Alert.alert('Sucesso', 'Perfil atualizado com sucesso');
+      toastUtils.showToast('Perfil atualizado com sucesso', 'success');
     },
     onError: message => {
-      Alert.alert('Atenção', message);
+      toastUtils.showToast(message, 'error');
     },
   });
 

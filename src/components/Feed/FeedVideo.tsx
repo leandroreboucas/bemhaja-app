@@ -1,4 +1,4 @@
-import {Video, ResizeMode} from 'expo-av';
+import {ResizeMode, Video} from 'expo-av';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Box} from '../Box';

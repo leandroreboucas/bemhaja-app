@@ -1,14 +1,14 @@
-import { FeedAudio } from './FeedAudio';
-import { FeedEvent } from './FeedEvent';
-import { FeedFooter } from './FeedFooter';
-import { FeedHeader } from './FeedHeader';
-import { FeedImage } from './FeedImage';
-import { FeedItem } from './FeedItem';
-import { FeedRoot } from './FeedRoot';
-import { FeedSeparator } from './FeedSeparator';
-import { FeedText } from './FeedText';
-import { FeedTitle } from './FeedTitle';
-import { FeedVideo } from './FeedVideo';
+import {FeedAudio} from './FeedAudio';
+import {FeedEvent} from './FeedEvent';
+import {FeedFooter} from './FeedFooter';
+import {FeedHeader} from './FeedHeader';
+import {FeedImage} from './FeedImage';
+import {FeedItem} from './FeedItem';
+import {FeedRoot} from './FeedRoot';
+import {FeedSeparator} from './FeedSeparator';
+import {FeedText} from './FeedText';
+import {FeedTitle} from './FeedTitle';
+import {FeedVideo} from './FeedVideo';
 
 export const Feed = {
   Root: FeedRoot,

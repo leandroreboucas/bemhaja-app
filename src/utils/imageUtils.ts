@@ -1,37 +1,37 @@
-import { Buffer } from 'buffer';
+import {Buffer} from 'buffer';
 
 async function base64toBlob(base64: string): Promise<Blob> {
-    const buffer = Buffer.from(base64, 'base64');
+  const buffer = Buffer.from(base64, 'base64');
 
-    const blob = new Blob([buffer], { type: 'image/jpeg' });
-    return blob;
+  const blob = new Blob([buffer], {type: 'image/jpeg'});
+  return blob;
 }
 
 function uriToBlob(uri: string): Promise<Blob> {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
 
-        // If successful -> return with blob
-        xhr.onload = function () {
-            resolve(xhr.response);
-        };
+    // If successful -> return with blob
+    xhr.onload = function () {
+      resolve(xhr.response);
+    };
 
-        // reject on error
-        xhr.onerror = function () {
-            reject(new Error('uriToBlob failed'));
-        };
+    // reject on error
+    xhr.onerror = function () {
+      reject(new Error('uriToBlob failed'));
+    };
 
-        // Set the response type to 'blob' - this means the server's response
-        // will be accessed as a binary object
-        xhr.responseType = 'blob';
+    // Set the response type to 'blob' - this means the server's response
+    // will be accessed as a binary object
+    xhr.responseType = 'blob';
 
-        // Initialize the request. The third argument set to 'true' denotes
-        // that the request is asynchronous
-        xhr.open('GET', uri, true);
+    // Initialize the request. The third argument set to 'true' denotes
+    // that the request is asynchronous
+    xhr.open('GET', uri, true);
 
-        // Send the request. The 'null' argument means that no body content is given for the request
-        xhr.send(null);
-    });
+    // Send the request. The 'null' argument means that no body content is given for the request
+    xhr.send(null);
+  });
 }
 
-export const imageUtils = { uriToBlob, base64toBlob };
+export const imageUtils = {uriToBlob, base64toBlob};

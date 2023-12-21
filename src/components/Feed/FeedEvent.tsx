@@ -1,6 +1,6 @@
 import {Image} from 'react-native';
 
-import {EventoDTO} from '@domain';
+import {Evento, EventoDTO} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppNavigation} from '@hooks';
@@ -10,20 +10,27 @@ import {Text} from '../Text';
 import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
 interface FeedContentNewEventProps {
-  item: EventoDTO;
+  item: Evento;
   boxProps?: BoxProps;
+  navigateEventDetail?: boolean;
 }
 
-export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
+export function FeedEvent({
+  item,
+  boxProps,
+  navigateEventDetail = true,
+}: FeedContentNewEventProps) {
   const navigation = useAppNavigation();
 
   function goEventDetail(event_id: string) {
-    navigation.navigate('EventDetail', {event_id});
+    if (navigateEventDetail) {
+      navigation.navigate('EventDetail', {event_id});
+    }
   }
 
   function getVisibleName({visibilidade}: Pick<EventoDTO, 'visibilidade'>) {
     if (visibilidade === 'PARTICIPANTES_EVENTO') {
-      return 'Participantes do evento';
+      return 'Participantes';
     }
     if (visibilidade === 'PUBLICO_GERAL') {
       return 'Público geral';
@@ -32,6 +39,8 @@ export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
       return 'Rede de amigos';
     }
   }
+
+  const Container = navigateEventDetail ? TouchableOpacityBox : Box;
 
   return (
     <Box
@@ -42,7 +51,7 @@ export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
       backgroundColor="gray_100"
       borderRadius="br10"
       {...boxProps}>
-      <TouchableOpacityBox
+      <Container
         flex={1}
         flexDirection="row"
         backgroundColor="gray_100"
@@ -51,7 +60,12 @@ export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
         borderRightWidth={RFValue(4)}
         borderTopRightRadius="br10"
         alignItems="center"
-        onPress={() => goEventDetail(item.id)}>
+        justifyContent="center"
+        onPress={() => {
+          if (navigateEventDetail) {
+            goEventDetail(item.id!);
+          }
+        }}>
         <Image
           source={{uri: item?.foto}}
           style={{
@@ -62,7 +76,7 @@ export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
         />
         <Box justifyContent="space-between" flex={1} gap="s4">
           <Box>
-            <Text variant="feed_desc_evento">{item?.descricao}</Text>
+            <Text variant="feed_desc_evento">{item?.nome}</Text>
           </Box>
           <Box flexDirection="row" justifyContent="flex-start" gap="s4">
             <Text variant="feed_data_hora_bold">Inicio:</Text>
@@ -74,7 +88,11 @@ export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
               {item?.data_hora_final || 'Sem definição'}
             </Text>
           </Box>
-          <Box flexDirection="row" justifyContent="flex-start" gap="s4">
+          <Box
+            flex={1}
+            flexDirection="row"
+            justifyContent="flex-start"
+            gap="s4">
             <Text variant="feed_data_hora_bold">Visibilidade:</Text>
             <Text variant="feed_data_hora">
               {getVisibleName({visibilidade: item.visibilidade})}
@@ -82,12 +100,10 @@ export function FeedEvent({item, boxProps}: FeedContentNewEventProps) {
           </Box>
           <Box flexDirection="row" justifyContent="flex-start" gap="s4">
             <Text variant="feed_data_hora_bold">Participantes:</Text>
-            <Text variant="feed_data_hora">
-              {item.meta?.participantes || 0}
-            </Text>
+            <Text variant="feed_data_hora">{item.participantes || 0}</Text>
           </Box>
         </Box>
-      </TouchableOpacityBox>
+      </Container>
     </Box>
   );
 }

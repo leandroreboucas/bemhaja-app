@@ -1,10 +1,10 @@
-import { useAuthCredentials } from '@hooks';
+import {useAuthCredentials} from '@hooks';
 
 export function useAuthSigOut() {
-    const { removeCredentials } = useAuthCredentials();
-    return {
-        signOut: () => {
-            removeCredentials();
-        },
-    };
+  const {removeCredentials} = useAuthCredentials();
+  return {
+    signOut: () => {
+      removeCredentials();
+    },
+  };
 }
