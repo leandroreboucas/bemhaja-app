@@ -1,4 +1,4 @@
-import {z} from 'zod';
+import { z } from 'zod';
 
 export const atitudeNewSchema = z.object({
   id: z.optional(z.string().uuid().nullable().default(null)),
