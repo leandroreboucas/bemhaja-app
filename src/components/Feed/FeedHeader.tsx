@@ -1,10 +1,9 @@
-import {Image} from 'react-native';
-
 import {FeedDTO} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Box} from '../Box';
 import {Icon} from '../Icon';
+import {ImageCached} from '../ImageCache';
 import {Text} from '../Text';
 
 interface FeedHeaderProps {
@@ -22,11 +21,20 @@ export function FeedHeader({item, removeProfile}: FeedHeaderProps) {
       alignItems="center">
       <Box flexDirection="row" flex={1} gap="s8" flexGrow={1}>
         {!removeProfile && (
-          <Image
+          // <Image
+          //   source={{uri: item.usuario.foto}}
+          //   style={{width: RFValue(48), height: RFValue(48)}}
+          //   borderRadius={RFValue(48) / 2}
+          //   resizeMode="cover"
+          // />
+          <ImageCached
             source={{uri: item.usuario.foto}}
-            style={{width: RFValue(48), height: RFValue(48)}}
-            borderRadius={RFValue(48) / 2}
-            resizeMode="cover"
+            style={{
+              height: RFValue(48),
+              width: RFValue(48),
+              borderRadius: RFValue(48) / 2,
+            }}
+            contentFit="cover"
           />
         )}
         <Box justifyContent="center" flex={1}>

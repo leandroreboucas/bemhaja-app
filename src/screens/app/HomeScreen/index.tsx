@@ -1,8 +1,8 @@
-import {useRef} from 'react';
+import {useCallback, useRef} from 'react';
 import {FlatList, ListRenderItemInfo, RefreshControl} from 'react-native';
 
 import {FeedDTO, useFeedList} from '@domain';
-import {useScrollToTop} from '@react-navigation/native';
+import {useFocusEffect, useScrollToTop} from '@react-navigation/native';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {EmptyData, Feed, Header, Screen} from '@components';
@@ -18,6 +18,12 @@ export function HomeScreen() {
   function renderItem(listRender: ListRenderItemInfo<FeedDTO>) {
     return <Feed.Item item={listRender} />;
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, []),
+  );
 
   return (
     <Screen
@@ -36,8 +42,8 @@ export function HomeScreen() {
         data={list}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        // onEndReached={fetchNextPage}
-        // onEndReachedThreshold={0.1}
+        onEndReached={fetchNextPage}
+        onEndReachedThreshold={0.1}
         refreshing={isLoading}
         refreshControl={
           <RefreshControl

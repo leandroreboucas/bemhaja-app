@@ -6,7 +6,7 @@ import {useScrollToTop} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-import {Screen, Header, Feed, EmptyData} from '@components';
+import {EmptyData, Feed, Header, Screen} from '@components';
 import {useAppTheme} from '@hooks';
 import {AppRoutes} from '@routes';
 
@@ -26,11 +26,7 @@ export function EventFeed({route}: ScreenProps) {
 
   function fecthData() {
     const {event_id} = route.params;
-    const feed = list.filter(
-      item =>
-        item.evento?.id === event_id ||
-        item.evento_atitude_Finalizada?.evento.id === event_id,
-    );
+    const feed = list.filter(item => item.evento?.id === event_id);
     setEventFeed(feed);
   }
 

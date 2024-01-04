@@ -1,11 +1,10 @@
-import {Image} from 'react-native';
-
 import {Evento, EventoDTO} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppNavigation} from '@hooks';
 
 import {Box, BoxProps} from '../Box';
+import {ImageCached} from '../ImageCache';
 import {Text} from '../Text';
 import {TouchableOpacityBox} from '../TouchableOpacityBox';
 
@@ -66,13 +65,14 @@ export function FeedEvent({
             goEventDetail(item.id!);
           }
         }}>
-        <Image
+        <ImageCached
           source={{uri: item?.foto}}
           style={{
             height: RFValue(84),
             width: RFValue(84),
             borderRadius: RFValue(10),
           }}
+          contentFit="cover"
         />
         <Box justifyContent="space-between" flex={1} gap="s4">
           <Box>

@@ -1,14 +1,14 @@
-import {MetaDataPageAPI, MetaDataPage} from '../types';
+import { MetaDataPage, MetaDataPageAPI } from '../types';
 
 function toMetaDataPage(meta: MetaDataPageAPI): MetaDataPage {
   return {
-    total: meta.total,
-    perPage: meta.per_page,
-    currentPage: meta.current_page,
-    lastPage: meta.last_page,
-    firstPage: meta.first_page,
-    hasNextPage: !!meta.next_page_url,
-    hasPreviousPage: !!meta.previous_page_url,
+    total: meta.total!,
+    perPage: meta.per_page!,
+    currentPage: meta.page!,
+    lastPage: meta.total_pages!,
+    firstPage: meta.next_page!,
+    hasNextPage: meta.has_more!,
+    hasPreviousPage: meta.page! > 1,
   };
 }
 

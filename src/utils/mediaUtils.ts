@@ -33,6 +33,7 @@ async function launchLibraryVideo(): Promise<string | null> {
       videoMaxDuration: 10,
     });
     if (!photoSelected.canceled) {
+      console.log(photoSelected);
       image = photoSelected.assets[0].uri;
     }
   } catch (error) {
@@ -71,7 +72,7 @@ async function launchVideo(): Promise<string | null> {
     const photoSelected = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Videos,
       quality: 1,
-      videoQuality: ImagePicker.UIImagePickerControllerQualityType.Medium,
+      videoQuality: ImagePicker.UIImagePickerControllerQualityType.High,
       cameraType: ImagePicker.CameraType.back,
       videoMaxDuration: 10,
 
@@ -88,9 +89,39 @@ async function launchVideo(): Promise<string | null> {
   }
 }
 
+async function getMimeType(extension: string) {
+  let contentType = 'image/jpeg';
+  if (extension === 'mp4') {
+    contentType = 'video/mp4';
+  }
+  if (extension === 'mov') {
+    contentType = 'video/quicktime';
+  }
+  if (extension === '3gp') {
+    contentType = 'audio/3gpp';
+  }
+  if (extension === 'caf') {
+    contentType = 'audio/x-caf';
+  }
+  if (extension === 'm4a') {
+    contentType = 'audio/mp4';
+  }
+  if (extension === 'wav') {
+    contentType = 'audio/wav';
+  }
+  if (extension === 'aac') {
+    contentType = 'audio/aac';
+  }
+  if (extension === 'webm') {
+    contentType = 'audio/webm';
+  }
+  return contentType;
+}
+
 export const mediaUtils = {
   launchLibraryImage,
   launchCameraImage,
   launchVideo,
   launchLibraryVideo,
+  getMimeType,
 };

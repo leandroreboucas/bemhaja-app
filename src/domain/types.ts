@@ -1,16 +1,16 @@
-import {Evento} from './Events/eventTypes';
+import { Evento } from './Events/eventTypes';
 
 export interface FeedDTO {
   id: string;
   codigo: number;
   tipo:
-    | 'EVENTO_CRIADO'
-    | 'EVENTO_FINALIZADO'
-    | 'ATITUDE_REALIZADA'
-    | 'POSTAGEM_AVULSA';
+  | 'EVENTO_CRIADO'
+  | 'EVENTO_FINALIZADO'
+  | 'ATITUDE_REALIZADA'
+  | 'POSTAGEM_AVULSA';
   usuario: UsuarioDTO;
   evento?: Evento;
-  evento_atitude_Finalizada?: EventoAtitudeFinalizadaDTO;
+  evento_atitude_finalizada?: EventoAtitudeFinalizadaDTO;
   titulo?: string;
   texto?: string;
   foto?: string;
@@ -113,9 +113,10 @@ export interface EventoAtitudeFinalizadaDTO {
   id: string;
   codigo: number;
   tipo: 'AUDIO' | 'VIDEO' | 'IMAGE' | 'TEXT';
-  evento: Evento;
-  usuario: UsuarioDTO;
-  atitude: AtitudeDTO;
+  // evento: Evento;
+  // usuario: UsuarioDTO;
+  // atitude: AtitudeDTO;
+  atitude_descricao?: string;
   midia_link: string;
   titulo?: string;
   texto?: string;
@@ -124,15 +125,13 @@ export interface EventoAtitudeFinalizadaDTO {
 }
 
 export interface MetaDataPageAPI {
-  total: number; // 24;
-  per_page: number; // 10;
-  current_page: number; // 1;
-  last_page: number; // 3;
-  first_page: number; // 1;
-  first_page_url: string; // '/?page=1';
-  last_page_url: string; // '/?page=3';
-  next_page_url: string | null; // '/?page=2';
-  previous_page_url: string | null; // null;
+  total?: number;
+  page?: number;
+  per_page?: number;
+  total_pages?: number;
+  previous_page?: number | null;
+  next_page?: number | null;
+  has_more?: boolean;
 }
 
 export interface GrupoAtitudeDTO {
@@ -152,13 +151,13 @@ export interface GrupoAtitudeDTO {
  * @template Data Tipo do dado da página.
  */
 export interface PageAPI<Data> {
-  meta: MetaDataPageAPI;
+  meta?: MetaDataPageAPI;
   data: Data[];
 }
 
 export interface PageParam {
-  page: number;
-  perPage: number;
+  page?: number;
+  per_page?: number;
 }
 
 export interface MetaDataPage {

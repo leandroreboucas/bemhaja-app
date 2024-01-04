@@ -18,7 +18,7 @@ export function FeedVideo({uri}: FeedVideoProps) {
           uri,
         }}
         style={{
-          height: RFValue(200),
+          height: RFValue(300),
           width: '100%',
           borderRadius: RFValue(8),
         }}

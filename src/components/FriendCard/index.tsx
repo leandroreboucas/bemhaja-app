@@ -1,9 +1,8 @@
-import {Image} from 'react-native';
-
 import {UsuarioDTO} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {Box} from '../Box';
+import {ImageCached} from '../ImageCache';
 import {Text} from '../Text';
 
 interface FriendCardProps {
@@ -18,7 +17,7 @@ export function FriendCard({item}: FriendCardProps) {
       alignItems="center"
       paddingVertical="s16"
       gap="s16">
-      <Image
+      {/* <Image
         source={{
           uri: item.foto
             ? item.foto
@@ -27,6 +26,19 @@ export function FriendCard({item}: FriendCardProps) {
         style={{width: RFValue(48), height: RFValue(48)}}
         borderRadius={RFValue(48) / 2}
         resizeMode="cover"
+      /> */}
+      <ImageCached
+        source={{
+          uri: item.foto
+            ? item.foto
+            : `https://ui-avatars.com/api/?name=${item.nome}&size=48`,
+        }}
+        style={{
+          width: RFValue(48),
+          height: RFValue(48),
+          borderRadius: RFValue(48) / 2,
+        }}
+        contentFit="cover"
       />
       <Box>
         <Text variant="friends_card_name">{item.nome}</Text>

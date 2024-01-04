@@ -1,8 +1,10 @@
-import {fileService} from '../File';
-import {PageAPI} from '../types';
+import { mediaUtils } from '@utils';
 
-import {eventApi} from './eventApi';
-import {CreateEventModel, Evento} from './eventTypes';
+import { fileService } from '../File';
+import { PageAPI } from '../types';
+
+import { eventApi } from './eventApi';
+import { CreateEventModel, Evento } from './eventTypes';
 
 async function getList(): Promise<PageAPI<Evento>> {
   return await eventApi.getList();
@@ -10,9 +12,12 @@ async function getList(): Promise<PageAPI<Evento>> {
 
 async function create(data: CreateEventModel): Promise<void> {
   if (data.event?.foto && !data.event?.foto.includes('amazonaws.com')) {
+    const lastIndexOf = data.event.foto.lastIndexOf('.');
+    const extension = data.event.foto.substring(lastIndexOf);
+    const contentType = await mediaUtils.getMimeType(extension);
     const photoBucket = await fileService.getUrlUpload({
-      contentType: 'image/jpeg',
-      fileName: `${new Date().getTime()}.jpg`,
+      contentType,
+      fileName: `${new Date().getTime()}.${extension}`,
       folder: 'app/events',
       uri: data.event.foto!,
     });

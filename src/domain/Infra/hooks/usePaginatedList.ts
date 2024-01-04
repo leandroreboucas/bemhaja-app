@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-import {useInfiniteQuery} from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
-import {Page} from './../../types';
+import { PageAPI } from './../../types';
 
 export interface usePaginatedListResult<TData> {
   list: TData[];
@@ -15,16 +15,16 @@ export interface usePaginatedListResult<TData> {
 
 export function usePaginatedList<Data>(
   queryKey: readonly unknown[],
-  getList: (page: number) => Promise<Page<Data>>,
+  getList: (page: number) => Promise<PageAPI<Data>>,
 ): usePaginatedListResult<Data> {
   const [list, setList] = useState<Data[]>([]);
 
   const query = useInfiniteQuery({
     queryKey,
-    queryFn: ({pageParam}) => getList(pageParam),
+    queryFn: ({ pageParam }) => getList(pageParam),
     initialPageParam: 1,
-    getNextPageParam: ({meta}) =>
-      meta.hasNextPage ? meta.currentPage + 1 : undefined,
+    getNextPageParam: ({ meta }) => (meta?.has_more ? meta.page! + 1 : undefined),
+    // enabled: false,
   });
 
   useEffect(() => {

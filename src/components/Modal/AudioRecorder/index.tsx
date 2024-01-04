@@ -70,6 +70,7 @@ export function AudioRecorder({closeModal, midiaSelected}: AudioRecorderProps) {
       if (recording) {
         await recording?.stopAndUnloadAsync();
         const uri = recording?.getURI();
+        console.log('uri', uri);
         setMidia(uri);
         midiaSelected(uri);
         setRecording(null);

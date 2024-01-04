@@ -1,7 +1,12 @@
 import {useEffect, useState} from 'react';
 
 import Slider from '@react-native-community/slider';
-import {AVPlaybackStatus, Audio} from 'expo-av';
+import {
+  AVPlaybackStatus,
+  Audio,
+  InterruptionModeAndroid,
+  InterruptionModeIOS,
+} from 'expo-av';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 import {useAppTheme} from '@hooks';
@@ -29,6 +34,17 @@ export function FeedAudio({uri}: FeedAudioProps) {
   }
 
   async function loadAudio() {
+    const {granted} = await Audio.requestPermissionsAsync();
+    if (granted) {
+      Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
+        interruptionModeIOS: InterruptionModeIOS.DoNotMix,
+        playsInSilentModeIOS: true,
+        shouldDuckAndroid: true,
+        playThroughEarpieceAndroid: true,
+      });
+    }
     const {sound: soundAudio} = await Audio.Sound.createAsync({uri});
     soundAudio.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
     setSound(soundAudio);

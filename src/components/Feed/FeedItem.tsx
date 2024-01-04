@@ -49,38 +49,38 @@ export function FeedItem({item: listFlat, removeProfile}: FeedItemProps) {
        */}
       {item.tipo === 'ATITUDE_REALIZADA' && (
         <>
-          {item.evento_atitude_Finalizada?.atitude.descricao && (
+          {item.evento_atitude_finalizada?.atitude_descricao && (
             <FeedTitle
-              title={item.evento_atitude_Finalizada?.atitude.descricao}
+              title={item.evento_atitude_finalizada?.atitude_descricao}
             />
           )}
 
           {/**
            * Imagem
            */}
-          {item.evento_atitude_Finalizada?.tipo === 'IMAGE' && (
-            <FeedImage foto={item.evento_atitude_Finalizada.midia_link} />
+          {item.evento_atitude_finalizada?.tipo === 'IMAGE' && (
+            <FeedImage foto={item.evento_atitude_finalizada.midia_link} />
           )}
 
           {/**
            * Video
            */}
-          {item.evento_atitude_Finalizada?.tipo === 'VIDEO' && (
-            <FeedVideo uri={item.evento_atitude_Finalizada.midia_link} />
+          {item.evento_atitude_finalizada?.tipo === 'VIDEO' && (
+            <FeedVideo uri={item.evento_atitude_finalizada.midia_link} />
           )}
 
           {/**
            * Audio
            */}
-          {item.evento_atitude_Finalizada?.tipo === 'AUDIO' && (
-            <FeedAudio uri={item.evento_atitude_Finalizada.midia_link} />
+          {item.evento_atitude_finalizada?.tipo === 'AUDIO' && (
+            <FeedAudio uri={item.evento_atitude_finalizada.midia_link} />
           )}
 
-          {item.evento_atitude_Finalizada?.titulo && (
-            <FeedTitle title={item.evento_atitude_Finalizada?.titulo} />
+          {item.evento_atitude_finalizada?.titulo && (
+            <FeedTitle title={item.evento_atitude_finalizada?.titulo} />
           )}
-          {item.evento_atitude_Finalizada?.texto && (
-            <FeedText text={item.evento_atitude_Finalizada?.texto} />
+          {item.evento_atitude_finalizada?.texto && (
+            <FeedText text={item.evento_atitude_finalizada?.texto} />
           )}
         </>
       )}
@@ -88,15 +88,13 @@ export function FeedItem({item: listFlat, removeProfile}: FeedItemProps) {
       {/**
        * Footer apenas para atitudes realizadas e postagens avulsas
        */}
-      {item.tipo === 'ATITUDE_REALIZADA' || item.tipo === 'POSTAGEM_AVULSA' ? (
-        <FeedFooter
-          evento={
-            item.tipo === 'ATITUDE_REALIZADA'
-              ? item.evento_atitude_Finalizada?.evento!
-              : item.evento!
-          }
-        />
-      ) : null}
+      {item.tipo === 'ATITUDE_REALIZADA' && (
+        <FeedFooter evento={item.evento!} />
+      )}
+
+      {item.tipo === 'POSTAGEM_AVULSA' && item.evento && (
+        <FeedFooter evento={item.evento} />
+      )}
     </FeedRoot>
   );
 }

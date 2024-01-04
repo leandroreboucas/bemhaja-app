@@ -250,7 +250,7 @@ export function PostNew() {
               <Button
                 onPress={handleSubmit(submitForm)}
                 loading={isLoading}
-                title="Criar"
+                title="Gravar"
                 preset="primary"
                 disabled={!formState.isValid || event === null}
               />
