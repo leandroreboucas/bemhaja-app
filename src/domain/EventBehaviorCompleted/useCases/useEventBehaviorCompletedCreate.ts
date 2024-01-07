@@ -19,10 +19,10 @@ export function useEventBehaviorCompletedCreate(
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [QueryKeys.FeedList, QueryKeys.EventGetListMyEvents],
-        exact: false,
-        type: 'all',
-        refetchType: 'all',
+        queryKey: [QueryKeys.FeedList],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.EventGetListMyEventsParticipants],
       });
 
       if (options?.onSucess) {

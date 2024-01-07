@@ -1,8 +1,10 @@
 import {useEffect, useState} from 'react';
-import {FlatList, ListRenderItemInfo} from 'react-native';
+import {FlatList, ListRenderItemInfo, RefreshControl} from 'react-native';
 
-import {Evento, useEventGetListMyEvents} from '@domain';
+import {Evento, useEventGetListMyEventsParticipanting} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
+
+import {useAppTheme, useDebounce} from '@hooks';
 
 import {Box} from './../../Box';
 import {Button} from './../../Button';
@@ -24,10 +26,14 @@ export function EventSearch({
   initialItemsSelected = null,
   changeItemsSelected,
 }: EventoSearchProps) {
-  const [filteredData, setFilteredData] = useState<Evento[]>([]);
-  const {events, isError, isLoading, isFetching, refetch} =
-    useEventGetListMyEvents();
+  const [filter, setFilter] = useState('');
+  const debounceSearch = useDebounce(filter);
+
+  const {list, isError, isLoading, refresh, fetchNextPage} =
+    useEventGetListMyEventsParticipanting(debounceSearch);
+
   const [itemSelected, setItemSelected] = useState<Evento | null>(null);
+  const {colors} = useAppTheme();
 
   function renderItem({item}: ListRenderItemInfo<Evento>) {
     return (
@@ -77,15 +83,6 @@ export function EventSearch({
     if (initialItemsSelected?.id) {
       setItemSelected(initialItemsSelected);
     }
-    const selectedItems = events.filter(
-      item => initialItemsSelected?.id === item.id!,
-    );
-    const nonSelectedItems = events.filter(
-      item => initialItemsSelected?.id !== item.id!,
-    );
-
-    // Coloca os itens selecionados no topo
-    setFilteredData([...selectedItems, ...nonSelectedItems]);
   }
 
   function handleConfirm() {
@@ -93,18 +90,9 @@ export function EventSearch({
     closeModal();
   }
 
-  function handleFilter(text: string) {
-    const newData = events.filter(item => {
-      const itemData = item.nome ? item.nome.toUpperCase() : ''.toUpperCase();
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-    setFilteredData(newData);
-  }
-
   useEffect(() => {
     handleInitialItemsSelected();
-  }, [isLoading, isFetching]);
+  }, [isLoading]);
 
   return (
     <Screen
@@ -138,7 +126,8 @@ export function EventSearch({
           removeLabel
           placeholder="Pesquisar"
           label=""
-          onChangeText={handleFilter}
+          value={filter}
+          onChangeText={setFilter}
         />
       </Box>
       <FlatList
@@ -146,18 +135,29 @@ export function EventSearch({
           borderRadius: RFValue(10),
         }}
         contentContainerStyle={{
-          flex: filteredData.length === 0 ? 1 : undefined,
+          flex: list.length === 0 ? 1 : undefined,
           borderRadius: RFValue(10),
         }}
         showsVerticalScrollIndicator={false}
-        data={filteredData}
+        data={list}
         keyExtractor={item => item.id!}
         renderItem={renderItem}
+        onEndReached={fetchNextPage}
+        onEndReachedThreshold={0.1}
+        refreshing={isLoading}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={refresh}
+            colors={['#fff']}
+            progressBackgroundColor={colors.primary_500}
+          />
+        }
         ListEmptyComponent={
           <EmptyData
-            loading={isLoading || isFetching}
+            loading={isLoading}
             error={isError}
-            refetch={refetch}
+            refetch={refresh}
             text=""
           />
         }

@@ -1,19 +1,15 @@
-import {useQuery} from '@tanstack/react-query';
+import { behaviorService } from '../behaviorService';
+import { Behavior } from '../behaviorTypes';
 
-import {behaviorService} from '../behaviorService';
+import { QueryKeys, usePaginatedList } from './../../Infra';
 
-import {QueryKeys} from './../../Infra';
-
-export function useBehaviorGetAll() {
-  const {data, isLoading, isError, refetch, isFetching} = useQuery({
-    queryKey: [QueryKeys.BehaviorGetAll],
-    queryFn: () => behaviorService.getAll(),
-  });
-  return {
-    behaviors: data || [],
-    isLoading,
-    isError,
-    refetch,
-    isFetching,
-  };
+export function useBehaviorGetAll(filter: string = '') {
+  return usePaginatedList<Behavior>(
+    [QueryKeys.BehaviorGetAll, filter],
+    () => behaviorService.getAll(undefined, filter),
+    {
+      enabled: filter.length > 0,
+      staleTime: 30000,
+    },
+  );
 }

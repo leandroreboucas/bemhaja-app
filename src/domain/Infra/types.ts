@@ -5,7 +5,7 @@ export enum QueryKeys {
   BehaviorGetAll = 'BehaviorGetAll',
   UserGetAll = 'UserGetAll',
   FriendGetAll = 'FriendGetAll',
-  EventGetListMyEvents = 'EventGetListMyEvents',
+  EventGetListMyEventsParticipants = 'EventGetListMyEventsParticipants',
 }
 
 export interface MutationOptions<TData> {

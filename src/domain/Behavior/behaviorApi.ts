@@ -1,16 +1,15 @@
-import {api} from '@api';
-import {AxiosError} from 'axios';
+import { api } from '@api';
+import { AxiosError } from 'axios';
 
-import {Behavior} from './behaviorTypes';
+import { PageAPI, PageParam } from './../types';
+import { Behavior } from './behaviorTypes';
 
-interface getAllResponse {
-  behaviors: Behavior[];
-}
-
-async function getAll(): Promise<Behavior[]> {
+async function getAll(params?: PageParam): Promise<PageAPI<Behavior>> {
   try {
-    const response = await api.get<getAllResponse>('/behavior');
-    return response.data.behaviors;
+    const response = await api.get<PageAPI<Behavior>>('/behavior', {
+      params,
+    });
+    return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response?.status === 409) {
@@ -18,7 +17,7 @@ async function getAll(): Promise<Behavior[]> {
       }
     }
     throw new Error(
-      'Estamos com problemas tecnicos, tente novamente mais tarde.',
+      'Estamos com problemas técnicos, tente novamente mais tarde.',
     );
   }
 }

@@ -1,8 +1,10 @@
 import {useEffect, useState} from 'react';
-import {FlatList, ListRenderItemInfo} from 'react-native';
+import {FlatList, ListRenderItemInfo, RefreshControl} from 'react-native';
 
 import {Behavior, useBehaviorGetAll} from '@domain';
 import {RFValue} from 'react-native-responsive-fontsize';
+
+import {useAppTheme, useDebounce} from '@hooks';
 
 import {BehaviorCard} from './../../BehaviorCard';
 import {Box} from './../../Box';
@@ -25,9 +27,13 @@ export function BehaviorSearchSingle({
   initialItemSelected = null,
   changeItemSelected,
 }: BehaviorSearchProps) {
-  const [filteredData, setFilteredData] = useState<Behavior[]>([]);
-  const {behaviors, isError, isLoading, isFetching, refetch} =
-    useBehaviorGetAll();
+  const {colors} = useAppTheme();
+  const [filter, setFilter] = useState('');
+  const debounceSearch = useDebounce(filter);
+
+  const {list, isError, isLoading, refresh, fetchNextPage} =
+    useBehaviorGetAll(debounceSearch);
+
   const [itemSelected, setItemSelected] = useState<Behavior | null>(null);
 
   function renderItem({item}: ListRenderItemInfo<Behavior>) {
@@ -78,15 +84,15 @@ export function BehaviorSearchSingle({
     if (initialItemSelected?.id) {
       setItemSelected(initialItemSelected);
     }
-    const selectedItems = behaviors.filter(
+    const selectedItems = list.filter(
       item => initialItemSelected?.id === item.id!,
     );
-    const nonSelectedItems = behaviors.filter(
+    const nonSelectedItems = list.filter(
       item => initialItemSelected?.id !== item.id!,
     );
 
     // Coloca os itens selecionados no topo
-    setFilteredData([...selectedItems, ...nonSelectedItems]);
+    // setFilteredData([...selectedItems, ...nonSelectedItems]);
   }
 
   function handleConfirm() {
@@ -94,20 +100,9 @@ export function BehaviorSearchSingle({
     closeModal();
   }
 
-  function handleFilter(text: string) {
-    const newData = behaviors.filter(item => {
-      const itemData = item.descricao
-        ? item.descricao.toUpperCase()
-        : ''.toUpperCase();
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-    setFilteredData(newData);
-  }
-
   useEffect(() => {
     handleInitialItemsSelected();
-  }, [isLoading, isFetching]);
+  }, [isLoading]);
 
   return (
     <Screen
@@ -141,7 +136,8 @@ export function BehaviorSearchSingle({
           removeLabel
           placeholder="Pesquisar"
           label=""
-          onChangeText={handleFilter}
+          value={filter}
+          onChangeText={setFilter}
         />
       </Box>
       <FlatList
@@ -149,18 +145,29 @@ export function BehaviorSearchSingle({
           borderRadius: RFValue(10),
         }}
         contentContainerStyle={{
-          flex: filteredData.length === 0 ? 1 : undefined,
+          flex: list.length === 0 ? 1 : undefined,
           borderRadius: RFValue(10),
         }}
         showsVerticalScrollIndicator={false}
-        data={filteredData}
+        data={list}
         keyExtractor={item => item.id!}
         renderItem={renderItem}
+        onEndReached={fetchNextPage}
+        onEndReachedThreshold={0.1}
+        refreshing={isLoading}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={refresh}
+            colors={['#fff']}
+            progressBackgroundColor={colors.primary_500}
+          />
+        }
         ListEmptyComponent={
           <EmptyData
-            loading={isLoading || isFetching}
+            loading={isLoading}
             error={isError}
-            refetch={refetch}
+            refetch={refresh}
             text=""
           />
         }

@@ -26,12 +26,19 @@ async function create(data: CreateEventModel): Promise<void> {
   return await eventApi.create(data);
 }
 
-async function getListMyEvents(): Promise<Evento[]> {
-  return await eventApi.getListMyEvents();
+async function getListMyEventsParticipanting(
+  page: number = 1,
+  filter: string = '',
+): Promise<PageAPI<Evento>> {
+  return await eventApi.getListMyEventsParticipanting({
+    page,
+    per_page: 10,
+    filter,
+  });
 }
 
 export const eventService = {
   getList,
   create,
-  getListMyEvents,
+  getListMyEventsParticipanting,
 };

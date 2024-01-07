@@ -158,6 +158,7 @@ export interface PageAPI<Data> {
 export interface PageParam {
   page?: number;
   per_page?: number;
+  filter?: string;
 }
 
 export interface MetaDataPage {

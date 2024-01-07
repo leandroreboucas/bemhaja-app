@@ -1,6 +1,6 @@
 import { api } from '@api';
 
-import { PageAPI } from '../types';
+import { PageAPI, PageParam } from '../types';
 
 import { eventListMock } from './eventListMock';
 import { CreateEventModel, Evento } from './eventTypes';
@@ -17,9 +17,13 @@ async function getList(): Promise<PageAPI<Evento>> {
   return data;
 }
 
-async function getListMyEvents(): Promise<Evento[]> {
-  const response = await api.get<ListResponse>('/events/me');
-  return response.data.events;
+async function getListMyEventsParticipanting(
+  params?: PageParam,
+): Promise<PageAPI<Evento>> {
+  const response = await api.get<PageAPI<Evento>>('/events/participant', {
+    params,
+  });
+  return response.data;
 }
 
 async function create(data: CreateEventModel): Promise<void> {
@@ -35,5 +39,5 @@ async function create(data: CreateEventModel): Promise<void> {
 export const eventApi = {
   getList,
   create,
-  getListMyEvents,
+  getListMyEventsParticipanting,
 };
