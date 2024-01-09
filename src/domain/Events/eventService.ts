@@ -37,8 +37,32 @@ async function getListMyEventsParticipanting(
   });
 }
 
+async function getListMyEvents(
+  page: number = 1,
+  filter: string = '',
+): Promise<PageAPI<Evento>> {
+  return await eventApi.getListMyEvents({
+    page,
+    per_page: 10,
+    filter,
+  });
+}
+
+async function getListEventsNotCreatedForMe(
+  page: number = 1,
+  filter: string = '',
+): Promise<PageAPI<Evento>> {
+  return await eventApi.getListEventsNotCreatedForMe({
+    page,
+    per_page: 10,
+    filter,
+  });
+}
+
 export const eventService = {
   getList,
   create,
   getListMyEventsParticipanting,
+  getListMyEvents,
+  getListEventsNotCreatedForMe,
 };

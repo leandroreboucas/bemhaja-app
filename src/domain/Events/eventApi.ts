@@ -20,10 +20,44 @@ async function getList(): Promise<PageAPI<Evento>> {
 async function getListMyEventsParticipanting(
   params?: PageParam,
 ): Promise<PageAPI<Evento>> {
-  const response = await api.get<PageAPI<Evento>>('/events/participant', {
-    params,
-  });
-  return response.data;
+  try {
+    const response = await api.get<PageAPI<Evento>>('/events/participant', {
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      'Estamos com problemas técnicos, tente novamente mais tarde.',
+    );
+  }
+}
+
+async function getListMyEvents(params?: PageParam): Promise<PageAPI<Evento>> {
+  try {
+    const response = await api.get<PageAPI<Evento>>('/events/me', {
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      'Estamos com problemas técnicos, tente novamente mais tarde.',
+    );
+  }
+}
+
+async function getListEventsNotCreatedForMe(
+  params?: PageParam,
+): Promise<PageAPI<Evento>> {
+  try {
+    const response = await api.get<PageAPI<Evento>>('/events/not/me', {
+      params,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      'Estamos com problemas técnicos, tente novamente mais tarde.',
+    );
+  }
 }
 
 async function create(data: CreateEventModel): Promise<void> {
@@ -40,4 +74,6 @@ export const eventApi = {
   getList,
   create,
   getListMyEventsParticipanting,
+  getListMyEvents,
+  getListEventsNotCreatedForMe,
 };

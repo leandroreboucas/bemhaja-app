@@ -15,16 +15,13 @@ export interface FilterHeaderEventsProps {
 }
 
 export function FilterHeaderEvents({setFilterEvents}: FilterHeaderEventsProps) {
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState('MEUS_EVENTOS');
 
   function changeFilter(param_filter: string) {
-    if (param_filter === filter) {
-      setFilter('');
-      setFilterEvents('');
-      return;
+    if (param_filter !== filter) {
+      setFilter(param_filter);
+      setFilterEvents(param_filter);
     }
-    setFilter(param_filter);
-    setFilterEvents(param_filter);
   }
 
   return (
